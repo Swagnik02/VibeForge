@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/models/playlist_model.dart';
 import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/widgets/widgets.dart';
 
@@ -9,6 +10,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Song> songs = Song.songs;
+    List<Playlist> playlists = Playlist.playlists;
+
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -25,7 +28,26 @@ class HomeScreen extends StatelessWidget {
         bottomNavigationBar: const _CustomNavBar(),
         body: SingleChildScrollView(
           child: Column(
-            children: [const _DiscoverMusic(), _TrendingMusic(songs: songs)],
+            children: [
+              const _DiscoverMusic(),
+              _TrendingMusic(songs: songs),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    const SectionHeader(title: 'Playlists'),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: playlists.length,
+                      itemBuilder: ((context, index) {
+                        return PlayListCard(playlist: playlists[index]);
+                      }),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
