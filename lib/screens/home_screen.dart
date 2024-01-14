@@ -14,14 +14,15 @@ class HomeScreen extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [
-          Colors.deepPurple.shade800.withOpacity(0.8),
-          Colors.deepPurple.shade200.withOpacity(0.8),
-        ],
-      )),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.deepPurple.shade800.withOpacity(0.8),
+            Colors.deepPurple.shade200.withOpacity(0.8),
+          ],
+        ),
+      ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const _CustomAppBar(),
