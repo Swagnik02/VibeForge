@@ -77,7 +77,10 @@ class _SongScreenState extends State<SongScreen> {
 
           // music control bar
           _MusicPlayer(
-              seekBarDataStream: _seekBarDataStream, audioPlayer: audioPlayer),
+            song: song,
+            seekBarDataStream: _seekBarDataStream,
+            audioPlayer: audioPlayer,
+          ),
         ],
       ),
     );
@@ -87,10 +90,12 @@ class _SongScreenState extends State<SongScreen> {
 class _MusicPlayer extends StatelessWidget {
   const _MusicPlayer({
     super.key,
+    required this.song,
     required Stream<SeekBarData> seekBarDataStream,
     required this.audioPlayer,
   }) : _seekBarDataStream = seekBarDataStream;
 
+  final Song song;
   final Stream<SeekBarData> _seekBarDataStream;
   final AudioPlayer audioPlayer;
 
@@ -102,6 +107,28 @@ class _MusicPlayer extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // title and desc
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                song.title,
+                overflow: TextOverflow.fade,
+                style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+              Text(
+                song.description,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          SizedBox(height: 40),
+
           // seekBar
           StreamBuilder<SeekBarData>(
             stream: _seekBarDataStream,
@@ -117,6 +144,29 @@ class _MusicPlayer extends StatelessWidget {
 
           // control buttons
           PlayerButtons(audioPlayer: audioPlayer),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              IconButton(
+                iconSize: 35,
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+              ),
+              IconButton(
+                iconSize: 35,
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.cloud_download,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
