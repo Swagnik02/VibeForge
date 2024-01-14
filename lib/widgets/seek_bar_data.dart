@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class SeekBarData {
@@ -11,7 +13,17 @@ class SeekBarData {
 }
 
 class SeekBar extends StatefulWidget {
-  const SeekBar({super.key});
+  final Duration position;
+  final Duration duration;
+  final ValueChanged<Duration>? onChanged;
+  final ValueChanged<Duration>? onChangedEnd;
+  const SeekBar({
+    super.key,
+    required this.position,
+    required this.duration,
+    this.onChanged,
+    this.onChangedEnd,
+  });
 
   @override
   State<SeekBar> createState() => _SeekBarState();
@@ -20,6 +32,55 @@ class SeekBar extends StatefulWidget {
 class _SeekBarState extends State<SeekBar> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    double? _dragValue;
+
+    return Row(
+      children: [
+        // current time
+        Text('${widget.position}'),
+        // slider
+        Expanded(
+          child: SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              trackHeight: 4,
+              thumbShape: const RoundSliderThumbShape(
+                disabledThumbRadius: 4,
+                enabledThumbRadius: 4,
+              ),
+              overlayShape: const RoundSliderOverlayShape(overlayRadius: 10),
+              activeTrackColor: Colors.white.withOpacity(0.2),
+              inactiveTrackColor: Colors.white,
+              thumbColor: Colors.white,
+              overlayColor: Colors.white,
+            ),
+            child: Slider(
+              min: 0.0,
+              max: widget.duration.inMilliseconds.toDouble(),
+              value: min(
+                _dragValue ?? widget.position.inMilliseconds.toDouble(),
+                widget.duration.inMilliseconds.toDouble(),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  _dragValue = value;
+                });
+                if (widget.onChanged != null) {
+                  widget.onChanged!(Duration(milliseconds: value.round()));
+                }
+              },
+              onChangeEnd: (value) {
+                if (widget.onChanged != null) {
+                  widget.onChanged!(Duration(milliseconds: value.round()));
+                }
+                _dragValue = null;
+              },
+            ),
+          ),
+        ),
+
+        // duration time
+        Text('${widget.duration}'),
+      ],
+    );
   }
 }
