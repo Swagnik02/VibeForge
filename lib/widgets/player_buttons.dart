@@ -14,6 +14,22 @@ class PlayerButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        // previous button
+        StreamBuilder(
+          stream: audioPlayer.sequenceStateStream,
+          builder: (context, index) {
+            return IconButton(
+              onPressed:
+                  audioPlayer.hasPrevious ? audioPlayer.seekToPrevious : null,
+              iconSize: 45,
+              icon: const Icon(
+                Icons.skip_previous,
+                color: Colors.white,
+              ),
+            );
+          },
+        ),
+
         // play, pause, replay
         StreamBuilder(
           stream: audioPlayer.playerStateStream,
@@ -58,7 +74,22 @@ class PlayerButtons extends StatelessWidget {
               return const CircularProgressIndicator();
             }
           },
-        )
+        ),
+
+        // next button
+        StreamBuilder(
+          stream: audioPlayer.sequenceStateStream,
+          builder: (context, index) {
+            return IconButton(
+              onPressed: audioPlayer.hasNext ? audioPlayer.seekToNext : null,
+              iconSize: 45,
+              icon: const Icon(
+                Icons.skip_next,
+                color: Colors.white,
+              ),
+            );
+          },
+        ),
       ],
     );
   }
