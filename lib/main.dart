@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:vibeforge/screens/home_screen.dart';
 import 'package:vibeforge/screens/playlist_screen.dart';
 import 'package:vibeforge/screens/song_screen.dart';
+import 'package:vibeforge/splashScreen/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,8 +25,10 @@ class MyApp extends StatelessWidget {
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         // useMaterial3: true,
       ),
+      initialRoute: '/splash',
       home: const HomeScreen(),
       getPages: [
+        GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/', page: () => const HomeScreen()),
         GetPage(name: '/song', page: () => const SongScreen()),
         GetPage(name: '/playlist', page: () => const PlaylistScreen()),

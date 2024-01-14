@@ -17,6 +17,9 @@ dependencies:
   get: ^4.6.6
   just_audio: ^0.9.36
   rxdart: ^0.27.7
+  lottie: ^3.0.0
+  animated_splash_screen: ^1.3.0
+  page_transition: ^2.1.0
 
 dev_dependencies:
   flutter_test:
