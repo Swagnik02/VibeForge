@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vibeforge/common/utils.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -135,8 +136,8 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Container(
           margin: const EdgeInsets.only(right: 20),
-          child: const CircleAvatar(
-            backgroundImage: AssetImage('assets/avatar.jpg'),
+          child: CircleAvatar(
+            backgroundImage: AssetImage(TestProfile.profilePic),
           ),
         )
       ],
