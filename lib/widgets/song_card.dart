@@ -53,6 +53,7 @@ class SongCard extends StatelessWidget {
                     children: [
                       Text(
                         song.title,
+                        overflow: TextOverflow.fade,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: Colors.deepPurple,
                               fontWeight: FontWeight.bold,
@@ -68,7 +69,7 @@ class SongCard extends StatelessWidget {
 
                   // play button
 
-                  Icon(
+                  const Icon(
                     Icons.play_circle,
                     color: Colors.deepPurple,
                   ),
