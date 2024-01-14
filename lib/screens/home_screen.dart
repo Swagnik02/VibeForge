@@ -21,42 +21,53 @@ class HomeScreen extends StatelessWidget {
       )),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: _CustomAppBar(),
-        bottomNavigationBar: _CustomNavBar(),
+        appBar: const _CustomAppBar(),
+        bottomNavigationBar: const _CustomNavBar(),
         body: SingleChildScrollView(
           child: Column(
-            children: [
-              _DiscoverMusic(),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 20,
-                  bottom: 20,
-                  top: 20,
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 20),
-                      child: SectionHeader(title: "Trending Music"),
-                    ),
-
-                    // corousel
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.27,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: songs.length,
-                        itemBuilder: (context, index) {
-                          return SongCard(song: songs[index]);
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              )
-            ],
+            children: [const _DiscoverMusic(), _TrendingMusic(songs: songs)],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _TrendingMusic extends StatelessWidget {
+  const _TrendingMusic({
+    super.key,
+    required this.songs,
+  });
+
+  final List<Song> songs;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 20,
+        bottom: 20,
+        top: 20,
+      ),
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(right: 20, bottom: 15),
+            child: SectionHeader(title: "Trending Music"),
+          ),
+
+          // corousel
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.27,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: songs.length,
+              itemBuilder: (context, index) {
+                return SongCard(song: songs[index]);
+              },
+            ),
+          )
+        ],
       ),
     );
   }
