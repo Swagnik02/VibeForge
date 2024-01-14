@@ -34,10 +34,21 @@ class _SeekBarState extends State<SeekBar> {
   Widget build(BuildContext context) {
     double? _dragValue;
 
+    String _formatDuration(Duration? duration) {
+      if (duration == null) {
+        return '--:--';
+      } else {
+        String minutes = duration.inMinutes.toString().padLeft(2, '0');
+        String seconds =
+            duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+        return '$minutes:$seconds';
+      }
+    }
+
     return Row(
       children: [
         // current time
-        Text('${widget.position}'),
+        Text(_formatDuration(widget.position)),
         // slider
         Expanded(
           child: SliderTheme(
@@ -79,7 +90,7 @@ class _SeekBarState extends State<SeekBar> {
         ),
 
         // duration time
-        Text('${widget.duration}'),
+        Text(_formatDuration(widget.duration)),
       ],
     );
   }
