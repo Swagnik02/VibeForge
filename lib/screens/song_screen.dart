@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:vibeforge/models/song_model.dart';
-import 'package:vibeforge/widgets/seek_bar_data.dart';
 import 'package:rxdart/rxdart.dart' as rxdart;
+import 'package:vibeforge/widgets/widgets.dart';
 
 class SongScreen extends StatefulWidget {
   const SongScreen({super.key});
@@ -108,6 +108,9 @@ class _MusicPlayer extends StatelessWidget {
               );
             },
           ),
+
+          // control buttons
+          PlayerButtons(audioPlayer: audioPlayer),
         ],
       ),
     );
