@@ -12,7 +12,9 @@ class PlayerButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        // play, pause, replay
         StreamBuilder(
           stream: audioPlayer.playerStateStream,
           builder: (context, snapshot) {
