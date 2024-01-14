@@ -31,25 +31,39 @@ class HomeScreen extends StatelessWidget {
             children: [
               const _DiscoverMusic(),
               _TrendingMusic(songs: songs),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: [
-                    const SectionHeader(title: 'Playlists'),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: playlists.length,
-                      itemBuilder: ((context, index) {
-                        return PlayListCard(playlist: playlists[index]);
-                      }),
-                    ),
-                  ],
-                ),
-              ),
+              _Playlists(playlists: playlists),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _Playlists extends StatelessWidget {
+  const _Playlists({
+    super.key,
+    required this.playlists,
+  });
+
+  final List<Playlist> playlists;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          const SectionHeader(title: 'Playlists'),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: playlists.length,
+            itemBuilder: ((context, index) {
+              return PlayListCard(playlist: playlists[index]);
+            }),
+          ),
+        ],
       ),
     );
   }
@@ -195,7 +209,10 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
-      leading: const Icon(Icons.grid_view_rounded),
+      leading: Icon(
+        Icons.grid_view_outlined,
+        color: Colors.white.withOpacity(0.9),
+      ),
       actions: [
         Container(
           margin: const EdgeInsets.only(right: 20),

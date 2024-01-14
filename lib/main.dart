@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'VibeForge',
       theme: ThemeData(
         textTheme: Theme.of(context).textTheme.apply(
