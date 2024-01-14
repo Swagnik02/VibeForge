@@ -9,11 +9,11 @@ class TestProfile {
 class LocalAssets {
   // cover images
   static String coverTheWantedGladYouCame =
-      '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.theWantedGladYouCame}.png';
+      '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.theWantedGladYouCame}.jpg';
   static String coverOwlCityGold =
       '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.owlCityGold}.jpg';
   static String coverAkonFreedom =
-      '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.akonFreedom}.jpg';
+      '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.akonFreedom}.png';
 
   // songs urls
   static String songTheWantedGladYouCame =

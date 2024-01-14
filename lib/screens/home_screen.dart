@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/models/song_model.dart';
+import 'package:vibeforge/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    List<Song> songs = Song.songs;
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -16,69 +19,96 @@ class HomeScreen extends StatelessWidget {
           Colors.deepPurple.shade200.withOpacity(0.8),
         ],
       )),
-      child: const Scaffold(
+      child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: _CustomAppBar(),
         bottomNavigationBar: _CustomNavBar(),
-        body: _mainBody(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              _DiscoverMusic(),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 20,
+                  bottom: 20,
+                  top: 20,
+                ),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 20),
+                      child: SectionHeader(title: "Trending Music"),
+                    ),
+
+                    // corousel
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.27,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: songs.length,
+                        itemBuilder: (context, index) {
+                          return SongCard(song: songs[index]);
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
-class _mainBody extends StatelessWidget {
-  const _mainBody({
+class _DiscoverMusic extends StatelessWidget {
+  const _DiscoverMusic({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Padding(
+      padding: const EdgeInsets.all(20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Welcome',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  'Enjoy your favourite music',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
+          Text(
+            'Welcome',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          const SizedBox(height: 5),
+          Text(
+            'Enjoy your favourite music',
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall
+                ?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 20),
 
-                // Search Text field
-                TextFormField(
-                  style: const TextStyle(
-                    color: Colors.deepPurple,
-                  ),
-                  decoration: InputDecoration(
-                    isDense: true,
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Search',
-                    hintStyle: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: Colors.grey.shade400),
-                    prefixIcon: const Icon(
-                      Icons.search,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-              ],
+          // Search Text field
+          TextFormField(
+            style: const TextStyle(
+              color: Colors.deepPurple,
+            ),
+            decoration: InputDecoration(
+              isDense: true,
+              filled: true,
+              fillColor: Colors.white,
+              hintText: 'Search',
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.grey.shade400),
+              prefixIcon: const Icon(
+                Icons.search,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: BorderSide.none,
+              ),
             ),
           ),
         ],

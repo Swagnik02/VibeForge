@@ -15,19 +15,22 @@ class Song {
 
   static List<Song> songs = [
     Song(
-        title: 'Gold',
-        description: 'Owl City',
-        url: LocalAssets.songOwlCityGold,
-        coverUrl: LocalAssets.coverOwlCityGold),
+      title: 'Gold',
+      description: 'Owl City',
+      url: LocalAssets.songOwlCityGold,
+      coverUrl: LocalAssets.coverOwlCityGold,
+    ),
     Song(
-        title: 'Freedom',
-        description: 'Akon',
-        url: LocalAssets.songAkonFreedom,
-        coverUrl: LocalAssets.coverAkonFreedom),
+      title: 'Freedom',
+      description: 'Akon',
+      url: LocalAssets.songAkonFreedom,
+      coverUrl: LocalAssets.coverAkonFreedom,
+    ),
     Song(
-        title: 'Glad You Came',
-        description: 'The Weekend',
-        url: LocalAssets.songTheWantedGladYouCame,
-        coverUrl: LocalAssets.coverTheWantedGladYouCame),
+      title: 'Glad You Came',
+      description: 'The Weekend',
+      url: LocalAssets.songTheWantedGladYouCame,
+      coverUrl: LocalAssets.coverTheWantedGladYouCame,
+    ),
   ];
 }

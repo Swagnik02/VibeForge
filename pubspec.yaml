@@ -33,6 +33,11 @@ flutter:
   assets:
 
     - assets/
+    - assets/images/
+    - assets/music/
+    - assets/covers/
+    
+    
     # - images/a_dot_ham.jpeg
 
   # fonts:
