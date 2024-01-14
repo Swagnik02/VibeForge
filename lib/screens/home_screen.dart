@@ -15,11 +15,72 @@ class HomeScreen extends StatelessWidget {
           Colors.deepPurple.shade200.withOpacity(0.8),
         ],
       )),
-      child: Scaffold(
+      child: const Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: const _CustomAppBar(),
-        bottomNavigationBar: const _CustomNavBar(),
-        body: Container(),
+        appBar: _CustomAppBar(),
+        bottomNavigationBar: _CustomNavBar(),
+        body: _mainBody(),
+      ),
+    );
+  }
+}
+
+class _mainBody extends StatelessWidget {
+  const _mainBody({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Welcome',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  'Enjoy your favourite music',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+
+                // Search Text field
+                TextFormField(
+                  style: const TextStyle(
+                    color: Colors.deepPurple,
+                  ),
+                  decoration: InputDecoration(
+                    isDense: true,
+                    filled: true,
+                    fillColor: Colors.white,
+                    hintText: 'Search',
+                    hintStyle: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: Colors.grey.shade400),
+                    prefixIcon: const Icon(
+                      Icons.search,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
