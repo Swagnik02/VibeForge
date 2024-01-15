@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_music_controller.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_mucis.dart';
 import 'package:vibeforge/widgets/widgets.dart';
@@ -22,12 +23,16 @@ class HomeScreen extends StatelessWidget {
             body: (() {
               switch (controller.bottomNavBarIndex.value) {
                 case 0:
+                  Get.delete<NCSMusicController>();
                   return const Home();
                 case 1:
+                  Get.delete<NCSMusicController>();
                   return Container();
                 case 2:
+                  Get.delete<NCSMusicController>();
                   return Container();
                 case 3:
+                  Get.delete<NCSMusicController>();
                   return NCSMusic();
                 default:
                   return const Home();
