@@ -1,0 +1,134 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
+import 'package:vibeforge/screens/ncs_mucis.dart';
+import 'package:vibeforge/widgets/widgets.dart';
+
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
+
+  final HomeScreenController controller = Get.put(HomeScreenController());
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<HomeScreenController>(
+      builder: (_) => Container(
+        decoration: boxDecor(),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: _CustomAppBar(controller: controller),
+          bottomNavigationBar: _CustomNavBar(controller: controller),
+          body: Obx(() {
+            switch (controller.bottomNavBarIndex.value) {
+              case 0:
+                return const Home();
+              case 1:
+                return Container();
+              case 2:
+                return Container();
+              case 3:
+                return const NCSMusic();
+              default:
+                return const Home();
+            }
+          }),
+        ),
+      ),
+    );
+  }
+
+  BoxDecoration boxDecor() {
+    return BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Colors.deepPurple.shade800.withOpacity(0.8),
+          Colors.deepPurple.shade200.withOpacity(0.8),
+        ],
+      ),
+    );
+  }
+}
+
+class _CustomNavBar extends StatelessWidget {
+  final HomeScreenController controller;
+
+  const _CustomNavBar({
+    required this.controller,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.deepPurple.shade800,
+      unselectedItemColor: Colors.white,
+      selectedItemColor: Colors.white,
+      showUnselectedLabels: false,
+      showSelectedLabels: false,
+      currentIndex: controller.bottomNavBarIndex.value,
+      onTap: (index) {
+        // Update the controller's bottomNavBarIndex when a tab is tapped
+        controller.bottomNavBarIndex.value = index;
+      },
+      items: [
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.home_rounded),
+          label: 'Home',
+        ),
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.favorite_outline),
+          label: 'Favourites',
+        ),
+        const BottomNavigationBarItem(
+          icon: Icon(Icons.play_circle_fill_outlined),
+          label: 'Play',
+        ),
+        BottomNavigationBarItem(
+          icon: Image(
+            image: AssetImage(LocalAssets.ncsLogo),
+            width: 50,
+          ),
+          label: 'NCS',
+        ),
+      ],
+    );
+  }
+}
+
+class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final HomeScreenController controller;
+
+  const _CustomAppBar({
+    required this.controller,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.transparent,
+      leading: Icon(
+        Icons.grid_view_outlined,
+        color: Colors.white.withOpacity(0.9),
+      ),
+      actions: [
+        Container(
+          margin: const EdgeInsets.only(right: 20),
+          child: InkWell(
+            onTap: () => Get.to(const NCSMusic()),
+            child: CircleAvatar(
+              backgroundImage: AssetImage(TestProfile.profilePic),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
+}

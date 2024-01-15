@@ -26,6 +26,8 @@ class LocalAssets {
   // others
   static String avatar =
       '${LocalAssetDirectories.localAssetsImagesDir}avatar.jpg';
+  static String ncsLogo =
+      '${LocalAssetDirectories.localAssetsImagesDir}ncs_logo.png';
 }
 
 class LocalAssetsMusic {

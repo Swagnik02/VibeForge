@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vibeforge/screens/home_screen.dart';
+import 'package:vibeforge/screens/HomeScreen/home_screen.dart';
 import 'package:vibeforge/screens/playlist_screen.dart';
 import 'package:vibeforge/screens/song_screen.dart';
 import 'package:vibeforge/splashScreen/splash_screen.dart';
@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
         // useMaterial3: true,
       ),
       initialRoute: '/splash',
-      home: const HomeScreen(),
+      home: HomeScreen(),
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
-        GetPage(name: '/', page: () => const HomeScreen()),
+        GetPage(name: '/', page: () => HomeScreen()),
         GetPage(name: '/song', page: () => const SongScreen()),
         GetPage(name: '/playlist', page: () => const PlaylistScreen()),
       ],
