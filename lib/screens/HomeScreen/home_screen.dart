@@ -47,8 +47,8 @@ class HomeScreen extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.deepPurple.shade800.withOpacity(0.8),
-            Colors.deepPurple.shade200.withOpacity(0.8),
+            Colors.deepPurple.shade900.withOpacity(0.8),
+            Colors.deepPurple.shade300.withOpacity(0.8),
           ],
         ),
       );
@@ -94,7 +94,7 @@ class _CustomNavBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       backgroundColor: controller.bottomNavBarIndex == 3
           ? Colors.black
-          : Colors.deepPurple.shade800,
+          : Colors.deepPurple.shade900,
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.white,
       showUnselectedLabels: false,

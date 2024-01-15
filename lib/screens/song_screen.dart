@@ -203,8 +203,8 @@ class _BackgroundFilter extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.deepPurple.shade200,
-              Colors.deepPurple.shade800,
+              Colors.deepPurple.shade500,
+              Colors.deepPurple.shade900,
             ],
           ),
         ),

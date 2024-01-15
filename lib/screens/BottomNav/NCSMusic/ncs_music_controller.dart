@@ -31,6 +31,12 @@ class NCSMusicController extends GetxController {
     update();
   }
 
+  void backToAllSongs() {
+    updateIsSearchBody();
+    songs.clear();
+    searchController.clear();
+  }
+
   // search song
   void searchSong() async {
     if (!isSearchBody) {

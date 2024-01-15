@@ -56,6 +56,7 @@ class _SongScreenState extends State<NCSSongScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -158,12 +159,11 @@ class _MusicPlayer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               IconButton(
-                iconSize: 35,
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.settings,
+                icon: Icon(
+                  Icons.arrow_back_ios_new,
                   color: Colors.white,
                 ),
+                onPressed: () => Get.back(),
               ),
               IconButton(
                 iconSize: 35,
