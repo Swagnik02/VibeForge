@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:vibeforge/models/song_model.dart';
-import 'package:ncs_io/ncs_io.dart' as NCSDep;
+import 'package:ncs_io/ncs_io.dart' as NCSDev;
 
 class SongCard extends StatelessWidget {
   const SongCard({
@@ -54,7 +57,7 @@ class SongCard extends StatelessWidget {
                     children: [
                       Text(
                         song.title,
-                        overflow: TextOverflow.fade,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: Colors.deepPurple,
                               fontWeight: FontWeight.bold,
@@ -62,6 +65,7 @@ class SongCard extends StatelessWidget {
                       ),
                       Text(
                         song.description,
+                        overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                             color: Colors.grey, fontWeight: FontWeight.bold),
                       ),
@@ -85,19 +89,19 @@ class SongCard extends StatelessWidget {
   }
 }
 
-class NCSSongCard extends StatelessWidget {
-  const NCSSongCard({
+class SongCardNCS extends StatelessWidget {
+  const SongCardNCS({
     super.key,
     required this.song,
   });
-
-  final NCSDep.Song song;
+  final NCSDev.Song song;
+  // final Song song;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/song', arguments: song);
+        Get.toNamed('/NCSsong', arguments: song);
       },
       child: Container(
         margin: const EdgeInsets.only(right: 10),
@@ -107,13 +111,10 @@ class NCSSongCard extends StatelessWidget {
             // cover image
             Container(
               width: MediaQuery.of(context).size.width * 0.45,
-              decoration: BoxDecoration(
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  image: AssetImage(
-                    song.imageUrl ?? '',
-                  ),
-                  fit: BoxFit.cover,
+                child: Image.network(
+                  song.imageUrl ?? '',
                 ),
               ),
             ),
@@ -130,24 +131,17 @@ class NCSSongCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // title and desc
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        song.name ?? '',
-                        overflow: TextOverflow.fade,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Colors.deepPurple,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      Text(
-                        song.artists.toString(),
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                            color: Colors.grey, fontWeight: FontWeight.bold),
-                      ),
-                    ],
+                  Container(
+                    alignment: Alignment.center,
+                    width: 100,
+                    child: Text(
+                      song.name ?? '',
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Colors.deepPurple,
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
                   ),
 
                   // play button

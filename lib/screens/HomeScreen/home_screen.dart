@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
-import 'package:vibeforge/screens/BottomNav/ncs_mucis.dart';
+import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_mucis.dart';
 import 'package:vibeforge/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
                 case 2:
                   return Container();
                 case 3:
-                  return const NCSMusic();
+                  return NCSMusic();
                 default:
                   return const Home();
               }
