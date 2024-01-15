@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
 import 'package:vibeforge/common/utils.dart';
-import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_music_controller.dart';
 import 'package:vibeforge/widgets/song_card.dart';
 
@@ -49,13 +46,8 @@ class NCSMusic extends StatelessWidget {
             itemCount: snapshot.data?.length ?? 0,
             itemBuilder: (context, index) {
               NCSDev.Song? song = snapshot.data?[index];
-              Song ncsSong = Song(
-                title: song!.name.toString(),
-                description: song.artists.toString(),
-                url: song.songUrl.toString(),
-                coverUrl: song.imageUrl.toString(),
-              );
-              return SongCardNCS(song: song);
+
+              return SongCardNCS(song: song!);
             },
           );
         } else if (snapshot.hasError) {
