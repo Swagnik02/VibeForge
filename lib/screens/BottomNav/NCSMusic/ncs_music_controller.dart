@@ -39,13 +39,13 @@ class NCSMusicController extends GetxController {
 
   // search song
   void searchSong() async {
+    FocusScope.of(Get.context!).unfocus();
     if (!isSearchBody) {
       updateIsSearchBody();
     }
     songs.clear();
     updateIsSearching();
     updateIsDataFetched();
-    update();
     songs.addAll(
         await NCSDev.NCS.searchMusic(search: searchController.text.trim()) ??
             []);
