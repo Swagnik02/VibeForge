@@ -117,16 +117,17 @@ class _MusicPlayer extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
               ),
+              // artist names
               Wrap(
                 children: [
-                  Icon(Icons.person, color: Colors.deepPurple.shade400),
                   ...List.generate(
                       song.artists?.length ?? 0,
                       (index) => Container(
                             decoration: BoxDecoration(
                                 color: Colors.grey.shade600,
                                 borderRadius: BorderRadius.circular(10)),
-                            padding: const EdgeInsets.all(3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
                             margin: const EdgeInsets.only(right: 3),
                             child: Text(song.artists?[index].name ?? ''),
                           ))
@@ -134,7 +135,7 @@ class _MusicPlayer extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
 
           // seekBar
           StreamBuilder<SeekBarData>(
@@ -212,8 +213,8 @@ class _BackgroundFilter extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.deepPurple.shade200,
-              Colors.deepPurple.shade800,
+              Colors.grey.shade800,
+              Colors.black,
             ],
           ),
         ),
