@@ -32,7 +32,6 @@ class HomeScreen extends StatelessWidget {
                   Get.delete<NCSMusicController>();
                   return Container();
                 case 3:
-                  Get.delete<NCSMusicController>();
                   return NCSMusic();
                 default:
                   return const Home();

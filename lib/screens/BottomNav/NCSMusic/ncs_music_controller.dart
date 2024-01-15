@@ -45,6 +45,7 @@ class NCSMusicController extends GetxController {
     songs.clear();
     updateIsSearching();
     updateIsDataFetched();
+    update();
     songs.addAll(
         await NCSDev.NCS.searchMusic(search: searchController.text.trim()) ??
             []);
