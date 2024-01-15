@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
 
 class NCSMusic extends StatefulWidget {
-  const NCSMusic({Key? key}) : super(key: key);
+  const NCSMusic({super.key});
 
   @override
   State<NCSMusic> createState() => _NCSMusicState();
@@ -54,7 +54,7 @@ class _NCSMusicState extends State<NCSMusic> {
 }
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -107,10 +107,10 @@ class _SearchPageState extends State<SearchPage> {
                 )),
             Visibility(
                 visible: !isDataFetched & isSearching,
-                child: Center(
+                child: const Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       CupertinoActivityIndicator(color: Colors.deepPurple),
                       Text('Searching...'),
                     ],
