@@ -28,6 +28,8 @@ class LocalAssets {
       '${LocalAssetDirectories.localAssetsImagesDir}avatar.jpg';
   static String ncsLogo =
       '${LocalAssetDirectories.localAssetsImagesDir}ncs_logo.png';
+  static String loadingAnim =
+      '${LocalAssetDirectories.localAssetsImagesDir}splash_astraunaut.json';
 }
 
 class LocalAssetsMusic {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/splashScreen/splash_screen_controller.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -19,7 +20,7 @@ class SplashScreen extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Lottie.asset('assets/images/splash_astraunaut.json'),
+                  Lottie.asset(LocalAssets.loadingAnim),
                   Text(
                     'Vibe Forge',
                     style: Theme.of(context)

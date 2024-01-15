@@ -9,46 +9,74 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final HomeScreenController controller = Get.put(HomeScreenController());
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeScreenController>(
-      builder: (_) => Container(
-        decoration: boxDecor(),
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          appBar: _CustomAppBar(controller: controller),
-          bottomNavigationBar: _CustomNavBar(controller: controller),
-          body: Obx(() {
-            switch (controller.bottomNavBarIndex.value) {
-              case 0:
-                return const Home();
-              case 1:
-                return Container();
-              case 2:
-                return Container();
-              case 3:
-                return const NCSMusic();
-              default:
-                return const Home();
-            }
-          }),
-        ),
-      ),
+      builder: (_) => Obx(() {
+        return Container(
+          decoration: boxDecor(),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: _CustomAppBar(controller: controller),
+            bottomNavigationBar: _CustomNavBar(controller: controller),
+            body: (() {
+              switch (controller.bottomNavBarIndex.value) {
+                case 0:
+                  return const Home();
+                case 1:
+                  return Container();
+                case 2:
+                  return Container();
+                case 3:
+                  return const NCSMusic();
+                default:
+                  return const Home();
+              }
+            })(),
+          ),
+        );
+      }),
     );
   }
 
   BoxDecoration boxDecor() {
-    return BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [
-          Colors.deepPurple.shade800.withOpacity(0.8),
-          Colors.deepPurple.shade200.withOpacity(0.8),
-        ],
-      ),
-    );
+    if (controller.bottomNavBarIndex.value == 0) {
+      // Return gradient for index 0
+      return BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.deepPurple.shade800.withOpacity(0.8),
+            Colors.deepPurple.shade200.withOpacity(0.8),
+          ],
+        ),
+      );
+    } else if (controller.bottomNavBarIndex.value == 3) {
+      // Return gradient for index 3
+      return BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.black.withOpacity(0.8),
+            Colors.white.withOpacity(0.8),
+          ],
+        ),
+      );
+    } else {
+      // Return a default gradient or any other decoration for other indices
+      return BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.deepPurple.shade800.withOpacity(0.8),
+            Colors.deepPurple.shade200.withOpacity(0.8),
+          ],
+        ),
+      );
+    }
   }
 }
 
@@ -64,14 +92,15 @@ class _CustomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.deepPurple.shade800,
+      backgroundColor: controller.bottomNavBarIndex == 3
+          ? Colors.black
+          : Colors.deepPurple.shade800,
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.white,
       showUnselectedLabels: false,
       showSelectedLabels: false,
       currentIndex: controller.bottomNavBarIndex.value,
       onTap: (index) {
-        // Update the controller's bottomNavBarIndex when a tab is tapped
         controller.bottomNavBarIndex.value = index;
       },
       items: [
@@ -111,6 +140,23 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
+      title: controller.bottomNavBarIndex == 3
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Image(
+                  image: AssetImage(LocalAssets.ncsLogo),
+                  height: 25,
+                ),
+                const SizedBox(width: 10),
+                const Text(
+                  'NoCopyrightSounds',
+                  style: TextStyle(color: Colors.white, fontSize: 14),
+                ),
+              ],
+            )
+          : null,
       leading: Icon(
         Icons.grid_view_outlined,
         color: Colors.white.withOpacity(0.9),
@@ -119,7 +165,7 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         Container(
           margin: const EdgeInsets.only(right: 20),
           child: InkWell(
-            onTap: () => Get.to(const NCSMusic()),
+            onTap: () {},
             child: CircleAvatar(
               backgroundImage: AssetImage(TestProfile.profilePic),
             ),
