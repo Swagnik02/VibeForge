@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
-import 'package:vibeforge/screens/ncs_mucis.dart';
+import 'package:vibeforge/screens/BottomNav/ncs_mucis.dart';
 import 'package:vibeforge/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
       // Return gradient for index 3
       return BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
+          begin: Alignment.center,
           end: Alignment.bottomCenter,
           colors: [
             Colors.black.withOpacity(0.8),

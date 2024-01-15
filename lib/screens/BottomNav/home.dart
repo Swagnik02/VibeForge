@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vibeforge/models/playlist_model.dart';
 import 'package:vibeforge/models/song_model.dart';
-import '../widgets/widgets.dart';
+import '../../widgets/widgets.dart';
 
 class Home extends StatelessWidget {
   const Home({
