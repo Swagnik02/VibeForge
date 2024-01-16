@@ -12,9 +12,10 @@ Music Application using Material3 Ui
 -   Offline songs
 -   NCS Songs section
 
-### NCS section
-
--   Searching (using the search from the website)
--   Artist info
--   Album Art
-
+<img src="https://github.com/Swagnik02/VibeForge/assets/91018814/609e0943-1d83-4bc5-9b5b-d6b8776adf4e" align="right" width="100px"/>
+        <h3>NCS Section</h3>
+            <li>Searching (using the search from the website)</li>
+            <li>Artist info</li>
+            <li>Album Art</li>
+       
+<br clear="left"/>
