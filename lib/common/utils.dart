@@ -24,6 +24,8 @@ class LocalAssets {
       '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.akonFreedom}.mp3';
 
   // others
+  static String appLogo =
+      '${LocalAssetDirectories.localAssetsImagesDir}app_logo.png';
   static String avatar =
       '${LocalAssetDirectories.localAssetsImagesDir}avatar.jpg';
   static String ncsLogo =
