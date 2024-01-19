@@ -51,10 +51,12 @@ class NCSMusic extends StatelessWidget {
             },
           );
         } else if (snapshot.hasError) {
-          return Center(child: Text(snapshot.error.toString()));
+          return Center(
+            child: Image.asset(LocalAssets.loadingAnim),
+          );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Lottie.asset(LocalAssets.loadingAnim),
+            child: Image.asset(LocalAssets.loadingAnim),
           );
         }
         return const Center(child: CupertinoActivityIndicator());

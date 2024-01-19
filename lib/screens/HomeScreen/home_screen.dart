@@ -4,6 +4,7 @@ import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_music_controller.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_mucis.dart';
+import 'package:vibeforge/screens/HomeScreen/profile_page.dart';
 import 'package:vibeforge/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -59,14 +60,15 @@ class HomeScreen extends StatelessWidget {
     } else if (controller.bottomNavBarIndex.value == 3) {
       // Return gradient for index 3
       return BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.center,
-          end: Alignment.bottomCenter,
-          colors: [
-            Colors.black.withOpacity(0.8),
-            Colors.white.withOpacity(0.8),
-          ],
-        ),
+        //   gradient: LinearGradient(
+        //     begin: Alignment.center,
+        //     end: Alignment.bottomCenter,
+        //     colors: [
+        //       Colors.black.withOpacity(0.8),
+        //       Colors.white.withOpacity(0.8),
+        //     ],
+        //   ),
+        color: Colors.black,
       );
     } else {
       // Return a default gradient or any other decoration for other indices
@@ -168,8 +170,10 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Container(
           margin: const EdgeInsets.only(right: 20),
-          child: InkWell(
-            onTap: () {},
+          child: GestureDetector(
+            onTap: () {
+              controller.miniProfileUI(context);
+            },
             child: CircleAvatar(
               backgroundImage: AssetImage(TestProfile.profilePic),
             ),

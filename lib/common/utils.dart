@@ -2,6 +2,7 @@ class GlobalUtils {}
 
 class TestProfile {
   static String userName = 'Swagnik';
+  static String fullName = 'Swagnik Saha';
   static String email = 'swagnik1234@gmail.com';
   static String profilePic = LocalAssets.avatar;
 }
@@ -32,6 +33,8 @@ class LocalAssets {
       '${LocalAssetDirectories.localAssetsImagesDir}ncs_logo.png';
   static String loadingAnim =
       '${LocalAssetDirectories.localAssetsImagesDir}splash_astraunaut.json';
+  static String ncsVisualizerYellow =
+      '${LocalAssetDirectories.localAssetsImagesDir}ncsVisualizer.gif';
 }
 
 class LocalAssetsMusic {
