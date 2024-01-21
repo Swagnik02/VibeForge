@@ -4,6 +4,7 @@ class TestProfile {
   static String userName = 'Swagnik';
   static String fullName = 'Swagnik Saha';
   static String email = 'swagnik1234@gmail.com';
+  static String mobile = '7318843109';
   static String profilePic = LocalAssets.avatar;
 }
 

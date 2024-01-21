@@ -4,7 +4,6 @@ import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_music_controller.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_mucis.dart';
-import 'package:vibeforge/screens/HomeScreen/profile_page.dart';
 import 'package:vibeforge/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {

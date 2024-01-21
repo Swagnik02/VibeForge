@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/screens/Auth/login_screen.dart';
 import 'package:vibeforge/screens/HomeScreen/profile_page_controller.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -52,23 +52,43 @@ class ProfilePage extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () => Get.back(),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_ios_new_rounded,
                           color: Colors.white,
                         ),
                       ),
                       IconButton(
-                        onPressed: () => Get.back(),
+                        onPressed: () => Get.to(LoginScreen()),
                         icon: Transform(
                           alignment: Alignment.center,
                           transform: Matrix4.rotationY(22 / 7),
-                          child: Icon(
+                          child: const Icon(
                             Icons.sort_rounded,
                             color: Colors.white,
                           ),
                         ),
                       )
                     ],
+                  ),
+                ),
+              ),
+
+              // userName
+              Positioned(
+                top: (screenWidth - (screenWidth / 2) - (screenWidth / 8)),
+                left: 0,
+                right: 0,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Center(
+                    child: Text(
+                      TestProfile.fullName,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(
+                              color: Colors.white, fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ),
               ),
@@ -89,25 +109,96 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
 
-              // userName
+              // Details Column
               Positioned(
-                top: (screenWidth - (screenWidth / 2) - (screenWidth / 8)),
+                top: (screenWidth - (screenWidth / 12)),
                 left: 0,
                 right: 0,
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Center(
-                      child: Text(
-                        TestProfile.fullName,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
-                            .copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400),
+                child: Container(
+                  height: screenHeight / 3,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 5),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.deepPurple.shade200,
+                                border: Border.all(),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: TextField(
+                                controller: controller.emailController,
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  hintText: 'E-mail',
+                                  border: InputBorder.none,
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 30),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 50, vertical: 5),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.deepPurple.shade200,
+                                border: Border.all(),
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: TextField(
+                                controller: controller.mobileController,
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  hintText: 'Mobile',
+                                  border: InputBorder.none,
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 30),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    )),
-              ),
+
+                      // edit button
+
+                      Row(
+                        children: [
+                          Expanded(
+                              child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 50.0),
+                            child: TextButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                  Colors.deepPurple.shade500,
+                                ),
+                              ),
+                              onPressed: () => controller.editWindow(),
+                              child: Text(
+                                'Edit',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(
+                                      color: Colors.deepPurple.shade100,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ),
+                          )),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
