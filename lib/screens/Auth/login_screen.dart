@@ -34,10 +34,12 @@ class LoginScreen extends StatelessWidget {
                         color: Colors.deepPurple.shade800.withOpacity(0.2),
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
                             children: [
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     'Login',
@@ -47,19 +49,15 @@ class LoginScreen extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: 10),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              _custTextField(
+                              _CustTextField(
                                 fieldController: controller.usernameController,
                                 labelText: 'Username',
                               ),
-                              _custTextField(
+                              _CustTextField(
                                 fieldController: controller.emailController,
                                 labelText: 'E-mail',
                               ),
-                              _custTextField(
+                              _CustTextField(
                                 fieldController: controller.mobileController,
                                 labelText: 'Mobile',
                               ),
@@ -69,7 +67,17 @@ class LoginScreen extends StatelessWidget {
                             children: [
                               Expanded(
                                   child: TextButton(
-                                child: Text('Login'),
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    Colors.deepPurple.shade500,
+                                  ),
+                                ),
+                                child: Text(
+                                  'Login',
+                                  style: Get.textTheme.headlineSmall!.copyWith(
+                                      color: Colors.white60,
+                                      fontWeight: FontWeight.bold),
+                                ),
                                 onPressed: () => controller.login(),
                               ))
                             ],
@@ -88,10 +96,10 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class _custTextField extends StatelessWidget {
+class _CustTextField extends StatelessWidget {
   final TextEditingController fieldController;
   final String labelText;
-  const _custTextField({
+  const _CustTextField({
     super.key,
     required this.fieldController,
     required this.labelText,
