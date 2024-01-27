@@ -7,8 +7,29 @@ import 'package:vibeforge/models/user_model.dart';
 
 class AuthService {
   static const String userKey = 'user';
+  static const String loggedInUserKey =
+      'loggedinUserdata'; // New key for logged-in user data
 
   List<User> _users = [];
+
+  // Initialize AuthService and load users from SharedPreferences
+  AuthService() {
+    loadUsers();
+  }
+
+  // Load users from SharedPreferences
+  Future<void> loadUsers() async {
+    final prefs = await SharedPreferences.getInstance();
+    final jsonString = prefs.getStringList(userKey);
+
+    if (jsonString != null) {
+      _users = jsonString
+          .map(
+            (json) => User.fromJson(jsonDecode(json)),
+          )
+          .toList();
+    }
+  }
 
   // Sign up
   Future<void> signUp(String userName, String email, String password) async {
@@ -21,7 +42,18 @@ class AuthService {
     User newUser = User(userName: userName, email: email, password: password);
     _users.add(newUser);
 
+    // Save updated user list to SharedPreferences
+    await saveUsers();
+
     log('Signup successful for user: $userName');
+  }
+
+  // Save users list to SharedPreferences
+  Future<void> saveUsers() async {
+    final prefs = await SharedPreferences.getInstance();
+    final userListJson =
+        _users.map((user) => json.encode(user.toJson())).toList();
+    prefs.setStringList(userKey, userListJson);
   }
 
   // Sign in
@@ -35,51 +67,29 @@ class AuthService {
     }
 
     // Save user data to SharedPreferences after successful login
-    await saveUser(user);
+    await saveLoggedInUser(user);
 
     log('Signin successful for user: ${user.userName}');
   }
 
-  // Save user data to SharedPreferences
-// Save user data to SharedPreferences
-  Future<void> saveUser(User user) async {
+  // Save logged-in user data to SharedPreferences
+  Future<void> saveLoggedInUser(User user) async {
     final prefs = await SharedPreferences.getInstance();
     final userJson = json.encode(user.toJson());
-    prefs.setString(userKey, userJson);
+    prefs.setString(
+        loggedInUserKey, userJson); // Use the new key for logged-in user data
   }
 
-  // Retrieve user data from SharedPreferences
-  Future<User?> getUser() async {
+  // Retrieve logged-in user data from SharedPreferences
+  Future<User?> getLoggedInUser() async {
     final prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs.getString(userKey);
+    final jsonString = prefs
+        .getString(loggedInUserKey); // Use the new key for logged-in user data
 
     if (jsonString != null) {
       final jsonMap = json.decode(jsonString);
       return User.fromJson(jsonMap);
     }
-
     return null;
   }
-
-  // Sign out (not applicable in this basic example)
 }
-
-// void main() async {
-//   AuthService authService = AuthService();
-
-//   try {
-//     // Example sign up
-//     await authService.signUp('JohnDoe', 'john@example.com', 'password123');
-
-//     // Example sign in
-//     await authService.signIn('john@example.com', 'password123');
-
-//     // Example retrieve user data after sign in
-//     User? loggedInUser = await authService.getUser();
-//     if (loggedInUser != null) {
-//       log('User data after sign in: ${loggedInUser.toJson()}');
-//     }
-//   } catch (e) {
-//     log('Error: $e');
-//   }
-// }

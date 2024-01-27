@@ -85,20 +85,39 @@ class LoginScreen extends StatelessWidget {
                           Row(
                             children: [
                               Expanded(
-                                  child: TextButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                    Colors.deepPurple.shade500,
+                                child: TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      Colors.deepPurple.shade500,
+                                    ),
                                   ),
+                                  child: Text(
+                                    'SignUp',
+                                    style: Get.textTheme.headlineSmall!
+                                        .copyWith(
+                                            color: Colors.white60,
+                                            fontWeight: FontWeight.bold),
+                                  ),
+                                  onPressed: () => controller.signup(),
                                 ),
-                                child: Text(
-                                  'SignUp',
-                                  style: Get.textTheme.headlineSmall!.copyWith(
-                                      color: Colors.white60,
-                                      fontWeight: FontWeight.bold),
+                              ),
+                              Expanded(
+                                child: TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      Colors.deepPurple.shade500,
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'CHECK',
+                                    style: Get.textTheme.headlineSmall!
+                                        .copyWith(
+                                            color: Colors.white60,
+                                            fontWeight: FontWeight.bold),
+                                  ),
+                                  onPressed: () => controller.printAllData(),
                                 ),
-                                onPressed: () => controller.signup(),
-                              ))
+                              ),
                             ],
                           ),
                         ],

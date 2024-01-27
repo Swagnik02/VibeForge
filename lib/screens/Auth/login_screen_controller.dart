@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/user_model.dart';
 import 'package:vibeforge/services/auth_service.dart';
@@ -27,7 +28,7 @@ class LoginScreenController extends GetxController {
       await authService.signIn(emailController.text, passwordController.text);
 
       // Get the user data after sign in
-      User? loggedInUser = await authService.getUser();
+      User? loggedInUser = await authService.getLoggedInUser();
 
       if (loggedInUser != null) {
         log('User data after sign in: ${loggedInUser.toJson()}');
@@ -59,5 +60,18 @@ class LoginScreenController extends GetxController {
     } catch (e) {
       log('Error: $e');
     }
+  }
+
+  Future<void> printAllData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> allData = prefs.getKeys().fold<Map<String, dynamic>>(
+      {},
+      (Map<String, dynamic> acc, String key) {
+        acc[key] = prefs.get(key);
+        return acc;
+      },
+    );
+
+    print('All Data in Shared Preferences: $allData');
   }
 }
