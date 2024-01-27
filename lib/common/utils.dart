@@ -1,4 +1,6 @@
-class GlobalUtils {}
+class GlobalUtils {
+  static bool isloggedIn = false;
+}
 
 class TestProfile {
   static String userName = 'Swagnik';
