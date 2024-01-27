@@ -22,7 +22,7 @@ class SplashScreenViewModel extends GetxController
     animation.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         // Navigate to the next screen (e.g., HomeScreen)
-        Get.offNamed('/');
+        Get.offNamed('/auth');
       }
     });
 

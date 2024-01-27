@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
     double screenHeight = Get.height;
     return GetBuilder<LoginScreenController>(
       builder: (_) => Scaffold(
-        backgroundColor: Color(0xFF1F1F1F),
+        backgroundColor: const Color(0xFF1F1F1F),
         body: SafeArea(
           child: Padding(
             padding:
@@ -23,12 +23,12 @@ class LoginScreen extends StatelessWidget {
                     // main container
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Color(0xFF353334),
+                      color: const Color(0xFF353334),
                     ),
                     height: Get.height / 2,
                     child: Container(
                       // inner container for tint
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.deepPurple.shade800.withOpacity(0.2),
@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
                                 labelText: 'E-mail',
                               ),
                               _CustTextField(
-                                fieldController: controller.mobileController,
+                                fieldController: controller.passwordController,
                                 labelText: 'Mobile',
                               ),
                             ],
@@ -81,7 +81,26 @@ class LoginScreen extends StatelessWidget {
                                 onPressed: () => controller.login(),
                               ))
                             ],
-                          )
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                  child: TextButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    Colors.deepPurple.shade500,
+                                  ),
+                                ),
+                                child: Text(
+                                  'SignUp',
+                                  style: Get.textTheme.headlineSmall!.copyWith(
+                                      color: Colors.white60,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onPressed: () => controller.signup(),
+                              ))
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -100,7 +119,6 @@ class _CustTextField extends StatelessWidget {
   final TextEditingController fieldController;
   final String labelText;
   const _CustTextField({
-    super.key,
     required this.fieldController,
     required this.labelText,
   });
@@ -120,6 +138,7 @@ class _CustTextField extends StatelessWidget {
           controller: fieldController,
           textAlign: TextAlign.center,
           decoration: InputDecoration(
+            floatingLabelAlignment: FloatingLabelAlignment.center,
             label: Text(labelText),
             border: InputBorder.none,
             contentPadding: const EdgeInsets.symmetric(horizontal: 30),
