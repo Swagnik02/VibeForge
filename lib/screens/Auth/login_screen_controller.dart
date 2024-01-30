@@ -22,16 +22,19 @@ class LoginScreenController extends GetxController {
   void login() async {
     try {
       // Call the sign-in method from AuthService
-      await authService.signIn(emailController.text, passwordController.text);
+      await authService
+          .signIn(emailController.text, passwordController.text)
+          .then((value) {
+        UserDataService().fetchUserData(emailController.text).then((_) async {
+          // Store user data locally after successful login
+          UserDataService().storeUserDataLocally();
+          User? loggedInUser = await authService.getLoggedInUser();
+          log('User data after sign in: ${loggedInUser?.toJson()}');
+        });
 
-      // Get the user data after sign in
-      User? loggedInUser = await authService.getLoggedInUser();
-
-      if (loggedInUser != null) {
-        log('User data after sign in: ${loggedInUser.toJson()}');
-        GlobalUtils.isloggedIn = true;
+        // Navigate to the home screen
         Get.offAllNamed('/');
-      }
+      });
     } catch (e) {
       log('Error: $e');
     }

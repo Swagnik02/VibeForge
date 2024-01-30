@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vibeforge/models/user_model.dart';
 import 'package:vibeforge/screens/Auth/login_screen.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_song_screen.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen.dart';
@@ -8,7 +9,10 @@ import 'package:vibeforge/screens/song_screen.dart';
 import 'package:vibeforge/splashScreen/splash_screen.dart';
 import 'package:vibeforge/screens/Auth/auth_home.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Retrieve user data from local storage
+  await UserDataService().retrieveUserDataLocally();
   runApp(const MyApp());
 }
 
