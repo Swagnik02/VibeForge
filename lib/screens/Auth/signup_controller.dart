@@ -1,12 +1,14 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/user_model.dart';
-import 'package:vibeforge/screens/Auth/signup_screen.dart';
 import 'package:vibeforge/services/auth_service.dart';
 
-class LoginScreenController extends GetxController {
+class SignUpScreenController extends GetxController {
+  late TextEditingController usernameController;
   late TextEditingController emailController;
   late TextEditingController passwordController;
 
@@ -15,8 +17,9 @@ class LoginScreenController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    usernameController = TextEditingController(text: TestProfile.userName);
     emailController = TextEditingController(text: TestProfile.email);
-    passwordController = TextEditingController(text: TestProfile.password);
+    passwordController = TextEditingController(text: 'password02');
   }
 
   void login() async {
@@ -37,23 +40,28 @@ class LoginScreenController extends GetxController {
     }
   }
 
-  void goToSignUp() {
-    Get.to(
-      SignUpScreen(),
-      transition: Transition.rightToLeft,
-    );
+  void signup() async {
+    try {
+      await authService.signUp(
+        usernameController.text,
+        emailController.text,
+        passwordController.text,
+      );
+    } catch (e) {
+      log('Error: $e');
+    }
   }
 
-  // Future<void> printAllData() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   Map<String, dynamic> allData = prefs.getKeys().fold<Map<String, dynamic>>(
-  //     {},
-  //     (Map<String, dynamic> acc, String key) {
-  //       acc[key] = prefs.get(key);
-  //       return acc;
-  //     },
-  //   );
+  Future<void> printAllData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> allData = prefs.getKeys().fold<Map<String, dynamic>>(
+      {},
+      (Map<String, dynamic> acc, String key) {
+        acc[key] = prefs.get(key);
+        return acc;
+      },
+    );
 
-  //   print('All Data in Shared Preferences: $allData');
-  // }
+    print('All Data in Shared Preferences: $allData');
+  }
 }

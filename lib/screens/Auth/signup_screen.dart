@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vibeforge/screens/Auth/login_screen_controller.dart';
+import 'package:vibeforge/screens/Auth/signup_controller.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  SignUpScreen({super.key});
 
-  final LoginScreenController controller = Get.put(LoginScreenController());
+  final SignUpScreenController controller = Get.put(SignUpScreenController());
   @override
   Widget build(BuildContext context) {
     double screenHeight = Get.height;
-    return GetBuilder<LoginScreenController>(
+    return GetBuilder<SignUpScreenController>(
       builder: (_) => Scaffold(
         backgroundColor: const Color(0xFF1F1F1F),
         body: SafeArea(
@@ -50,81 +50,77 @@ class LoginScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 10),
                               _CustTextField(
+                                fieldController: controller.usernameController,
+                                labelText: 'Username',
+                              ),
+                              _CustTextField(
                                 fieldController: controller.emailController,
                                 labelText: 'E-mail',
                               ),
                               _CustTextField(
                                 fieldController: controller.passwordController,
-                                labelText: 'Password',
+                                labelText: 'Mobile',
                               ),
                             ],
                           ),
-                          Column(
+                          Row(
                             children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                      child: TextButton(
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                        Colors.deepPurple.shade500,
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'Login',
-                                      style: Get.textTheme.headlineSmall!
-                                          .copyWith(
-                                              color: Colors.white60,
-                                              fontWeight: FontWeight.bold),
-                                    ),
-                                    onPressed: () => controller.login(),
-                                  ))
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  // signup button
-                                  Expanded(
-                                    child: TextButton(
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                          Colors.deepPurple.shade500,
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'SignUp',
-                                        style: Get.textTheme.headlineSmall!
-                                            .copyWith(
-                                                color: Colors.white60,
-                                                fontWeight: FontWeight.bold),
-                                      ),
-                                      onPressed: () => controller.goToSignUp(),
+                              Expanded(
+                                  child: TextButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                    Colors.deepPurple.shade500,
+                                  ),
+                                ),
+                                child: Text(
+                                  'Login',
+                                  style: Get.textTheme.headlineSmall!.copyWith(
+                                      color: Colors.white60,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onPressed: () => controller.login(),
+                              ))
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              // signup button
+                              Expanded(
+                                child: TextButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                      Colors.deepPurple.shade500,
                                     ),
                                   ),
-                                  // testing button
-
-                                  // Expanded(
-                                  //   child: TextButton(
-                                  //     style: ButtonStyle(
-                                  //       backgroundColor: MaterialStateProperty.all(
-                                  //         Colors.deepPurple.shade500,
-                                  //       ),
-                                  //     ),
-                                  //     child: Text(
-                                  //       'CHECK',
-                                  //       style: Get.textTheme.headlineSmall!
-                                  //           .copyWith(
-                                  //               color: Colors.white60,
-                                  //               fontWeight: FontWeight.bold),
-                                  //     ),
-                                  //     onPressed: () => controller.printAllData(),
-                                  //   ),
-                                  // ),
-                                ],
+                                  child: Text(
+                                    'SignUp',
+                                    style: Get.textTheme.headlineSmall!
+                                        .copyWith(
+                                            color: Colors.white60,
+                                            fontWeight: FontWeight.bold),
+                                  ),
+                                  onPressed: () => controller.signup(),
+                                ),
                               ),
+                              // testing button
+
+                              // Expanded(
+                              //   child: TextButton(
+                              //     style: ButtonStyle(
+                              //       backgroundColor: MaterialStateProperty.all(
+                              //         Colors.deepPurple.shade500,
+                              //       ),
+                              //     ),
+                              //     child: Text(
+                              //       'CHECK',
+                              //       style: Get.textTheme.headlineSmall!
+                              //           .copyWith(
+                              //               color: Colors.white60,
+                              //               fontWeight: FontWeight.bold),
+                              //     ),
+                              //     onPressed: () => controller.printAllData(),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ],
