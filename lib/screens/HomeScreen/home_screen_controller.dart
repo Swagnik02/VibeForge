@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/screens/HomeScreen/profile_page.dart';
+import 'package:vibeforge/services/auth_service.dart';
 
 class HomeScreenController extends GetxController {
   var bottomNavBarIndex = 0.obs;
@@ -22,7 +23,7 @@ class HomeScreenController extends GetxController {
             child: Stack(
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       child: Icon(
@@ -32,6 +33,15 @@ class HomeScreenController extends GetxController {
                             : Colors.deepPurple,
                       ),
                       onTap: () => Get.to(ProfilePage()),
+                    ),
+                    InkWell(
+                      child: Icon(
+                        Icons.logout,
+                        color: bottomNavBarIndex.obs == 3.obs
+                            ? Colors.grey
+                            : Colors.deepPurple,
+                      ),
+                      onTap: () => AuthService().signOut(),
                     ),
                   ],
                 ),

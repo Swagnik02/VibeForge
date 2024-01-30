@@ -7,8 +7,7 @@ import 'package:vibeforge/models/user_model.dart';
 
 class AuthService {
   static const String userKey = 'user';
-  static const String loggedInUserKey =
-      'loggedinUserdata'; // New key for logged-in user data
+  static const String loggedInUserKey = 'loggedinUserdata';
 
   List<User> _users = [];
 
@@ -76,20 +75,25 @@ class AuthService {
   Future<void> saveLoggedInUser(User user) async {
     final prefs = await SharedPreferences.getInstance();
     final userJson = json.encode(user.toJson());
-    prefs.setString(
-        loggedInUserKey, userJson); // Use the new key for logged-in user data
+    prefs.setString(loggedInUserKey, userJson);
   }
 
   // Retrieve logged-in user data from SharedPreferences
   Future<User?> getLoggedInUser() async {
     final prefs = await SharedPreferences.getInstance();
-    final jsonString = prefs
-        .getString(loggedInUserKey); // Use the new key for logged-in user data
+    final jsonString = prefs.getString(loggedInUserKey);
 
     if (jsonString != null) {
       final jsonMap = json.decode(jsonString);
       return User.fromJson(jsonMap);
     }
     return null;
+  }
+
+  Future<void> signOut() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove(loggedInUserKey);
+    Get.offAllNamed('/auth');
+    log('Logout successful');
   }
 }

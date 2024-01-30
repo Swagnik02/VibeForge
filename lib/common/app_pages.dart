@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 class AppPages {
   static List<GetPage> appPages = [
     GetPage(name: '/splash', page: () => const SplashScreen()),
-    GetPage(name: '/auth', page: () => const AuthHome()),
+    GetPage(name: '/auth', page: () => AuthHome()),
     GetPage(name: '/login', page: () => LoginScreen()),
     GetPage(name: '/', page: () => HomeScreen()),
     GetPage(name: '/song', page: () => const SongScreen()),

@@ -42,21 +42,11 @@ class LoginScreenController extends GetxController {
 
   void signup() async {
     try {
-      // Call the sign-in method from AuthService
       await authService.signUp(
         usernameController.text,
         emailController.text,
         passwordController.text,
       );
-
-      // // Get the user data after sign in
-      // User? loggedInUser = await authService.getUser();
-
-      // if (loggedInUser != null) {
-      //   log('User data after sign in: ${loggedInUser.toJson()}');
-      //   GlobalUtils.isloggedIn = true;
-      //   Get.offAllNamed('/');
-      // }
     } catch (e) {
       log('Error: $e');
     }

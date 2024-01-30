@@ -31,7 +31,6 @@ class _AuthHomeState extends State<AuthHome> {
           // Return a loading indicator if the future is still in progress
           return CircularProgressIndicator();
         } else {
-          // Return the appropriate screen based on login status
           return snapshot.hasData ? HomeScreen() : LoginScreen();
         }
       },

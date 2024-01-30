@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                       color: const Color(0xFF353334),
                     ),
-                    height: Get.height / 2,
+                    height: Get.height / 1.5,
                     child: Container(
                       // inner container for tint
                       padding: const EdgeInsets.all(20),
@@ -84,6 +84,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Row(
                             children: [
+                              // signup button
                               Expanded(
                                 child: TextButton(
                                   style: ButtonStyle(
@@ -101,23 +102,25 @@ class LoginScreen extends StatelessWidget {
                                   onPressed: () => controller.signup(),
                                 ),
                               ),
-                              Expanded(
-                                child: TextButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Colors.deepPurple.shade500,
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'CHECK',
-                                    style: Get.textTheme.headlineSmall!
-                                        .copyWith(
-                                            color: Colors.white60,
-                                            fontWeight: FontWeight.bold),
-                                  ),
-                                  onPressed: () => controller.printAllData(),
-                                ),
-                              ),
+                              // testing button
+
+                              // Expanded(
+                              //   child: TextButton(
+                              //     style: ButtonStyle(
+                              //       backgroundColor: MaterialStateProperty.all(
+                              //         Colors.deepPurple.shade500,
+                              //       ),
+                              //     ),
+                              //     child: Text(
+                              //       'CHECK',
+                              //       style: Get.textTheme.headlineSmall!
+                              //           .copyWith(
+                              //               color: Colors.white60,
+                              //               fontWeight: FontWeight.bold),
+                              //     ),
+                              //     onPressed: () => controller.printAllData(),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ],
