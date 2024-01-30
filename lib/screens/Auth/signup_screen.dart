@@ -42,7 +42,7 @@ class SignUpScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Login',
+                                    'SignUp',
                                     style: Get.textTheme.headlineSmall!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
@@ -59,68 +59,73 @@ class SignUpScreen extends StatelessWidget {
                               ),
                               _CustTextField(
                                 fieldController: controller.passwordController,
-                                labelText: 'Mobile',
+                                labelText: 'Password',
                               ),
                             ],
                           ),
-                          Row(
+                          Column(
                             children: [
-                              Expanded(
-                                  child: TextButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
-                                    Colors.deepPurple.shade500,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Login',
-                                  style: Get.textTheme.headlineSmall!.copyWith(
-                                      color: Colors.white60,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                onPressed: () => controller.login(),
-                              ))
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              // signup button
-                              Expanded(
-                                child: TextButton(
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Colors.deepPurple.shade500,
+                              Row(
+                                children: [
+                                  // signup button
+                                  Expanded(
+                                    child: TextButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                          Colors.deepPurple.shade500,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        'SignUp',
+                                        style: Get.textTheme.headlineSmall!
+                                            .copyWith(
+                                                color: Colors.white60,
+                                                fontWeight: FontWeight.bold),
+                                      ),
+                                      onPressed: () => controller.signup(),
                                     ),
                                   ),
-                                  child: Text(
-                                    'SignUp',
-                                    style: Get.textTheme.headlineSmall!
-                                        .copyWith(
-                                            color: Colors.white60,
-                                            fontWeight: FontWeight.bold),
-                                  ),
-                                  onPressed: () => controller.signup(),
-                                ),
+                                ],
                               ),
-                              // testing button
-
-                              // Expanded(
-                              //   child: TextButton(
-                              //     style: ButtonStyle(
-                              //       backgroundColor: MaterialStateProperty.all(
-                              //         Colors.deepPurple.shade500,
-                              //       ),
-                              //     ),
-                              //     child: Text(
-                              //       'CHECK',
-                              //       style: Get.textTheme.headlineSmall!
-                              //           .copyWith(
-                              //               color: Colors.white60,
-                              //               fontWeight: FontWeight.bold),
-                              //     ),
-                              //     onPressed: () => controller.printAllData(),
-                              //   ),
-                              // ),
+                              SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  // back button
+                                  Expanded(
+                                    child: TextButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                          Colors.deepPurple.shade500,
+                                        ),
+                                      ),
+                                      onPressed: () => controller.goToLogin(),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.arrow_back_ios,
+                                            color: Colors.white60,
+                                          ),
+                                          SizedBox(
+                                              width:
+                                                  8), // Adjust the spacing between icon and text
+                                          Text(
+                                            'Back',
+                                            style: Get.textTheme.headlineSmall!
+                                                .copyWith(
+                                              color: Colors.white60,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ],
