@@ -6,27 +6,36 @@ class Toast {
     final overlay = Overlay.of(context);
     OverlayEntry overlayEntry;
 
+    // Colors and dimensions similar to fluttertoast package
+    Color backgroundColor = Colors.white;
+    Color textColor = Colors.black;
+    double fontSize = 16.0;
+
     overlayEntry = OverlayEntry(
-      builder: (context) => Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Center(
-            child: Material(
-              color: Colors.transparent,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Text(
-                  message,
-                  style: TextStyle(color: Colors.white),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Center(
+              child: Material(
+                color: Colors.transparent,
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                  decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Text(
+                    message,
+                    style: TextStyle(color: textColor, fontSize: fontSize),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
 
