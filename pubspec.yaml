@@ -28,6 +28,7 @@ dependencies:
   device_info_plus: ^9.1.2
   url_launcher: ^6.2.4
   open_file: ^3.3.2
+  searchbar_animation: ^0.0.4
 
 dev_dependencies:
   flutter_test:

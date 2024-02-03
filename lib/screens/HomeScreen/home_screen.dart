@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
-import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_music_controller.dart';
+import 'package:vibeforge/screens/BottomNav/AllSongs/all_songs.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_mucis.dart';
 import 'package:vibeforge/widgets/toast.dart';
@@ -24,13 +24,10 @@ class HomeScreen extends StatelessWidget {
             body: (() {
               switch (controller.bottomNavBarIndex.value) {
                 case 0:
-                  Get.delete<NCSMusicController>();
                   return const Home();
                 case 1:
-                  Get.delete<NCSMusicController>();
-                  return Container();
+                  return AllSongs();
                 case 2:
-                  Get.delete<NCSMusicController>();
                   return Container();
                 case 3:
                   return NCSMusic();
@@ -115,12 +112,12 @@ class _CustomNavBar extends StatelessWidget {
           label: 'Home',
         ),
         const BottomNavigationBarItem(
-          icon: Icon(Icons.favorite_outline),
-          label: 'Favourites',
+          icon: Icon(Icons.music_note_rounded),
+          label: 'Play',
         ),
         const BottomNavigationBarItem(
-          icon: Icon(Icons.play_circle_fill_outlined),
-          label: 'Play',
+          icon: Icon(Icons.favorite_outline),
+          label: 'Favourites',
         ),
         BottomNavigationBarItem(
           icon: Image(
