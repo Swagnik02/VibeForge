@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:vibeforge/models/playlist_model.dart';
 import 'package:vibeforge/models/song_model.dart';
 import '../../widgets/widgets.dart';
@@ -21,8 +22,57 @@ class Home extends StatelessWidget {
             const _DiscoverMusic(),
             _TrendingMusic(songs: songs),
             _Playlists(playlists: playlists),
+            _craftedWithLove(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _craftedWithLove() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 26.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            'Music',
+            style: Get.textTheme.headlineLarge!.copyWith(
+                color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 50),
+          ),
+          Text(
+            'heals!',
+            style: Get.textTheme.headlineLarge!.copyWith(
+                color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 50),
+          ),
+          Row(
+            children: [
+              Text(
+                'Crafted with',
+                style: Get.textTheme.bodyLarge!.copyWith(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Icon(
+                Icons.favorite_rounded,
+                color: Colors.red,
+                size: 50,
+              ),
+              Text(
+                'for Anusha',
+                style: Get.textTheme.bodyLarge!.copyWith(
+                  color: Colors.grey,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 100,
+          )
+        ],
       ),
     );
   }
