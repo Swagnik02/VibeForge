@@ -4,6 +4,7 @@ import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_music_controller.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_mucis.dart';
+import 'package:vibeforge/widgets/toast.dart';
 import 'package:vibeforge/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -162,9 +163,14 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             )
           : null,
-      leading: Icon(
-        Icons.grid_view_outlined,
-        color: Colors.white.withOpacity(0.9),
+      leading: InkWell(
+        onTap: () {
+          Toast.showToast(context, "Short Toast");
+        },
+        child: Icon(
+          Icons.grid_view_outlined,
+          color: Colors.white.withOpacity(0.9),
+        ),
       ),
       actions: [
         Container(
