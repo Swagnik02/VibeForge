@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/models/user_model.dart';
 import 'package:vibeforge/screens/Auth/login_screen.dart';
 import 'package:vibeforge/screens/HomeScreen/profile_page_controller.dart';
 
@@ -58,7 +59,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       IconButton(
-                        onPressed: () => Get.to(LoginScreen()),
+                        onPressed: () {},
                         icon: Transform(
                           alignment: Alignment.center,
                           transform: Matrix4.rotationY(22 / 7),
@@ -67,7 +68,7 @@ class ProfilePage extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -82,7 +83,7 @@ class ProfilePage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Center(
                     child: Text(
-                      TestProfile.fullName,
+                      UserDataService().user?.userName ?? 'UserName',
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall!
@@ -131,8 +132,11 @@ class ProfilePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: TextField(
+                                enabled: false,
                                 controller: controller.emailController,
+                                style: const TextStyle(color: Colors.white),
                                 textAlign: TextAlign.center,
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: const InputDecoration(
                                   hintText: 'E-mail',
                                   border: InputBorder.none,
@@ -152,8 +156,11 @@ class ProfilePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                               child: TextField(
+                                enabled: false,
                                 controller: controller.mobileController,
+                                style: const TextStyle(color: Colors.white),
                                 textAlign: TextAlign.center,
+                                keyboardType: TextInputType.phone,
                                 decoration: const InputDecoration(
                                   hintText: 'Mobile',
                                   border: InputBorder.none,

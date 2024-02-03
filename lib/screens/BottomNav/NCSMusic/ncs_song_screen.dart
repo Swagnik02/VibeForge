@@ -4,9 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
+import 'package:permission_handler/permission_handler.dart' as perms;
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:rxdart/rxdart.dart' as rxdart;
+import 'package:vibeforge/services/permission_service.dart';
+import 'package:vibeforge/widgets/file_save_helper.dart';
 import 'package:vibeforge/widgets/widgets.dart';
+import 'package:dio/dio.dart' as DioDev;
 
 class NCSSongScreen extends StatefulWidget {
   const NCSSongScreen({super.key});
@@ -167,8 +172,15 @@ class _MusicPlayer extends StatelessWidget {
               ),
               IconButton(
                 iconSize: 35,
-                onPressed: () {
-                  log(song.songUrl ?? '');
+                onPressed: () async {
+                  if (await requestPermission(Permission.storage) == true) {
+                    log(song.songUrl ?? '');
+                    _downloadSong(
+                        song.songUrl.toString(), song.name.toString());
+                  } else {
+                    // Handle the case when storage permission is not granted
+                    log('Storage permission not granted');
+                  }
                 },
                 icon: const Icon(
                   Icons.cloud_download,
@@ -180,6 +192,27 @@ class _MusicPlayer extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _downloadSong(String url, String fileName) async {
+    DioDev.Dio dio = DioDev.Dio();
+
+    try {
+      DioDev.Response response = await dio.get(
+        url,
+        options: DioDev.Options(
+          responseType: DioDev.ResponseType.bytes,
+        ),
+      );
+
+      // Save the file to the device
+      await FileSaveHelper.saveFile(fileName, response.data);
+
+      // You can display a success message or perform any other action here
+    } catch (e) {
+      // Handle errors
+      print('Error downloading song: $e');
+    }
   }
 }
 

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_download.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_music_controller.dart';
 import 'package:vibeforge/widgets/song_card.dart';
 
@@ -52,11 +53,17 @@ class NCSMusic extends StatelessWidget {
           );
         } else if (snapshot.hasError) {
           return Center(
-            child: Image.asset(LocalAssets.loadingAnim),
+            child: Image.asset(
+              LocalAssets.ncsLogo,
+              scale: 0.8,
+            ),
           );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Image.asset(LocalAssets.loadingAnim),
+            child: Image.asset(
+              LocalAssets.ncsLogo,
+              scale: 0.8,
+            ),
           );
         }
         return const Center(child: CupertinoActivityIndicator());
@@ -110,6 +117,14 @@ class _searchBox extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        IconButton(
+          onPressed: () => Get.to(NCSDownloads()),
+          icon: const Icon(
+            Icons.download,
+            size: 40,
+          ),
+          color: Colors.white,
         ),
       ],
     );
