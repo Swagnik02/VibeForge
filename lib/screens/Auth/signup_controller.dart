@@ -30,6 +30,7 @@ class SignUpScreenController extends GetxController {
         emailController.text,
         passwordController.text,
       );
+      Get.offAllNamed('/auth');
     } catch (e) {
       log('Error: $e');
     }
