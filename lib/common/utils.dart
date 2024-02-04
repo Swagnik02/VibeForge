@@ -39,10 +39,8 @@ class LocalAssets {
       '${LocalAssetDirectories.localAssetsImagesDir}ncs_logo.png';
   static String loadingAnim =
       '${LocalAssetDirectories.localAssetsImagesDir}splash_astraunaut.json';
-  static String drumsAnim =
-      '${LocalAssetDirectories.localAssetsImagesDir}drums.json';
-  static String owl =
-      '${LocalAssetDirectories.localAssetsImagesDir}owl_green.json';
+  static String waveAnim =
+      '${LocalAssetDirectories.localAssetsImagesDir}wave_horizontal.json';
   static String ncsVisualizerYellow =
       '${LocalAssetDirectories.localAssetsImagesDir}ncsVisualizer.gif';
 }

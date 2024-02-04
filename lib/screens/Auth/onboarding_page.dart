@@ -58,7 +58,7 @@ class OnboardingPage extends StatelessWidget {
 
   _logo() {
     return Image.asset(
-      'assets/images/astraunaut_peace.png',
+      LocalAssets.appLogo,
       width: 160,
       // color: Colors.deepPurple.shade100,
     );
