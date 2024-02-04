@@ -23,6 +23,7 @@ class Home extends StatelessWidget {
             _TrendingMusic(songs: songs),
             _Playlists(playlists: playlists),
             _craftedWithLove(),
+            // Lottie.asset(LocalAssets.owl),
           ],
         ),
       ),
@@ -69,9 +70,6 @@ class Home extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 100,
-          )
         ],
       ),
     );
