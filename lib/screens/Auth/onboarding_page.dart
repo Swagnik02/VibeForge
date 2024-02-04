@@ -1,0 +1,130 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:vibeforge/common/utils.dart';
+import 'package:action_slider/action_slider.dart';
+
+class OnboardingPage extends StatelessWidget {
+  const OnboardingPage({Key? key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: boxDecor(),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.transparent,
+        body: _mainBody(),
+      ),
+    );
+  }
+
+  // Background Gradient Colour
+
+  BoxDecoration boxDecor() {
+    return const BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color.fromARGB(149, 66, 31, 126),
+          Color.fromARGB(190, 20, 5, 43),
+          Color.fromARGB(100, 20, 5, 43),
+        ],
+      ),
+    );
+  }
+
+  _mainBody() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _logo(),
+          _welcomeText(),
+          const SizedBox(height: 16.0),
+          _inputUserName(),
+          const SizedBox(height: 16.0),
+          // action slider 1
+          _actionSlider(() {
+            Get.back();
+          }),
+          Lottie.asset('assets/images/wave_horizontal.json'),
+        ],
+      ),
+    );
+  }
+
+  _logo() {
+    return Image.asset(
+      'assets/images/astraunaut_peace.png',
+      width: 160,
+      // color: Colors.deepPurple.shade100,
+    );
+  }
+
+  _welcomeText() {
+    return Text(
+      'Welcome to Vibe Forge',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.deepPurple.shade400,
+        fontWeight: FontWeight.bold,
+        fontSize: 30.0,
+      ),
+    );
+  }
+
+  _inputUserName() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.deepPurple.shade100,
+          border: Border.all(),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: TextField(
+          style: TextStyle(color: Colors.deepPurple.shade900, fontSize: 30),
+          controller: TextEditingController(),
+          textAlign: TextAlign.center,
+          decoration: const InputDecoration(
+            floatingLabelAlignment: FloatingLabelAlignment.center,
+            hintText: 'Enter your name',
+            hintStyle: TextStyle(fontSize: 20),
+            border: InputBorder.none,
+            contentPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+          ),
+        ),
+      ),
+    );
+  }
+
+  _actionSlider(
+    VoidCallback onSlide,
+  ) {
+    return ActionSlider.standard(
+      rolling: true,
+      width: 300.0,
+      backgroundColor: const Color.fromARGB(149, 66, 31, 126),
+      reverseSlideAnimationCurve: Curves.easeInOut,
+      reverseSlideAnimationDuration: const Duration(milliseconds: 500),
+      toggleColor: Colors.purpleAccent,
+      icon: const Icon(Icons.headphones),
+      successIcon: Image.asset(
+        'assets/images/astraunaut_peace.png',
+        color: Colors.deepPurple.shade900,
+      ),
+      action: (controller) async {
+        controller.loading(); //starts loading animation
+        await Future.delayed(const Duration(seconds: 1));
+        controller.success(); //starts success animation
+        await Future.delayed(const Duration(seconds: 1));
+        controller.reset(); //resets the slider
+        onSlide();
+      },
+      child: const Text('DIVE INTO MUSIC',
+          style: TextStyle(color: Colors.white, fontSize: 18)),
+    );
+  }
+}

@@ -29,6 +29,7 @@ dependencies:
   url_launcher: ^6.2.4
   open_file: ^3.3.2
   searchbar_animation: ^0.0.4
+  action_slider: ^0.7.0
 
 dev_dependencies:
   flutter_test:

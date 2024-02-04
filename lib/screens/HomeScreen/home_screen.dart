@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/screens/Auth/onboarding_page.dart';
 import 'package:vibeforge/screens/BottomNav/AllSongs/all_songs.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_mucis.dart';
@@ -44,19 +45,20 @@ class HomeScreen extends StatelessWidget {
   BoxDecoration boxDecor() {
     if (controller.bottomNavBarIndex.value == 0) {
       // Return gradient for index 0
-      return BoxDecoration(
+      return const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.deepPurple.shade900.withOpacity(0.8),
-            Colors.deepPurple.shade300.withOpacity(0.8),
+            Color.fromARGB(149, 66, 31, 126),
+            Color.fromARGB(190, 20, 5, 43),
+            Color.fromARGB(100, 20, 5, 43),
           ],
         ),
       );
     } else if (controller.bottomNavBarIndex.value == 3) {
       // Return gradient for index 3
-      return BoxDecoration(
+      return const BoxDecoration(
         //   gradient: LinearGradient(
         //     begin: Alignment.center,
         //     end: Alignment.bottomCenter,
@@ -69,13 +71,14 @@ class HomeScreen extends StatelessWidget {
       );
     } else {
       // Return a default gradient or any other decoration for other indices
-      return BoxDecoration(
+      return const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Colors.deepPurple.shade800.withOpacity(0.8),
-            Colors.deepPurple.shade200.withOpacity(0.8),
+            Color.fromARGB(149, 66, 31, 126),
+            Color.fromARGB(190, 20, 5, 43),
+            Color.fromARGB(100, 20, 5, 43),
           ],
         ),
       );
@@ -97,7 +100,7 @@ class _CustomNavBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       backgroundColor: controller.bottomNavBarIndex == 3
           ? Colors.black
-          : Colors.deepPurple.shade900,
+          : const Color.fromARGB(30, 20, 5, 43),
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.white,
       showUnselectedLabels: false,
@@ -162,7 +165,8 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           : null,
       leading: InkWell(
         onTap: () {
-          Toast.showToast(context, "Short Toast");
+          Get.to(const OnboardingPage());
+          // Toast.showToast(context, "Short Toast");
         },
         child: Icon(
           Icons.grid_view_outlined,
