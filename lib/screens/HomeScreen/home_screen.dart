@@ -45,14 +45,14 @@ class HomeScreen extends StatelessWidget {
   BoxDecoration boxDecor() {
     if (controller.bottomNavBarIndex.value == 0) {
       // Return gradient for index 0
-      return const BoxDecoration(
+      return BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color.fromARGB(149, 66, 31, 126),
-            Color.fromARGB(190, 20, 5, 43),
-            Color.fromARGB(100, 20, 5, 43),
+            ColorConstants.themeColourShade1,
+            ColorConstants.themeColourShade2,
+            ColorConstants.themeColourShade3,
           ],
         ),
       );
@@ -71,14 +71,14 @@ class HomeScreen extends StatelessWidget {
       );
     } else {
       // Return a default gradient or any other decoration for other indices
-      return const BoxDecoration(
+      return BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color.fromARGB(149, 66, 31, 126),
-            Color.fromARGB(190, 20, 5, 43),
-            Color.fromARGB(100, 20, 5, 43),
+            ColorConstants.themeColourShade1,
+            ColorConstants.themeColourShade2,
+            ColorConstants.themeColourShade3,
           ],
         ),
       );

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class GlobalUtils {
   static bool isloggedIn = false;
 }
@@ -55,4 +57,12 @@ class LocalAssetDirectories {
   static String localAssetsImagesDir = 'assets/images/';
   static String localAssetsCoversDir = 'assets/covers/';
   static String localAssetsMusicrsDir = 'assets/music/';
+}
+
+class ColorConstants {
+  static Color themeColour = const Color(0xFF14052b);
+
+  static Color themeColourShade1 = const Color(0x94421F7E);
+  static Color themeColourShade2 = const Color(0xBD14052B);
+  static Color themeColourShade3 = const Color(0x6314052B);
 }

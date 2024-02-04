@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:vibeforge/common/utils.dart';
+
 import 'package:action_slider/action_slider.dart';
+import 'package:vibeforge/common/utils.dart';
 
 class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({Key? key});
+  const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +23,14 @@ class OnboardingPage extends StatelessWidget {
   // Background Gradient Colour
 
   BoxDecoration boxDecor() {
-    return const BoxDecoration(
+    return BoxDecoration(
       gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          Color.fromARGB(149, 66, 31, 126),
-          Color.fromARGB(190, 20, 5, 43),
-          Color.fromARGB(100, 20, 5, 43),
+          ColorConstants.themeColourShade1,
+          ColorConstants.themeColourShade2,
+          ColorConstants.themeColourShade3,
         ],
       ),
     );
