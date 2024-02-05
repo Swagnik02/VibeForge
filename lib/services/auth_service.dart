@@ -30,6 +30,26 @@ class AuthService {
     }
   }
 
+  Future<void> welcome(String userName) async {
+    // Check if the username is already taken
+    if (_users.any((user) => user.userName == userName)) {
+      throw Exception('Username is already taken.');
+    }
+
+    // Create a new user with only the provided username
+    User newUser = User(userName: userName, password: '', email: '');
+
+    // Add the new user to the list
+    _users.add(newUser);
+
+    // Save the updated user list to SharedPreferences
+    await saveUsers();
+
+    log('Welcome process successful for user: $userName');
+
+    await saveLoggedInUser(newUser);
+  }
+
   // Sign up
   Future<void> signUp(String userName, String email, String password) async {
     // Check if the email is already registered

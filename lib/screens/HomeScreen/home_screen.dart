@@ -165,7 +165,7 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           : null,
       leading: InkWell(
         onTap: () {
-          Get.to(const OnboardingPage());
+          Get.to(OnboardingPage());
           // Toast.showToast(context, "Short Toast");
         },
         child: Icon(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibeforge/services/auth_service.dart';
 
@@ -48,7 +50,12 @@ class UserDataService {
       final authService = AuthService();
       final loggedInUser = await authService.getLoggedInUser();
 
-      if (loggedInUser == null || loggedInUser.email != userEmail) {
+      // if (loggedInUser == null || loggedInUser.email != userEmail) {
+      // return;
+      //     }
+
+      // the Welcome Page case
+      if (loggedInUser == null) {
         return;
       }
 
@@ -59,9 +66,9 @@ class UserDataService {
         password: loggedInUser.password,
       );
 
-      print('User Data for $userEmail: $_user');
+      log('User Data for $userEmail: $_user');
     } catch (e) {
-      print('Error collecting user data: $e');
+      log('Error collecting user data: $e');
     }
   }
 
@@ -100,7 +107,7 @@ class UserDataService {
       _user = updatedUserData;
       storeUserDataLocally();
     } catch (e) {
-      print('Error updating user data: $e');
+      log('Error updating user data: $e');
     }
   }
 

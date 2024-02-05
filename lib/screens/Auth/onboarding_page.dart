@@ -4,18 +4,23 @@ import 'package:lottie/lottie.dart';
 
 import 'package:action_slider/action_slider.dart';
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/screens/Auth/onboarding_page_controller.dart';
 
 class OnboardingPage extends StatelessWidget {
-  const OnboardingPage({super.key});
+  OnboardingPage({super.key});
 
+  final OnboardingPageController controller =
+      Get.put(OnboardingPageController());
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: boxDecor(),
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.transparent,
-        body: _mainBody(),
+    return GetBuilder<OnboardingPageController>(
+      builder: (_) => Container(
+        decoration: boxDecor(),
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.transparent,
+          body: _mainBody(),
+        ),
       ),
     );
   }
@@ -41,15 +46,18 @@ class OnboardingPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          TextButton(
+              onPressed: () => controller.printAllData(), child: Text('check')),
+          SizedBox(
+            height: 100,
+          ),
           _logo(),
           _welcomeText(),
           const SizedBox(height: 16.0),
           _inputUserName(),
           const SizedBox(height: 16.0),
           // action slider 1
-          _actionSlider(() {
-            Get.back();
-          }),
+          _actionSlider(() => controller.onSlideWelcome()),
           Lottie.asset('assets/images/wave_horizontal.json'),
         ],
       ),
@@ -87,7 +95,7 @@ class OnboardingPage extends StatelessWidget {
         ),
         child: TextField(
           style: TextStyle(color: Colors.deepPurple.shade900, fontSize: 30),
-          controller: TextEditingController(),
+          controller: controller.userNameController,
           textAlign: TextAlign.center,
           decoration: const InputDecoration(
             floatingLabelAlignment: FloatingLabelAlignment.center,
@@ -113,7 +121,7 @@ class OnboardingPage extends StatelessWidget {
       toggleColor: Colors.purpleAccent,
       icon: const Icon(Icons.headphones),
       successIcon: Image.asset(
-        'assets/images/astraunaut_peace.png',
+        LocalAssets.appLogo,
         color: Colors.deepPurple.shade900,
       ),
       action: (controller) async {
