@@ -34,7 +34,7 @@ class LocalAssets {
   static String appLogo =
       '${LocalAssetDirectories.localAssetsImagesDir}app_logo.png';
   static String avatar =
-      '${LocalAssetDirectories.localAssetsImagesDir}avatar.jpg';
+      '${LocalAssetDirectories.localAssetsImagesDir}avatar.png';
   static String ncsLogo =
       '${LocalAssetDirectories.localAssetsImagesDir}ncs_logo.png';
   static String loadingAnim =

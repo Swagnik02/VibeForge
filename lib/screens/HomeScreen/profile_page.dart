@@ -8,8 +8,8 @@ class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
   final ProfilePageController controller = Get.put(ProfilePageController());
-  double screenHeight = Get.height;
-  double screenWidth = Get.width;
+  final double screenHeight = Get.height;
+  final double screenWidth = Get.width;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfilePageController>(
@@ -102,8 +102,12 @@ class ProfilePage extends StatelessWidget {
                   width: 150,
                   height: 150,
                   child: CircleAvatar(
-                    foregroundImage: AssetImage(
-                      TestProfile.profilePic,
+                    backgroundColor: ColorConstants.themeColour,
+                    child: ClipOval(
+                      child: Image.asset(
+                        LocalAssets.avatar,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
