@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vibeforge/services/auth_service.dart';
 
-class OnboardingPageController extends GetxController {
+class WelcomePageController extends GetxController {
   TextEditingController userNameController = TextEditingController();
   AuthService authService = AuthService();
   void onSlideWelcome() async {

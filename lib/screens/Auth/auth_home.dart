@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vibeforge/models/user_model.dart';
-import 'package:vibeforge/screens/Auth/onboarding_page.dart';
+import 'package:vibeforge/screens/Auth/Welcome/onboarding_page.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen.dart';
 import 'package:vibeforge/services/auth_service.dart';
 
@@ -31,7 +31,7 @@ class _AuthHomeState extends State<AuthHome> {
           // Return a loading indicator if the future is still in progress
           return CircularProgressIndicator();
         } else {
-          return snapshot.hasData ? HomeScreen() : OnboardingPage();
+          return snapshot.hasData ? HomeScreen() : WelcomePage();
         }
       },
     );

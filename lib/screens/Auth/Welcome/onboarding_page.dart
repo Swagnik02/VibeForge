@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-
 import 'package:action_slider/action_slider.dart';
 import 'package:vibeforge/common/utils.dart';
-import 'package:vibeforge/screens/Auth/onboarding_page_controller.dart';
+import 'package:vibeforge/screens/Auth/Welcome/onboarding_page_controller.dart';
 
-class OnboardingPage extends StatelessWidget {
-  OnboardingPage({super.key});
+class WelcomePage extends StatelessWidget {
+  WelcomePage({super.key});
 
-  final OnboardingPageController controller =
-      Get.put(OnboardingPageController());
+  final WelcomePageController controller = Get.put(WelcomePageController());
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<OnboardingPageController>(
+    return GetBuilder<WelcomePageController>(
       builder: (_) => Container(
         decoration: boxDecor(),
         child: Scaffold(

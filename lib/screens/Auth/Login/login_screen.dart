@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:vibeforge/screens/Auth/signup_controller.dart';
+import 'package:vibeforge/screens/Auth/Login/login_screen_controller.dart';
 
-class SignUpScreen extends StatelessWidget {
-  SignUpScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
 
-  final SignUpScreenController controller = Get.put(SignUpScreenController());
+  final LoginScreenController controller = Get.put(LoginScreenController());
   @override
   Widget build(BuildContext context) {
     double screenHeight = Get.height;
-    return GetBuilder<SignUpScreenController>(
+    return GetBuilder<LoginScreenController>(
       builder: (_) => Scaffold(
         backgroundColor: const Color(0xFF1F1F1F),
         body: SafeArea(
@@ -42,17 +42,13 @@ class SignUpScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'SignUp',
+                                    'Login',
                                     style: Get.textTheme.headlineSmall!
                                         .copyWith(fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
                               const SizedBox(height: 10),
-                              _CustTextField(
-                                fieldController: controller.usernameController,
-                                labelText: 'Username',
-                              ),
                               _CustTextField(
                                 fieldController: controller.emailController,
                                 labelText: 'E-mail',
@@ -65,6 +61,28 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           Column(
                             children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                      child: TextButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        Colors.deepPurple.shade500,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      'Login',
+                                      style: Get.textTheme.headlineSmall!
+                                          .copyWith(
+                                              color: Colors.white60,
+                                              fontWeight: FontWeight.bold),
+                                    ),
+                                    onPressed: () => controller.login(),
+                                  ))
+                                ],
+                              ),
+                              const SizedBox(height: 10),
                               Row(
                                 children: [
                                   // signup button
@@ -83,47 +101,28 @@ class SignUpScreen extends StatelessWidget {
                                                 color: Colors.white60,
                                                 fontWeight: FontWeight.bold),
                                       ),
-                                      onPressed: () => controller.signup(),
+                                      onPressed: () => controller.goToSignUp(),
                                     ),
                                   ),
-                                ],
-                              ),
-                              SizedBox(height: 10),
-                              Row(
-                                children: [
-                                  // back button
-                                  Expanded(
-                                    child: TextButton(
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                          Colors.deepPurple.shade500,
-                                        ),
-                                      ),
-                                      onPressed: () => controller.goToLogin(),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            Icons.arrow_back_ios,
-                                            color: Colors.white60,
-                                          ),
-                                          SizedBox(
-                                              width:
-                                                  8), // Adjust the spacing between icon and text
-                                          Text(
-                                            'Back',
-                                            style: Get.textTheme.headlineSmall!
-                                                .copyWith(
-                                              color: Colors.white60,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  // testing button
+
+                                  // Expanded(
+                                  //   child: TextButton(
+                                  //     style: ButtonStyle(
+                                  //       backgroundColor: MaterialStateProperty.all(
+                                  //         Colors.deepPurple.shade500,
+                                  //       ),
+                                  //     ),
+                                  //     child: Text(
+                                  //       'CHECK',
+                                  //       style: Get.textTheme.headlineSmall!
+                                  //           .copyWith(
+                                  //               color: Colors.white60,
+                                  //               fontWeight: FontWeight.bold),
+                                  //     ),
+                                  //     onPressed: () => controller.printAllData(),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ],
