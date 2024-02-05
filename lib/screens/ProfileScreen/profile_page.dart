@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/user_model.dart';
-import 'package:vibeforge/screens/HomeScreen/profile_page_controller.dart';
+import 'package:vibeforge/screens/ProfileScreen/profile_page_controller.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});

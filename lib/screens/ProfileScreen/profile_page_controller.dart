@@ -60,7 +60,10 @@ class ProfilePageController extends GetxController {
                 child: const Text('Cancel'),
               ),
               TextButton(
-                onPressed: () => onTapUpdateProfile(),
+                onPressed: () {
+                  onTapUpdateProfile();
+                  Get.back();
+                },
                 child: const Text('Save'),
               ),
             ],
