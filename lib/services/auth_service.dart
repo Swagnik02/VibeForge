@@ -37,7 +37,11 @@ class AuthService {
     }
 
     // Create a new user with only the provided username
-    User newUser = User(userName: userName, password: '', email: '');
+    User newUser = User(
+      userName: userName,
+      email: 'guestuser@user.com',
+      password: '',
+    );
 
     // Add the new user to the list
     _users.add(newUser);

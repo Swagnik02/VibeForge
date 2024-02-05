@@ -211,7 +211,7 @@ class _MusicPlayer extends StatelessWidget {
       // You can display a success message or perform any other action here
     } catch (e) {
       // Handle errors
-      print('Error downloading song: $e');
+      log('Error downloading song: $e');
     }
   }
 }
