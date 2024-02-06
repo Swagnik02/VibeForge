@@ -64,3 +64,7 @@ class ColorConstants {
   static Color themeColourShade2 = const Color(0xBD14052B);
   static Color themeColourShade3 = const Color(0x6314052B);
 }
+
+class FilePath {
+  static String ncsDownloads = '/storage/emulated/0/VibeForge/NCSdownloads';
+}

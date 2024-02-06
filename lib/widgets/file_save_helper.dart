@@ -1,16 +1,13 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:path_provider/path_provider.dart';
-
 class FileSaveHelper {
-  static Future<void> saveFile(String fileName, Uint8List data) async {
+  static Future<void> saveFile(
+      String downloadsPath, String fileName, Uint8List data) async {
     try {
       // Get the external storage directory
-      Directory? externalDir = await getExternalStorageDirectory();
-
-      // Append "Downloads" to the path
-      String downloadsPath = '${externalDir!.path}/Downloads';
+      // Directory? externalDir = await getExternalStorageDirectory();
 
       // Check if the Downloads directory exists, create it if not
       Directory downloadsDir = Directory(downloadsPath);
@@ -18,15 +15,16 @@ class FileSaveHelper {
         downloadsDir.createSync(recursive: true);
       }
 
-      String filePath = '$downloadsPath/$fileName';
+      // Concatenate the file extension '.mp3' to the file name
+      String filePath = '$downloadsPath/$fileName.mp3';
 
       // Write the file
       File file = File(filePath);
       await file.writeAsBytes(data);
 
-      print('File saved at: $filePath');
+      log('File saved at: $filePath');
     } catch (e) {
-      print('Error saving file: $e');
+      log('Error saving file: $e');
     }
   }
 }

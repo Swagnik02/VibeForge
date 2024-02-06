@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart' as perms;
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:rxdart/rxdart.dart' as rxdart;
+import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/services/permission_service.dart';
 import 'package:vibeforge/widgets/file_save_helper.dart';
 import 'package:vibeforge/widgets/widgets.dart';
@@ -206,7 +207,8 @@ class _MusicPlayer extends StatelessWidget {
       );
 
       // Save the file to the device
-      await FileSaveHelper.saveFile(fileName, response.data);
+      await FileSaveHelper.saveFile(
+          FilePath.ncsDownloads, fileName, response.data);
 
       // You can display a success message or perform any other action here
     } catch (e) {

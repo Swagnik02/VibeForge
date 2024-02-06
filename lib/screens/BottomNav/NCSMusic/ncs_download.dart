@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:open_file/open_file.dart';
+import 'package:vibeforge/common/utils.dart';
 
 class NCSDownloads extends StatefulWidget {
   const NCSDownloads({Key? key}) : super(key: key);
@@ -22,11 +23,12 @@ class _NCSDownloadsState extends State<NCSDownloads> {
   Future<void> _loadFiles() async {
     try {
       // Get the external storage directory
-      Directory? externalDir = await getExternalStorageDirectory();
+      // Directory? externalDir = await getExternalStorageDirectory();
 
       // Append "Downloads" to the path
-      String downloadsPath = '${externalDir!.path}/Downloads';
-      Directory dir = Directory(downloadsPath);
+      // String downloadsPath = '${externalDir!.path}/Downloads';
+
+      Directory dir = Directory(FilePath.ncsDownloads);
       List<FileSystemEntity> fileList = dir.listSync();
       setState(() {
         files = fileList;
@@ -68,7 +70,7 @@ class _NCSDownloadsState extends State<NCSDownloads> {
               // Open the file on tap
               OpenFile.open(
                 files[index].path,
-                type: 'audio/mp3', // Specify the MIME type
+                // type: 'audio/mp3', // Specify the MIME type
               );
             },
           );
