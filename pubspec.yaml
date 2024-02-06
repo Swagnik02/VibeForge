@@ -30,6 +30,7 @@ dependencies:
   open_file: ^3.3.2
   searchbar_animation: ^0.0.4
   action_slider: ^0.7.0
+  file_picker: ^6.1.1
 
 dev_dependencies:
   flutter_test:

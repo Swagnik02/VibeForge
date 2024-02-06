@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/screens/Auth/Welcome/onboarding_page.dart';
 import 'package:vibeforge/screens/BottomNav/AllSongs/all_songs.dart';
+import 'package:vibeforge/screens/DirectorySelection/directory_screen.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_mucis.dart';
 import 'package:vibeforge/widgets/widgets.dart';
@@ -164,8 +165,7 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           : null,
       leading: InkWell(
         onTap: () {
-          Get.to(WelcomePage());
-          // Toast.showToast(context, "Short Toast");
+          Get.to(DirectoryScreen(), transition: Transition.downToUp);
         },
         child: Icon(
           Icons.grid_view_outlined,

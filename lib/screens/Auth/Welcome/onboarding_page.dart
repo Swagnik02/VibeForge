@@ -44,8 +44,8 @@ class WelcomePage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextButton(
-              onPressed: () => controller.printAllData(), child: Text('check')),
+          // TextButton(
+          //     onPressed: () => controller.printAllData(), child: Text('check')),
           SizedBox(
             height: 100,
           ),
