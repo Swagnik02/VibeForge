@@ -1,8 +1,15 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metadata_god/metadata_god.dart';
 import 'package:open_file/open_file.dart';
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/screens/DirectorySelection/directory_screen_controller.dart';
+import 'package:vibeforge/screens/local_song_screen.dart';
 
 class DirectoryScreen extends StatelessWidget {
   DirectoryScreen({super.key});
@@ -77,12 +84,38 @@ class DirectoryScreen extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(controller.files[index].uri.pathSegments.last),
-                onTap: () {
-                  // Open the file on tap
-                  OpenFile.open(
-                    controller.files[index].path,
-                    // type: 'audio/mp3', // Specify the MIME type
+                onTap: () async {
+                  Metadata metadata = await MetadataGod.readMetadata(
+                      file: controller.files[index].path);
+
+                  log(metadata.title ?? '');
+
+// Extract image bytes from the metadata if available
+                  Uint8List? imageBytes;
+                  String? mimeType;
+                  if (metadata.picture != null) {
+                    imageBytes = metadata.picture!.data;
+                    mimeType = metadata.picture!.mimeType;
+                  }
+
+                  Song song = Song(
+                    title: metadata.title ?? '',
+                    description: metadata.artist ?? '',
+                    url: controller.files[index].path,
+                    // Convert image bytes to base64 and use it as the coverUrl
+                    coverUrl: imageBytes != null
+                        ? 'data:$mimeType;base64,${base64Encode(imageBytes)}'
+                        : '',
                   );
+
+                  // Get.toNamed('/localSong', arguments: song);
+                  Get.to(LocalSongScreen(song: song));
+
+                  // // Open the file on tap
+                  // OpenFile.open(
+                  //   controller.files[index].path,
+                  //   // type: 'audio/mp3', // Specify the MIME type
+                  // );
                 },
               );
             },
