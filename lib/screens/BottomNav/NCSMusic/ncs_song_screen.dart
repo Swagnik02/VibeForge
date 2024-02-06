@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:metadata_god/metadata_god.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
-import 'package:permission_handler/permission_handler.dart' as perms;
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:rxdart/rxdart.dart' as rxdart;
@@ -38,6 +38,7 @@ class _SongScreenState extends State<NCSSongScreen> {
         ],
       ),
     );
+    MetadataGod.initialize();
   }
 
   @override
@@ -176,8 +177,8 @@ class _MusicPlayer extends StatelessWidget {
                 onPressed: () async {
                   if (await requestPermission(Permission.storage) == true) {
                     log(song.songUrl ?? '');
-                    _downloadSong(
-                        song.songUrl.toString(), song.name.toString());
+                    log(song.imageUrl ?? '');
+                    _downloadSong(song);
                   } else {
                     // Handle the case when storage permission is not granted
                     log('Storage permission not granted');
@@ -195,8 +196,10 @@ class _MusicPlayer extends StatelessWidget {
     );
   }
 
-  Future<void> _downloadSong(String url, String fileName) async {
+  Future<void> _downloadSong(NCSDev.Song song) async {
     DioDev.Dio dio = DioDev.Dio();
+
+    String url = song.songUrl ?? '';
 
     try {
       DioDev.Response response = await dio.get(
@@ -207,10 +210,7 @@ class _MusicPlayer extends StatelessWidget {
       );
 
       // Save the file to the device
-      await FileSaveHelper.saveFile(
-          FilePath.ncsDownloads, fileName, response.data);
-
-      // You can display a success message or perform any other action here
+      await FileSaveHelper.saveFile(FilePath.ncsDownloads, song, response.data);
     } catch (e) {
       // Handle errors
       log('Error downloading song: $e');

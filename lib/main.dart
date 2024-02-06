@@ -13,6 +13,7 @@ import 'package:vibeforge/screens/Auth/auth_home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Retrieve user data from local storage
+
   await UserDataService().retrieveUserDataLocally();
   runApp(const MyApp());
 }
