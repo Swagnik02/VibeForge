@@ -70,12 +70,7 @@ class DirectoryScreen extends StatelessWidget {
           ListTile(
             title: Text(folder),
           ),
-        // Display the scanned songs
-        for (DirSong song in controller.songs)
-          ListTile(
-            title: Text(song.name),
-            subtitle: Text(song.path),
-          ),
+
         Expanded(
           child: ListView.builder(
             itemCount: controller.files.length,

@@ -3,24 +3,9 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 
-class DirSong {
-  String name;
-  String path;
-
-  DirSong({required this.name, required this.path});
-}
-
 class DirectoryScreenController extends GetxController {
   List<String> selectedFolders = [];
   List<FileSystemEntity> files = [];
-
-  List<DirSong> songs = [];
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    // _loadFiles();
-  }
 
   void addFolder() async {
     final path = await FilePicker.platform.getDirectoryPath();
