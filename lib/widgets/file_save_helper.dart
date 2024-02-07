@@ -1,9 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'package:metadata_god/metadata_god.dart';
 import 'package:mime/mime.dart';
-import 'package:ncs_io/ncs_io.dart' as NCSDev;
 import 'package:vibeforge/models/song_model.dart';
 
 class FileSaveHelper {
@@ -54,9 +54,9 @@ class FileSaveHelper {
         ),
       );
 
-      print('Metadata added to the file: $filePath');
+      log('Metadata added to the file: $filePath');
     } catch (e) {
-      print('Error saving file or adding metadata: $e');
+      log('Error saving file or adding metadata: $e');
     }
   }
 }

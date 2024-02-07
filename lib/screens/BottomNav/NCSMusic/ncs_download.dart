@@ -1,13 +1,11 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
-import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:metadata_god/metadata_god.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/vibeComponents/SongScreen/vibe_song_screen.dart';
+import 'package:vibeforge/vibeComponents/model_conversion.dart';
 
 class NCSDownloads extends StatefulWidget {
   const NCSDownloads({super.key});
@@ -72,26 +70,8 @@ class _NCSDownloadsState extends State<NCSDownloads> {
           return ListTile(
             title: Text(files[index].uri.pathSegments.last),
             onTap: () async {
-              Metadata metadata =
-                  await MetadataGod.readMetadata(file: files[index].path);
-
-              log(metadata.title ?? '');
-
-              Uint8List? imageBytes;
-              String? mimeType;
-              if (metadata.picture != null) {
-                imageBytes = metadata.picture!.data;
-                mimeType = metadata.picture!.mimeType;
-              }
-
-              VibeSong song = VibeSong(
-                name: metadata.title ?? '',
-                // artists: metadata.artist ?? '',
-                songUrl: files[index].path,
-                imageUrl: imageBytes != null
-                    ? 'data:$mimeType;base64,${base64Encode(imageBytes)}'
-                    : '',
-              );
+              VibeSong song =
+                  await createVibeSongFromMetadata(files[index].path);
 
               Get.to(VibeSongScreen(
                 song: song,

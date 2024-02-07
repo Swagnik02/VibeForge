@@ -2,6 +2,10 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
+import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/models/song_model.dart';
+import 'package:vibeforge/vibeComponents/SongScreen/vibe_song_screen.dart';
+import 'package:vibeforge/vibeComponents/model_conversion.dart';
 
 class DirectoryScreenController extends GetxController {
   List<String> selectedFolders = [];
@@ -30,5 +34,13 @@ class DirectoryScreenController extends GetxController {
     } catch (e) {
       print("Error loading files: $e");
     }
+  }
+
+  playAudioFile(int index) async {
+    VibeSong song = await createVibeSongFromMetadata(files[index].path);
+    Get.to(VibeSongScreen(
+      song: song,
+      musicSource: MusicSource.localDirectory,
+    ));
   }
 }

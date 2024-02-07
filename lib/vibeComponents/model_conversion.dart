@@ -1,3 +1,8 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'dart:typed_data';
+
+import 'package:metadata_god/metadata_god.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
 import 'package:vibeforge/models/song_model.dart';
 
@@ -24,4 +29,28 @@ VibeSong convertToVibeSong(NCSDev.Song? ncsSong) {
             ))
         .toList(),
   );
+}
+
+Future<VibeSong> createVibeSongFromMetadata(String filePath) async {
+  Metadata metadata = await MetadataGod.readMetadata(file: filePath);
+
+  log(metadata.title ?? '');
+
+  Uint8List? imageBytes;
+  String? mimeType;
+
+  if (metadata.picture != null) {
+    imageBytes = metadata.picture!.data;
+    mimeType = metadata.picture!.mimeType;
+  }
+
+  VibeSong song = VibeSong(
+    name: metadata.title ?? '',
+    songUrl: filePath,
+    imageUrl: imageBytes != null
+        ? 'data:$mimeType;base64,${base64Encode(imageBytes)}'
+        : '',
+  );
+
+  return song;
 }

@@ -1,14 +1,7 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:metadata_god/metadata_god.dart';
 import 'package:vibeforge/common/utils.dart';
-import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/screens/DirectorySelection/directory_screen_controller.dart';
-import 'package:vibeforge/vibeComponents/SongScreen/vibe_song_screen.dart';
 
 class DirectoryScreen extends StatelessWidget {
   DirectoryScreen({super.key});
@@ -38,7 +31,7 @@ class DirectoryScreen extends StatelessWidget {
             ),
           ),
           resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           body: _mainBody(),
         ),
       ),
@@ -74,7 +67,7 @@ class DirectoryScreen extends StatelessWidget {
         Text('Display the added folders'),
         for (String folder in controller.selectedFolders)
           ListTile(
-            title: Text(folder),
+            title: Text(folder, style: TextStyle(color: Colors.white)),
           ),
 
         Expanded(
@@ -82,44 +75,11 @@ class DirectoryScreen extends StatelessWidget {
             itemCount: controller.files.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(controller.files[index].uri.pathSegments.last),
-                onTap: () async {
-                  Metadata metadata = await MetadataGod.readMetadata(
-                      file: controller.files[index].path);
-
-                  log(metadata.title ?? '');
-
-// Extract image bytes from the metadata if available
-                  Uint8List? imageBytes;
-                  String? mimeType;
-                  if (metadata.picture != null) {
-                    imageBytes = metadata.picture!.data;
-                    mimeType = metadata.picture!.mimeType;
-                  }
-
-                  VibeSong song = VibeSong(
-                    name: metadata.title ?? '',
-                    // artists: metadata.artist ?? '',
-                    songUrl: controller.files[index].path,
-                    // Convert image bytes to base64 and use it as the coverUrl
-                    imageUrl: imageBytes != null
-                        ? 'data:$mimeType;base64,${base64Encode(imageBytes)}'
-                        : '',
-                  );
-
-                  // Get.toNamed('/localSong', arguments: song);
-                  Get.to(VibeSongScreen(
-                    song: song,
-                    musicSource: MusicSource.localDirectory,
-                  ));
-
-                  // // Open the file on tap
-                  // OpenFile.open(
-                  //   controller.files[index].path,
-                  //   // type: 'audio/mp3', // Specify the MIME type
-                  // );
-                },
-              );
+                  title: Text(
+                    controller.files[index].uri.pathSegments.last,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onTap: () => controller.playAudioFile(index));
             },
           ),
         )

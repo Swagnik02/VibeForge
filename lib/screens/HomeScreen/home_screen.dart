@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
-import 'package:vibeforge/screens/Auth/Welcome/onboarding_page.dart';
 import 'package:vibeforge/screens/BottomNav/AllSongs/all_songs.dart';
 import 'package:vibeforge/screens/DirectorySelection/directory_screen.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
