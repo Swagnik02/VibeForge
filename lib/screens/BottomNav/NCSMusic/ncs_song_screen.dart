@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:metadata_god/metadata_god.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
 import 'package:permission_handler/permission_handler.dart';
 
