@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vibeforge/models/user_model.dart';
-import 'package:vibeforge/screens/Auth/Welcome/onboarding_page.dart';
+import 'package:vibeforge/screens/Auth/Welcome/welcome_page.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen.dart';
 import 'package:vibeforge/services/auth_service.dart';
 

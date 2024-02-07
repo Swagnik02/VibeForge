@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:action_slider/action_slider.dart';
 import 'package:vibeforge/common/utils.dart';
-import 'package:vibeforge/screens/Auth/Welcome/onboarding_page_controller.dart';
+import 'package:vibeforge/screens/Auth/Welcome/welcome_page_controller.dart';
 
 class WelcomePage extends StatelessWidget {
   WelcomePage({super.key});
