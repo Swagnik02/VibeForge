@@ -94,6 +94,7 @@ class _CustomNavBar extends StatelessWidget {
       currentIndex: controller.bottomNavBarIndex.value,
       onTap: (index) {
         controller.bottomNavBarIndex.value = index;
+        controller.title('VibeForge');
       },
       items: [
         const BottomNavigationBarItem(

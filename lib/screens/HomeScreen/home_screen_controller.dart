@@ -17,6 +17,12 @@ class HomeScreenController extends GetxController {
       text.value = '';
     });
   }
+
+  void title(String str) {
+    text.value = str;
+    onInit();
+  }
+
   // MiniProfile
 
   void miniProfileUI(BuildContext context) {
