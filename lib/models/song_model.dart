@@ -1,5 +1,47 @@
 import 'package:vibeforge/common/utils.dart';
 
+class VibeArtist {
+  final String? name;
+  final String? url;
+  final String? img;
+  final List<String>? genres;
+  // final List<Song>? songs;
+
+  VibeArtist({this.img, this.genres, /*this.songs*/ this.name, this.url});
+}
+
+class VibeTag {
+  final String? name;
+  final int? mood;
+  final int? genre;
+
+  VibeTag({
+    this.name,
+    this.mood,
+    this.genre,
+  });
+}
+
+class VibeSong {
+  final String? name;
+  final String? genre;
+  final List<VibeArtist>? artists;
+  final String? url;
+  final String? imageUrl;
+  final String? songUrl;
+  final List<VibeTag>? tags;
+
+  VibeSong({
+    this.name,
+    this.genre,
+    this.artists,
+    this.url,
+    this.imageUrl,
+    this.songUrl,
+    this.tags,
+  });
+}
+
 class Song {
   final String title;
   final String description;
