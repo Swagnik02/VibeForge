@@ -60,20 +60,6 @@ class VibeMusicPlayer extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
 
-                Wrap(
-                  children: [
-                    ...List.generate(
-                        song.tags?.length ?? 0,
-                        (index) => Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.green.shade50,
-                                  borderRadius: BorderRadius.circular(10)),
-                              padding: const EdgeInsets.all(3),
-                              margin: const EdgeInsets.only(right: 3),
-                              child: Text(song.tags?[index].name ?? ''),
-                            ))
-                  ],
-                ),
                 Text(song.genre ?? '',
                     style: TextStyle(color: Colors.grey.shade400)),
               ],

@@ -44,12 +44,41 @@ Future<VibeSong> createVibeSongFromMetadata(String filePath) async {
     mimeType = metadata.picture!.mimeType;
   }
 
+  // Extract artists' names from the metadata and split them based on presence of , or /
+  List<String> artistNames = [];
+  if (metadata.artist != null) {
+    if (metadata.artist!.contains(',')) {
+      artistNames.addAll(metadata.artist!.split(','));
+    } else if (metadata.artist!.contains('/')) {
+      artistNames.addAll(metadata.artist!.split('/'));
+    } else {
+      artistNames.add(metadata.artist!);
+    }
+  }
+
+  // Trim and remove empty artist names
+  artistNames = artistNames
+      .map((artistName) => artistName.trim())
+      .where((artistName) => artistName.isNotEmpty)
+      .toList();
+
+  // Create VibeArtist objects for each artist name
+  List<VibeArtist> artists = artistNames
+      .map((artistName) => VibeArtist(
+            name: artistName,
+            // You may need to provide additional properties for the artist here,
+            // such as URL, image, and genres, based on the metadata structure.
+          ))
+      .toList();
+
+  // Create the VibeSong object including the extracted artist information
   VibeSong song = VibeSong(
     name: metadata.title ?? '',
     songUrl: filePath,
     imageUrl: imageBytes != null
         ? 'data:$mimeType;base64,${base64Encode(imageBytes)}'
         : '',
+    artists: artists,
   );
 
   return song;

@@ -5,9 +5,8 @@ class VibeArtist {
   final String? url;
   final String? img;
   final List<String>? genres;
-  // final List<Song>? songs;
 
-  VibeArtist({this.img, this.genres, /*this.songs*/ this.name, this.url});
+  VibeArtist({this.img, this.genres, this.name, this.url});
 }
 
 class VibeTag {
@@ -44,64 +43,42 @@ class VibeSong {
   static List<VibeSong> songs = [
     VibeSong(
       name: 'Gold',
-      // artists: 'Owl City',
+      artists: [
+        VibeArtist(
+          name: 'Owl City',
+          url: 'artist_url_here',
+          img: 'artist_image_url_here',
+          genres: ['Pop', 'Electronic'],
+        ),
+      ],
       songUrl: LocalAssets.songOwlCityGold,
       imageUrl: LocalAssets.coverOwlCityGold,
     ),
     VibeSong(
       name: 'Freedom',
-      // description: 'Akon',
+      artists: [
+        VibeArtist(
+          name: 'Akon',
+          url: 'artist_url_here',
+          img: 'artist_image_url_here',
+          genres: ['R&B', 'Hip Hop'],
+        ),
+      ],
       songUrl: LocalAssets.songAkonFreedom,
       imageUrl: LocalAssets.coverAkonFreedom,
     ),
     VibeSong(
       name: 'Glad You Came',
-      // description: 'The Weekend',
+      artists: [
+        VibeArtist(
+          name: 'The Wanted',
+          url: 'artist_url_here',
+          img: 'artist_image_url_here',
+          genres: ['Pop', 'Rock'],
+        ),
+      ],
       songUrl: LocalAssets.songTheWantedGladYouCame,
       imageUrl: LocalAssets.coverTheWantedGladYouCame,
-    ),
-  ];
-}
-
-class Song {
-  final String title;
-  final String description;
-  final String url;
-  final String coverUrl;
-
-  Song({
-    required this.title,
-    required this.description,
-    required this.url,
-    required this.coverUrl,
-  });
-
-  static List<Song> songs = [
-    // Song(
-    //   title: 'Dont Stay',
-    //   description: 'Owl City',
-    //   url:
-    //       'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/601/dont-stay-1704934851-zQtgjDlDI6.mp3',
-    //   coverUrl:
-    //       'https://ncsmusic.s3.eu-west-1.amazonaws.com/tracks/000/001/601/325x325/1704967625_DgryNWWoMq_final.jpg',
-    // ),
-    Song(
-      title: 'Gold',
-      description: 'Owl City',
-      url: LocalAssets.songOwlCityGold,
-      coverUrl: LocalAssets.coverOwlCityGold,
-    ),
-    Song(
-      title: 'Freedom',
-      description: 'Akon',
-      url: LocalAssets.songAkonFreedom,
-      coverUrl: LocalAssets.coverAkonFreedom,
-    ),
-    Song(
-      title: 'Glad You Came',
-      description: 'The Weekend',
-      url: LocalAssets.songTheWantedGladYouCame,
-      coverUrl: LocalAssets.coverTheWantedGladYouCame,
     ),
   ];
 }
