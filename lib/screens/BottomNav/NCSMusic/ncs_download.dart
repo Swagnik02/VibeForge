@@ -1,9 +1,12 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
+import 'package:vibeforge/services/permission_service.dart';
 import 'package:vibeforge/vibeComponents/SongScreen/vibe_song_screen.dart';
 import 'package:vibeforge/vibeComponents/model_conversion.dart';
 
@@ -20,24 +23,29 @@ class _NCSDownloadsState extends State<NCSDownloads> {
   @override
   void initState() {
     super.initState();
+
     _loadFiles();
   }
 
   Future<void> _loadFiles() async {
-    try {
-      // Get the external storage directory
-      // Directory? externalDir = await getExternalStorageDirectory();
+    if (await requestPermission(Permission.storage) == true) {
+      try {
+        // Get the external storage directory
+        // Directory? externalDir = await getExternalStorageDirectory();
 
-      // Append "Downloads" to the path
-      // String downloadsPath = '${externalDir!.path}/Downloads';
-
-      Directory dir = Directory(FilePath.ncsDownloads);
-      List<FileSystemEntity> fileList = dir.listSync();
-      setState(() {
-        files = fileList;
-      });
-    } catch (e) {
-      print("Error loading files: $e");
+        // Append "Downloads" to the path
+        // String downloadsPath = '${externalDir!.path}/Downloads';
+        Directory dir = Directory(FilePath.ncsDownloads);
+        List<FileSystemEntity> fileList = dir.listSync();
+        setState(() {
+          files = fileList;
+        });
+      } catch (e) {
+        print("Error loading files: $e");
+      }
+    } else {
+      // Handle the case when storage permission is not granted
+      log('Storage permission not granted');
     }
   }
 
