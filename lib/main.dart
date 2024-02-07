@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metadata_god/metadata_god.dart';
 import 'package:vibeforge/models/user_model.dart';
 import 'package:vibeforge/screens/Auth/Login/login_screen.dart';
 import 'package:vibeforge/screens/Auth/Welcome/onboarding_page.dart';
@@ -14,7 +15,7 @@ import 'package:vibeforge/screens/Auth/auth_home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Retrieve user data from local storage
-
+  MetadataGod.initialize();
   await UserDataService().retrieveUserDataLocally();
   runApp(const MyApp());
 }

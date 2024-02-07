@@ -1,5 +1,9 @@
+import 'dart:developer';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metadata_god/metadata_god.dart';
 import 'package:searchbar_animation/searchbar_animation.dart';
 import 'all_songs_controller.dart';
 
@@ -57,6 +61,13 @@ class AllSongs extends StatelessWidget {
           const Text(
             'All Songs here',
             style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+          IconButton(
+            onPressed: controller.addFolder,
+            icon: const Icon(
+              Icons.add,
+              color: Colors.purpleAccent,
+            ),
           )
         ],
       ),
@@ -65,19 +76,18 @@ class AllSongs extends StatelessWidget {
 
   Widget _buildMusicList() {
     return ListView.builder(
-      itemCount: controller.filteredMusicList.length,
-      itemBuilder: (BuildContext context, int index) {
-        // Replace with your music list item UI
+      itemCount: controller.files.length,
+      itemBuilder: (context, index) {
         return ListTile(
           leading: const Icon(
             Icons.music_note,
             color: Colors.white,
           ),
           title: Text(
-            controller.filteredMusicList[index],
-            style: const TextStyle(color: Colors.white),
+            controller.files[index].uri.pathSegments.last,
+            style: TextStyle(color: Colors.white),
           ),
-          // Add more details or customize as needed
+          onTap: () => controller.playAudioFile(index),
         );
       },
     );

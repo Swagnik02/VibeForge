@@ -38,7 +38,6 @@ class _SongScreenState extends State<NCSSongScreen> {
         ],
       ),
     );
-    MetadataGod.initialize();
   }
 
   @override
