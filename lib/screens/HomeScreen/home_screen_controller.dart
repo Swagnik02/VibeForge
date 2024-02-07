@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
@@ -7,7 +10,15 @@ import 'package:vibeforge/services/auth_service.dart';
 
 class HomeScreenController extends GetxController {
   var bottomNavBarIndex = 0.obs;
+  RxString text = 'VibeForge'.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    Timer(const Duration(seconds: 8), () {
+      text.value = '';
+    });
+  }
   // MiniProfile
 
   void miniProfileUI(BuildContext context) {

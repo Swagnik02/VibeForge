@@ -143,47 +143,60 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      title: controller.bottomNavBarIndex == 3
-          ? Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Image(
-                  image: AssetImage(LocalAssets.ncsLogo),
-                  height: 25,
-                ),
-                const SizedBox(width: 10),
-                const Text(
-                  'NoCopyrightSounds',
-                  style: TextStyle(color: Colors.white, fontSize: 14),
-                ),
-              ],
-            )
-          : null,
-      leading: InkWell(
-        onTap: () {
-          Get.to(DirectoryScreen(), transition: Transition.downToUp);
-        },
-        child: Icon(
-          Icons.grid_view_outlined,
-          color: Colors.white.withOpacity(0.9),
-        ),
-      ),
-      actions: [
-        Container(
-          margin: const EdgeInsets.only(right: 20),
-          child: GestureDetector(
-            onTap: () {
-              controller.miniProfileUI(context);
-            },
-            child: CircleAvatar(
-              backgroundImage: AssetImage(TestProfile.profilePic),
-            ),
+    return GetBuilder<HomeScreenController>(
+      builder: (_) => AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        title: controller.bottomNavBarIndex == 3
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Image(
+                    image: AssetImage(LocalAssets.ncsLogo),
+                    height: 25,
+                  ),
+                  const SizedBox(width: 10),
+                  const Text(
+                    'NoCopyrightSounds',
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+                ],
+              )
+            : Obx(() => AnimatedSwitcher(
+                  duration: Duration(milliseconds: 500),
+                  child: Text(
+                    controller.text.value,
+                    key: UniqueKey(),
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
+                  ),
+                )),
+        leading: InkWell(
+          onTap: () {
+            Get.to(DirectoryScreen(), transition: Transition.downToUp);
+          },
+          child: Icon(
+            Icons.grid_view_outlined,
+            color: Colors.white.withOpacity(0.9),
           ),
-        )
-      ],
+        ),
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 20),
+            child: GestureDetector(
+              onTap: () {
+                controller.miniProfileUI(context);
+              },
+              child: CircleAvatar(
+                backgroundImage: AssetImage(TestProfile.profilePic),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 
