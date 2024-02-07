@@ -84,13 +84,14 @@ class _CustomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
+      elevation: 0,
       backgroundColor: controller.bottomNavBarIndex == 3
           ? Colors.black
           : const Color.fromARGB(30, 20, 5, 43),
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.white,
       showUnselectedLabels: false,
-      showSelectedLabels: false,
+      showSelectedLabels: true,
       currentIndex: controller.bottomNavBarIndex.value,
       onTap: (index) {
         controller.bottomNavBarIndex.value = index;
@@ -98,12 +99,14 @@ class _CustomNavBar extends StatelessWidget {
       },
       items: [
         const BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded),
+          icon: Icon(
+            Icons.home_rounded,
+          ),
           label: 'Home',
         ),
         const BottomNavigationBarItem(
           icon: Icon(Icons.music_note_rounded),
-          label: 'Play',
+          label: 'All Songs',
         ),
         const BottomNavigationBarItem(
           icon: Icon(Icons.favorite_outline),
@@ -114,7 +117,7 @@ class _CustomNavBar extends StatelessWidget {
             image: AssetImage(LocalAssets.ncsLogo),
             width: 50,
           ),
-          label: 'NCS',
+          label: '',
         ),
       ],
     );

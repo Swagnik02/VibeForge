@@ -15,10 +15,7 @@ class AllSongsController extends GetxController {
   List<VibeSong> musicList = [];
 
   List<String> selectedFolders = [];
-  List<FileSystemEntity> files = [];
-  // List<Map<String, dynamic>> musicList = []; // List to store song details
-  List<Map<String, dynamic>> filteredMusicList =
-      []; // List to store filtered music
+  List<VibeSong> filteredMusicList = [];
 
   @override
   void onInit() {
@@ -28,18 +25,17 @@ class AllSongsController extends GetxController {
     filteredMusicList = List.from(musicList);
   }
 
-  // Method to filter music list based on search input
   void filterMusicList(String searchQuery) {
-    // if (searchQuery.isEmpty) {
-    //   // If search query is empty, show the entire list
-    //   filteredMusicList = List.from(musicList);
-    // } else {
-    //   // If search query is not empty, filter the list based on the query
-    //   filteredMusicList = musicList
-    //       .where((song) =>
-    //           song['name'].toLowerCase().contains(searchQuery.toLowerCase()))
-    //       .toList();
-    // }
+    if (searchQuery.isEmpty) {
+      // If search query is empty, show the entire list
+      filteredMusicList = List.from(musicList);
+    } else {
+      // If search query is not empty, filter the list based on the query
+      filteredMusicList = musicList
+          .where((song) =>
+              song.name!.toLowerCase().contains(searchQuery.toLowerCase()))
+          .toList();
+    }
     update();
   }
 
@@ -73,7 +69,7 @@ class AllSongsController extends GetxController {
   Future<void> _loadFiles(String path) async {
     try {
       Directory dir = Directory(path);
-      List<FileSystemEntity> fileList = dir.listSync();
+      List<FileSystemEntity> fileList = dir.listSync(recursive: true);
 
       List<VibeSong> tempMusicList = [];
 
@@ -82,17 +78,31 @@ class AllSongsController extends GetxController {
           // Assuming createVibeSongFromMetadata returns a VibeSong object
           VibeSong song = await createVibeSongFromMetadata(file.path);
 
-          tempMusicList.add(song);
+          if (!_songExistsInMusicList(song.name, musicList)) {
+            tempMusicList.add(song);
+          } else {
+            log('${song.name} already exists ');
+          }
         }
       }
 
       // Set the musicList to the temporary list after loading all files
-      musicList = tempMusicList;
+      musicList.addAll(tempMusicList);
+      filteredMusicList = List.from(musicList);
 
       // Update the UI
       update();
     } catch (e) {
       print("Error loading files: $e");
     }
+  }
+
+  bool _songExistsInMusicList(String? songName, List<VibeSong> musicList) {
+    for (VibeSong song in musicList) {
+      if (song.name == songName) {
+        return true;
+      }
+    }
+    return false;
   }
 }
