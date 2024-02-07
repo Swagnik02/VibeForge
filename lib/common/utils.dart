@@ -15,20 +15,20 @@ class TestProfile {
 
 class LocalAssets {
   // cover images
-  static String coverTheWantedGladYouCame =
-      '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.theWantedGladYouCame}.jpg';
-  static String coverOwlCityGold =
-      '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.owlCityGold}.jpg';
-  static String coverAkonFreedom =
-      '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.akonFreedom}.png';
+  // static String coverTheWantedGladYouCame =
+  //     '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.theWantedGladYouCame}.jpg';
+  // static String coverOwlCityGold =
+  //     '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.owlCityGold}.jpg';
+  // static String coverAkonFreedom =
+  //     '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.akonFreedom}.png';
 
-  // songs urls
-  static String songTheWantedGladYouCame =
-      '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.theWantedGladYouCame}.mp3';
-  static String songOwlCityGold =
-      '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.owlCityGold}.mp3';
-  static String songAkonFreedom =
-      '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.akonFreedom}.mp3';
+  // // songs urls
+  // static String songTheWantedGladYouCame =
+  //     '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.theWantedGladYouCame}.mp3';
+  // static String songOwlCityGold =
+  //     '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.owlCityGold}.mp3';
+  // static String songAkonFreedom =
+  //     '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.akonFreedom}.mp3';
 
   // others
   static String appLogo =
@@ -46,15 +46,15 @@ class LocalAssets {
 }
 
 class LocalAssetsMusic {
-  static String akonFreedom = 'akon_freedom';
-  static String owlCityGold = 'owl_city_gold';
-  static String theWantedGladYouCame = 'the_wanted_glad_you_came';
+  // static String akonFreedom = 'akon_freedom';
+  // static String owlCityGold = 'owl_city_gold';
+  // static String theWantedGladYouCame = 'the_wanted_glad_you_came';
 }
 
 class LocalAssetDirectories {
   static String localAssetsImagesDir = 'assets/images/';
   static String localAssetsCoversDir = 'assets/covers/';
-  static String localAssetsMusicrsDir = 'assets/music/';
+  static String localAssetsMusicrDir = 'assets/music/';
 }
 
 class ColorConstants {

@@ -39,46 +39,108 @@ class VibeSong {
     this.songUrl,
     this.tags,
   });
-
   static List<VibeSong> songs = [
     VibeSong(
-      name: 'Gold',
+      name: 'Forever and Always',
       artists: [
         VibeArtist(
-          name: 'Owl City',
+          name: 'Abe',
           url: 'artist_url_here',
           img: 'artist_image_url_here',
-          genres: ['Pop', 'Electronic'],
+          genres: ['Genre_here'],
         ),
       ],
-      songUrl: LocalAssets.songOwlCityGold,
-      imageUrl: LocalAssets.coverOwlCityGold,
+      songUrl:
+          '${LocalAssetDirectories.localAssetsMusicrDir}Forever and Always.mp3',
+      imageUrl:
+          '${LocalAssetDirectories.localAssetsCoversDir}Forever & Always.jpg',
+      tags: [
+        VibeTag(name: 'Emotional', mood: 3),
+      ],
     ),
     VibeSong(
-      name: 'Freedom',
+      name: 'Hoye Jetey Paari',
       artists: [
         VibeArtist(
-          name: 'Akon',
+          name: 'Anupam Roy',
           url: 'artist_url_here',
           img: 'artist_image_url_here',
-          genres: ['R&B', 'Hip Hop'],
+          genres: ['Indie', 'Rock'],
         ),
       ],
-      songUrl: LocalAssets.songAkonFreedom,
-      imageUrl: LocalAssets.coverAkonFreedom,
+      songUrl:
+          '${LocalAssetDirectories.localAssetsMusicrDir}Hoye Jetey Paari.mp3',
+      imageUrl:
+          '${LocalAssetDirectories.localAssetsCoversDir}Hoye Jetey Paari.jpg',
+      tags: [
+        VibeTag(name: 'Nostalgia', mood: 5),
+      ],
     ),
     VibeSong(
-      name: 'Glad You Came',
+      name: '8 Letters',
       artists: [
         VibeArtist(
-          name: 'The Wanted',
+          name: 'Why Don\'t We',
           url: 'artist_url_here',
           img: 'artist_image_url_here',
-          genres: ['Pop', 'Rock'],
+          genres: ['Pop'],
         ),
       ],
-      songUrl: LocalAssets.songTheWantedGladYouCame,
-      imageUrl: LocalAssets.coverTheWantedGladYouCame,
+      songUrl: '${LocalAssetDirectories.localAssetsMusicrDir}8 Letters.mp3',
+      imageUrl: '${LocalAssetDirectories.localAssetsCoversDir}8 Letters.jpg',
+      tags: [
+        VibeTag(name: 'Love', mood: 2),
+      ],
+    ),
+    VibeSong(
+      name: 'Hold Me While You Wait',
+      artists: [
+        VibeArtist(
+          name: 'Lewis Capaldi',
+          url: 'artist_url_here',
+          img: 'artist_image_url_here',
+          genres: ['Pop', 'Soul'],
+        ),
+      ],
+      songUrl:
+          '${LocalAssetDirectories.localAssetsMusicrDir}Hold Me While You Wait.mp3',
+      imageUrl:
+          '${LocalAssetDirectories.localAssetsCoversDir}Hold Me While You Wait.jpg',
+      tags: [
+        VibeTag(name: 'Longing', mood: 4),
+      ],
+    ),
+    VibeSong(
+      name: 'Its You',
+      artists: [
+        VibeArtist(
+          name: 'Ali Gatie',
+          url: 'artist_url_here',
+          img: 'artist_image_url_here',
+          genres: ['R&B', 'Soul'],
+        ),
+      ],
+      songUrl: '${LocalAssetDirectories.localAssetsMusicrDir}Its You.mp3',
+      imageUrl: '${LocalAssetDirectories.localAssetsCoversDir}Its You.jpg',
+      tags: [
+        VibeTag(name: 'Romantic', mood: 2),
+      ],
+    ),
+    VibeSong(
+      name: 'Tomake Chai',
+      artists: [
+        VibeArtist(
+          name: 'Arijit Singh',
+          url: 'artist_url_here',
+          img: 'artist_image_url_here',
+          genres: ['Bollywood', 'Romance'],
+        ),
+      ],
+      songUrl: '${LocalAssetDirectories.localAssetsMusicrDir}Tomake Chai.mp3',
+      imageUrl: '${LocalAssetDirectories.localAssetsCoversDir}Tomake Chai.jpg',
+      tags: [
+        VibeTag(name: 'Desire', mood: 2),
+      ],
     ),
   ];
 }
