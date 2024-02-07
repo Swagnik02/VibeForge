@@ -1,33 +1,61 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 
 import 'package:rxdart/rxdart.dart' as rxdart;
+import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/vibeComponents/MusicPlayer/vibe_music_player.dart';
 import 'package:vibeforge/widgets/widgets.dart';
 
 class VibeSongScreen extends StatefulWidget {
-  const VibeSongScreen({super.key, required this.song});
+  const VibeSongScreen({
+    super.key,
+    required this.song,
+    required this.musicSource,
+  });
+
   final VibeSong song;
+  final String musicSource;
+
   @override
   State<VibeSongScreen> createState() => _SongScreenState();
 }
 
 class _SongScreenState extends State<VibeSongScreen> {
   AudioPlayer audioPlayer = AudioPlayer();
-
   @override
   void initState() {
     super.initState();
+    List<AudioSource> audioInit = [];
 
-    audioPlayer.setAudioSource(
-      ConcatenatingAudioSource(
-        children: [
+    switch (widget.musicSource) {
+      case MusicSource.localAssets:
+        audioInit = [
+          AudioSource.uri(
+            Uri.parse('asset:///${widget.song.songUrl}'),
+          ),
+          AudioSource.uri(
+            Uri.parse('asset:///${VibeSong.songs[1].url}'),
+          ),
+          AudioSource.uri(
+            Uri.parse('asset:///${VibeSong.songs[2].url}'),
+          ),
+        ];
+        break;
+      default:
+        audioInit = [
           AudioSource.uri(
             Uri.parse(widget.song.songUrl ?? ''),
           ),
-        ],
+        ];
+        break;
+    }
+
+    audioPlayer.setAudioSource(
+      ConcatenatingAudioSource(
+        children: audioInit,
       ),
     );
   }
@@ -63,13 +91,15 @@ class _SongScreenState extends State<VibeSongScreen> {
         fit: StackFit.expand,
         children: [
           // cover image
-          Image.network(
-            widget.song.imageUrl ?? '',
-            fit: BoxFit.cover,
+          _CoverImage(
+            musicSource: widget.musicSource,
+            image: widget.song.imageUrl ?? '',
           ),
 
           // fliter overlay
-          const _BackgroundFilter(),
+          _BackgroundFilter(
+            musicSource: widget.musicSource,
+          ),
 
           // music control bar
           VibeMusicPlayer(
@@ -84,27 +114,46 @@ class _SongScreenState extends State<VibeSongScreen> {
 }
 
 class _BackgroundFilter extends StatelessWidget {
+  final String musicSource;
+
   const _BackgroundFilter({
-    super.key,
+    required this.musicSource,
   });
 
   @override
   Widget build(BuildContext context) {
+    List<Color> gradientColors;
+    switch (musicSource) {
+      case MusicSource.apiNCS:
+        gradientColors = [
+          Colors.grey.shade800,
+          Colors.black,
+        ];
+        break;
+      default:
+        gradientColors = [
+          Colors.deepPurple.shade500,
+          Colors.deepPurple.shade900,
+        ];
+        break;
+    }
+
     return ShaderMask(
       shaderCallback: (rect) {
         return LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.white.withOpacity(1.0),
-              Colors.white.withOpacity(0.5),
-              Colors.white.withOpacity(0.0),
-            ],
-            stops: [
-              0.0,
-              0.4,
-              0.6
-            ]).createShader(rect);
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Colors.white.withOpacity(1.0),
+            Colors.white.withOpacity(0.5),
+            Colors.white.withOpacity(0.0),
+          ],
+          stops: const [
+            0.0,
+            0.4,
+            0.6,
+          ],
+        ).createShader(rect);
       },
       blendMode: BlendMode.dstOut,
       child: Container(
@@ -112,13 +161,54 @@ class _BackgroundFilter extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Colors.grey.shade800,
-              Colors.black,
-            ],
+            colors: gradientColors,
           ),
         ),
       ),
     );
+  }
+}
+
+class _CoverImage extends StatelessWidget {
+  final String musicSource;
+  final String image;
+
+  const _CoverImage({
+    required this.musicSource,
+    required this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Widget coverImage;
+
+    switch (musicSource) {
+      case MusicSource.apiNCS:
+        coverImage = Image.network(
+          image,
+          fit: BoxFit.cover,
+        );
+        break;
+      case MusicSource.localDirectory:
+        coverImage = Image.memory(
+          base64Decode(image.split(',').last),
+          fit: BoxFit.cover,
+        );
+        break;
+      case MusicSource.localAssets:
+        coverImage = Image.asset(
+          image,
+          fit: BoxFit.cover,
+        );
+        break;
+      default:
+        coverImage = Image.asset(
+          LocalAssets.appLogo,
+          fit: BoxFit.cover,
+        );
+        break;
+    }
+
+    return coverImage;
   }
 }

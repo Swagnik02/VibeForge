@@ -19,6 +19,7 @@ class VibeSongCard extends StatelessWidget {
     return InkWell(
       onTap: () => Get.to(VibeSongScreen(
         song: song,
+        musicSource: musicSource,
       )),
       child: Container(
         margin: const EdgeInsets.only(right: 10),

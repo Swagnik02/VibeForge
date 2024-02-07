@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/playlist_model.dart';
 import 'package:vibeforge/models/song_model.dart';
-import '../../widgets/widgets.dart';
+import 'package:vibeforge/vibeComponents/vibe_song_card.dart';
+import '../../../widgets/widgets.dart';
 
 class Home extends StatelessWidget {
   const Home({
@@ -11,7 +13,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Song> songs = Song.songs;
+    List<VibeSong> songs = VibeSong.songs;
     List<Playlist> playlists = Playlist.playlists;
 
     return Scaffold(
@@ -137,7 +139,7 @@ class _TrendingMusic extends StatelessWidget {
     required this.songs,
   });
 
-  final List<Song> songs;
+  final List<VibeSong> songs;
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +163,10 @@ class _TrendingMusic extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: songs.length,
               itemBuilder: (context, index) {
-                return SongCard(song: songs[index]);
+                return VibeSongCard(
+                  song: songs[index],
+                  musicSource: MusicSource.localAssets,
+                );
               },
             ),
           )

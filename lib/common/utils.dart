@@ -70,7 +70,7 @@ class FilePath {
 }
 
 class MusicSource {
-  static String localAssets = 'localAssets';
-  static String localDirectory = 'localDirectory';
-  static String apiNCS = 'apiNCS';
+  static const String localAssets = 'localAssets';
+  static const String localDirectory = 'localDirectory';
+  static const String apiNCS = 'apiNCS';
 }

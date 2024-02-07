@@ -40,6 +40,27 @@ class VibeSong {
     this.songUrl,
     this.tags,
   });
+
+  static List<VibeSong> songs = [
+    VibeSong(
+      name: 'Gold',
+      // artists: 'Owl City',
+      songUrl: LocalAssets.songOwlCityGold,
+      imageUrl: LocalAssets.coverOwlCityGold,
+    ),
+    VibeSong(
+      name: 'Freedom',
+      // description: 'Akon',
+      songUrl: LocalAssets.songAkonFreedom,
+      imageUrl: LocalAssets.coverAkonFreedom,
+    ),
+    VibeSong(
+      name: 'Glad You Came',
+      // description: 'The Weekend',
+      songUrl: LocalAssets.songTheWantedGladYouCame,
+      imageUrl: LocalAssets.coverTheWantedGladYouCame,
+    ),
+  ];
 }
 
 class Song {

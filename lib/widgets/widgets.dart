@@ -4,4 +4,4 @@ export 'playlist_card.dart';
 export 'seek_bar_data.dart';
 export 'player_buttons.dart';
 
-export '../screens/BottomNav/home.dart';
+export '../screens/BottomNav/Home/home.dart';

@@ -8,8 +8,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metadata_god/metadata_god.dart';
+import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/screens/SongScreens/local_song_screen.dart';
+import 'package:vibeforge/vibeComponents/SongScreen/vibe_song_screen.dart';
 
 class AllSongsController extends GetxController {
   late TextEditingController searchController = TextEditingController();
@@ -116,15 +118,18 @@ class AllSongsController extends GetxController {
       mimeType = metadata.picture!.mimeType;
     }
 
-    Song song = Song(
-      title: metadata.title ?? '',
-      description: metadata.artist ?? '',
-      url: files[index].path,
-      coverUrl: imageBytes != null
+    VibeSong song = VibeSong(
+      name: metadata.title ?? '',
+      // artists: metadata.artist ?? '',
+      songUrl: files[index].path,
+      imageUrl: imageBytes != null
           ? 'data:$mimeType;base64,${base64Encode(imageBytes)}'
           : '',
     );
 
-    Get.to(LocalSongScreen(song: song));
+    Get.to(VibeSongScreen(
+      song: song,
+      musicSource: MusicSource.localDirectory,
+    ));
   }
 }
