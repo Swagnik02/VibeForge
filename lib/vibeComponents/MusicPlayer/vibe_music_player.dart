@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/vibeComponents/MusicPlayer/vibe_music_player_controller.dart';
 import 'package:vibeforge/vibeComponents/MusicPlayer/vibe_player_buttons.dart';
@@ -12,12 +13,14 @@ class VibeMusicPlayer extends StatelessWidget {
   final VibeSong song;
   final Stream<SeekBarData> seekBarDataStream;
   final AudioPlayer audioPlayer;
+  final String musicSource;
 
   VibeMusicPlayer({
     super.key,
     required this.song,
     required this.seekBarDataStream,
     required this.audioPlayer,
+    required this.musicSource,
   });
 
   @override
@@ -94,14 +97,16 @@ class VibeMusicPlayer extends StatelessWidget {
                   ),
                   onPressed: () => Get.back(),
                 ),
-                IconButton(
-                  iconSize: 35,
-                  onPressed: () => controller.downloadSong(song),
-                  icon: const Icon(
-                    Icons.cloud_download,
-                    color: Colors.white,
-                  ),
-                ),
+                musicSource == MusicSource.apiNCS
+                    ? IconButton(
+                        iconSize: 35,
+                        onPressed: () => controller.downloadSong(song),
+                        icon: const Icon(
+                          Icons.downloading_rounded,
+                          color: Colors.white,
+                        ),
+                      )
+                    : Container(),
               ],
             ),
           ],

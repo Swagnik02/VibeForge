@@ -106,6 +106,7 @@ class _SongScreenState extends State<VibeSongScreen> {
             song: widget.song,
             seekBarDataStream: _seekBarDataStream,
             audioPlayer: audioPlayer,
+            musicSource: widget.musicSource,
           ),
         ],
       ),
