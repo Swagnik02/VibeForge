@@ -124,7 +124,7 @@ class _BackgroundFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Color> gradientColors;
     switch (musicSource) {
-      case MusicSource.apiNCS:
+      case MusicSource.apiNCS || MusicSource.downloadedNCS:
         gradientColors = [
           Colors.grey.shade800,
           Colors.black,
@@ -189,7 +189,7 @@ class _CoverImage extends StatelessWidget {
           fit: BoxFit.cover,
         );
         break;
-      case MusicSource.localDirectory:
+      case MusicSource.localDirectory || MusicSource.downloadedNCS:
         coverImage = Image.memory(
           base64Decode(image.split(',').last),
           fit: BoxFit.cover,

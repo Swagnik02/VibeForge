@@ -7,10 +7,10 @@ import 'package:get/get.dart';
 import 'package:metadata_god/metadata_god.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
-import 'package:vibeforge/screens/SongScreens/local_song_screen.dart';
+import 'package:vibeforge/vibeComponents/SongScreen/vibe_song_screen.dart';
 
 class NCSDownloads extends StatefulWidget {
-  const NCSDownloads({Key? key}) : super(key: key);
+  const NCSDownloads({super.key});
 
   @override
   _NCSDownloadsState createState() => _NCSDownloadsState();
@@ -47,7 +47,7 @@ class _NCSDownloadsState extends State<NCSDownloads> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Downloads'),
+        title: const Text('Downloads'),
         actions: [
           IconButton(
             onPressed: () {
@@ -77,7 +77,6 @@ class _NCSDownloadsState extends State<NCSDownloads> {
 
               log(metadata.title ?? '');
 
-// Extract image bytes from the metadata if available
               Uint8List? imageBytes;
               String? mimeType;
               if (metadata.picture != null) {
@@ -85,23 +84,19 @@ class _NCSDownloadsState extends State<NCSDownloads> {
                 mimeType = metadata.picture!.mimeType;
               }
 
-              Song song = Song(
-                title: metadata.title ?? '',
-                description: metadata.artist ?? '',
-                url: files[index].path,
-                // Convert image bytes to base64 and use it as the coverUrl
-                coverUrl: imageBytes != null
+              VibeSong song = VibeSong(
+                name: metadata.title ?? '',
+                // artists: metadata.artist ?? '',
+                songUrl: files[index].path,
+                imageUrl: imageBytes != null
                     ? 'data:$mimeType;base64,${base64Encode(imageBytes)}'
                     : '',
               );
 
-              // Get.toNamed('/localSong', arguments: song);
-              Get.to(LocalSongScreen(song: song));
-              // Open the file on tap
-              // OpenFile.open(
-              //   files[index].path,
-              //   // type: 'audio/mp3', // Specify the MIME type
-              // );
+              Get.to(VibeSongScreen(
+                song: song,
+                musicSource: MusicSource.downloadedNCS,
+              ));
             },
           );
         },

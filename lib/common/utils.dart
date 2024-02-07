@@ -73,4 +73,5 @@ class MusicSource {
   static const String localAssets = 'localAssets';
   static const String localDirectory = 'localDirectory';
   static const String apiNCS = 'apiNCS';
+  static const String downloadedNCS = 'downloadedNCS';
 }

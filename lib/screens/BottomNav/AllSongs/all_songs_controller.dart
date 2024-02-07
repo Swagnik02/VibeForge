@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import 'package:metadata_god/metadata_god.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
-import 'package:vibeforge/screens/SongScreens/local_song_screen.dart';
 import 'package:vibeforge/vibeComponents/SongScreen/vibe_song_screen.dart';
 
 class AllSongsController extends GetxController {
