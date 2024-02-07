@@ -8,6 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'package:rxdart/rxdart.dart' as rxdart;
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/services/permission_service.dart';
 import 'package:vibeforge/widgets/file_save_helper.dart';
 import 'package:vibeforge/widgets/widgets.dart';
@@ -22,7 +23,7 @@ class NCSSongScreen extends StatefulWidget {
 
 class _SongScreenState extends State<NCSSongScreen> {
   AudioPlayer audioPlayer = AudioPlayer();
-  NCSDev.Song song = Get.arguments ?? '';
+  VibeSong song = Get.arguments ?? '';
 
   @override
   void initState() {
@@ -98,7 +99,7 @@ class _MusicPlayer extends StatelessWidget {
     required this.audioPlayer,
   }) : _seekBarDataStream = seekBarDataStream;
 
-  final NCSDev.Song song;
+  final VibeSong song;
   final Stream<SeekBarData> _seekBarDataStream;
   final AudioPlayer audioPlayer;
 
@@ -194,7 +195,7 @@ class _MusicPlayer extends StatelessWidget {
     );
   }
 
-  Future<void> _downloadSong(NCSDev.Song song) async {
+  Future<void> _downloadSong(VibeSong song) async {
     DioDev.Dio dio = DioDev.Dio();
 
     String url = song.songUrl ?? '';

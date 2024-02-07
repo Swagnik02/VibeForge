@@ -4,10 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:metadata_god/metadata_god.dart';
 import 'package:mime/mime.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
+import 'package:vibeforge/models/song_model.dart';
 
 class FileSaveHelper {
   static Future<void> saveFile(
-      String downloadsPath, NCSDev.Song song, Uint8List data) async {
+      String downloadsPath, VibeSong song, Uint8List data) async {
     String fileName = song.name ?? '';
 
     try {

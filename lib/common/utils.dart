@@ -68,3 +68,9 @@ class ColorConstants {
 class FilePath {
   static String ncsDownloads = '/storage/emulated/0/VibeForge/NCSdownloads';
 }
+
+class MusicSource {
+  static String localAssets = 'localAssets';
+  static String localDirectory = 'localDirectory';
+  static String apiNCS = 'apiNCS';
+}

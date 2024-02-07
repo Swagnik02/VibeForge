@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
+import 'package:vibeforge/vibeComponents/model_conversion.dart';
 import 'package:vibeforge/common/utils.dart';
+import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_download.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_music_controller.dart';
-import 'package:vibeforge/widgets/song_card.dart';
+import 'package:vibeforge/vibeComponents/vibe_song_card.dart';
 
 class NCSMusic extends StatelessWidget {
   NCSMusic({super.key});
@@ -46,9 +48,14 @@ class NCSMusic extends StatelessWidget {
             shrinkWrap: true,
             itemCount: snapshot.data?.length ?? 0,
             itemBuilder: (context, index) {
-              NCSDev.Song? song = snapshot.data?[index];
+              // Usage:
+              NCSDev.Song? ncsSong = snapshot.data?[index];
+              VibeSong song = convertToVibeSong(ncsSong);
 
-              return SongCardNCS(song: song!);
+              return VibeSongCard(
+                song: song,
+                musicSource: MusicSource.apiNCS,
+              );
             },
           );
         } else if (snapshot.hasError) {
