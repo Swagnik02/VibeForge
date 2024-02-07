@@ -42,20 +42,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   BoxDecoration boxDecor() {
-    if (controller.bottomNavBarIndex.value == 0) {
-      // Return gradient for index 0
-      return BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            ColorConstants.themeColourShade1,
-            ColorConstants.themeColourShade2,
-            ColorConstants.themeColourShade3,
-          ],
-        ),
-      );
-    } else if (controller.bottomNavBarIndex.value == 3) {
+    if (controller.bottomNavBarIndex.value == 3) {
       // Return gradient for index 3
       return const BoxDecoration(
         //   gradient: LinearGradient(
