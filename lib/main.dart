@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:metadata_god/metadata_god.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:vibeforge/models/user_model.dart';
 import 'package:vibeforge/screens/Auth/Login/login_screen.dart';
 import 'package:vibeforge/screens/Auth/Welcome/welcome_page.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen.dart';
 import 'package:vibeforge/screens/playlist_screen.dart';
-import 'package:vibeforge/services/permission_service.dart';
 import 'package:vibeforge/splashScreen/splash_screen.dart';
 import 'package:vibeforge/screens/Auth/auth_home.dart';
 

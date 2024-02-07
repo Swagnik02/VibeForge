@@ -16,13 +16,13 @@ class VibeSongCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => Get.to(VibeSongScreen(
-        song: song,
-        musicSource: musicSource,
-      )),
-      child: Container(
-        margin: const EdgeInsets.only(right: 10),
+    return Container(
+      padding: const EdgeInsets.only(right: 10),
+      child: InkWell(
+        onTap: () => Get.to(VibeSongScreen(
+          song: song,
+          musicSource: musicSource,
+        )),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
