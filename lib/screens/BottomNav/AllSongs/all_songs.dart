@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:searchbar_animation/searchbar_animation.dart';
+import 'package:vibeforge/models/song_model.dart';
 import 'all_songs_controller.dart';
 
 class AllSongs extends StatelessWidget {
@@ -73,18 +76,23 @@ class AllSongs extends StatelessWidget {
 
   Widget _buildMusicList() {
     return ListView.builder(
-      itemCount: controller.files.length,
+      physics: const BouncingScrollPhysics(),
+      itemCount: controller.musicList.length,
       itemBuilder: (context, index) {
+        VibeSong song = controller.musicList[index];
+
         return ListTile(
-          leading: const Icon(
-            Icons.music_note,
-            color: Colors.white,
+          leading: CircleAvatar(
+            backgroundImage:
+                MemoryImage(base64Decode(song.imageUrl!.split(',').last)),
           ),
           title: Text(
-            controller.files[index].uri.pathSegments.last,
-            style: TextStyle(color: Colors.white),
+            song.name ?? '',
+            style: const TextStyle(color: Colors.white),
           ),
-          onTap: () => controller.playAudioFile(index),
+          subtitle: Text(song.artists!.map((artist) => artist.name).join(', ')),
+          subtitleTextStyle: TextStyle(color: Colors.purpleAccent.shade200),
+          onTap: () => controller.playAudioFile(song),
         );
       },
     );

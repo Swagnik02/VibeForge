@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
@@ -13,41 +12,13 @@ import 'package:vibeforge/vibeComponents/model_conversion.dart';
 class AllSongsController extends GetxController {
   late TextEditingController searchController = TextEditingController();
 
+  List<VibeSong> musicList = [];
+
   List<String> selectedFolders = [];
   List<FileSystemEntity> files = [];
-  List<String> musicList = [
-    "Song 0",
-    "Song 1",
-    "Song 2",
-    "enrique taylor",
-    "taylor",
-    "enrique",
-    "Song 0",
-    "Song 1",
-    "Song 2",
-    "enrique taylor",
-    "taylor",
-    "enrique",
-    "Song 0",
-    "Song 1",
-    "Song 2",
-    "enrique taylor",
-    "taylor",
-    "enrique",
-    "Song 0",
-    "Song 1",
-    "Song 2",
-    "enrique taylor",
-    "taylor",
-    "enrique",
-    "Song 0",
-    "Song 1",
-    "Song 2",
-    "enrique taylor",
-    "taylor",
-    "enrique",
-  ]; // Your actual music list
-  List<String> filteredMusicList = []; // List to store filtered music
+  // List<Map<String, dynamic>> musicList = []; // List to store song details
+  List<Map<String, dynamic>> filteredMusicList =
+      []; // List to store filtered music
 
   @override
   void onInit() {
@@ -59,23 +30,23 @@ class AllSongsController extends GetxController {
 
   // Method to filter music list based on search input
   void filterMusicList(String searchQuery) {
-    if (searchQuery.isEmpty) {
-      // If search query is empty, show the entire list
-      filteredMusicList = List.from(musicList);
-    } else {
-      // If search query is not empty, filter the list based on the query
-      filteredMusicList = musicList
-          .where(
-              (song) => song.toLowerCase().contains(searchQuery.toLowerCase()))
-          .toList();
-    }
-    update(); // Notify the UI to update the displayed list
+    // if (searchQuery.isEmpty) {
+    //   // If search query is empty, show the entire list
+    //   filteredMusicList = List.from(musicList);
+    // } else {
+    //   // If search query is not empty, filter the list based on the query
+    //   filteredMusicList = musicList
+    //       .where((song) =>
+    //           song['name'].toLowerCase().contains(searchQuery.toLowerCase()))
+    //       .toList();
+    // }
+    update();
   }
 
   void resetSearch() {
     searchController.clear(); // Clear the search text
     filteredMusicList = List.from(musicList); // Reset the filtered list
-    update(); // Notify the UI to update the displayed list
+    update();
   }
 
   void addFolder() async {
@@ -91,23 +62,37 @@ class AllSongsController extends GetxController {
     await _loadFiles(path);
   }
 
+  playAudioFile(VibeSong song) async {
+    // VibeSong song = await createVibeSongFromMetadata(filepath);
+    Get.to(VibeSongScreen(
+      song: song,
+      musicSource: MusicSource.localDirectory,
+    ));
+  }
+
   Future<void> _loadFiles(String path) async {
     try {
       Directory dir = Directory(path);
       List<FileSystemEntity> fileList = dir.listSync();
 
-      files = fileList;
+      List<VibeSong> tempMusicList = [];
+
+      for (FileSystemEntity file in fileList) {
+        if (file is File) {
+          // Assuming createVibeSongFromMetadata returns a VibeSong object
+          VibeSong song = await createVibeSongFromMetadata(file.path);
+
+          tempMusicList.add(song);
+        }
+      }
+
+      // Set the musicList to the temporary list after loading all files
+      musicList = tempMusicList;
+
+      // Update the UI
       update();
     } catch (e) {
       print("Error loading files: $e");
     }
-  }
-
-  playAudioFile(int index) async {
-    VibeSong song = await createVibeSongFromMetadata(files[index].path);
-    Get.to(VibeSongScreen(
-      song: song,
-      musicSource: MusicSource.localDirectory,
-    ));
   }
 }
