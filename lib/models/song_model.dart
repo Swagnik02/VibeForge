@@ -50,10 +50,9 @@ class VibeSong {
           genres: ['Genre_here'],
         ),
       ],
-      songUrl:
-          '${LocalAssetDirectories.localAssetsMusicrDir}Forever and Always.mp3',
-      imageUrl:
-          '${LocalAssetDirectories.localAssetsCoversDir}Forever & Always.jpg',
+      genre: 'Soft',
+      songUrl: 'assets/music/Forever & Always.mp3',
+      imageUrl: 'assets/covers/Forever & Always.jpg',
       tags: [
         VibeTag(name: 'Emotional', mood: 3),
       ],
@@ -68,6 +67,7 @@ class VibeSong {
           genres: ['Indie', 'Rock'],
         ),
       ],
+      genre: 'Indie, Rock',
       songUrl:
           '${LocalAssetDirectories.localAssetsMusicrDir}Hoye Jetey Paari.mp3',
       imageUrl:
@@ -86,6 +86,7 @@ class VibeSong {
           genres: ['Pop'],
         ),
       ],
+      genre: 'Pop',
       songUrl: '${LocalAssetDirectories.localAssetsMusicrDir}8 Letters.mp3',
       imageUrl: '${LocalAssetDirectories.localAssetsCoversDir}8 Letters.jpg',
       tags: [
@@ -102,6 +103,7 @@ class VibeSong {
           genres: ['Pop', 'Soul'],
         ),
       ],
+      genre: 'Pop, Soul',
       songUrl:
           '${LocalAssetDirectories.localAssetsMusicrDir}Hold Me While You Wait.mp3',
       imageUrl:
@@ -120,6 +122,7 @@ class VibeSong {
           genres: ['R&B', 'Soul'],
         ),
       ],
+      genre: 'R&B, Soul',
       songUrl: '${LocalAssetDirectories.localAssetsMusicrDir}Its You.mp3',
       imageUrl: '${LocalAssetDirectories.localAssetsCoversDir}Its You.jpg',
       tags: [
@@ -136,6 +139,7 @@ class VibeSong {
           genres: ['Bollywood', 'Romance'],
         ),
       ],
+      genre: 'Bollywood, Romance',
       songUrl: '${LocalAssetDirectories.localAssetsMusicrDir}Tomake Chai.mp3',
       imageUrl: '${LocalAssetDirectories.localAssetsCoversDir}Tomake Chai.jpg',
       tags: [

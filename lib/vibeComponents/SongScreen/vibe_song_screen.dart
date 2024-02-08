@@ -134,7 +134,7 @@ class _BackgroundFilter extends StatelessWidget {
       default:
         gradientColors = [
           Colors.deepPurple.shade500,
-          Colors.deepPurple.shade900,
+          Colors.black,
         ];
         break;
     }
