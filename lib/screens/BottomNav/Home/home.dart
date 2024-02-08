@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/playlist_model.dart';
 import 'package:vibeforge/models/song_model.dart';
@@ -42,22 +43,17 @@ class Home extends StatelessWidget {
         children: [
           Text(
             'Music',
-            style: Get.textTheme.headlineLarge!.copyWith(
-                color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 50),
+            style: GoogleFonts.monoton(fontSize: 50),
           ),
           Text(
             'heals!',
-            style: Get.textTheme.headlineLarge!.copyWith(
-                color: Colors.grey, fontWeight: FontWeight.bold, fontSize: 50),
+            style: GoogleFonts.monoton(fontSize: 50),
           ),
           Row(
             children: [
               Text(
                 'Crafted with',
-                style: Get.textTheme.bodyLarge!.copyWith(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: GoogleFonts.asul(fontSize: 18),
               ),
               const Icon(
                 Icons.favorite_rounded,
@@ -66,13 +62,11 @@ class Home extends StatelessWidget {
               ),
               Text(
                 'for Anusha',
-                style: Get.textTheme.bodyLarge!.copyWith(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: GoogleFonts.asul(fontSize: 18),
               ),
             ],
           ),
+          const SizedBox(height: 200),
         ],
       ),
     );
