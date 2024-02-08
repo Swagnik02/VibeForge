@@ -15,20 +15,8 @@ class TestProfile {
 
 class LocalAssets {
   // cover images
-  // static String coverTheWantedGladYouCame =
-  //     '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.theWantedGladYouCame}.jpg';
-  // static String coverOwlCityGold =
-  //     '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.owlCityGold}.jpg';
-  // static String coverAkonFreedom =
-  //     '${LocalAssetDirectories.localAssetsCoversDir}${LocalAssetsMusic.akonFreedom}.png';
 
   // // songs urls
-  // static String songTheWantedGladYouCame =
-  //     '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.theWantedGladYouCame}.mp3';
-  // static String songOwlCityGold =
-  //     '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.owlCityGold}.mp3';
-  // static String songAkonFreedom =
-  //     '${LocalAssetDirectories.localAssetsMusicrsDir}${LocalAssetsMusic.akonFreedom}.mp3';
 
   // others
   static String appLogo =
