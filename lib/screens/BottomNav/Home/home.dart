@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/playlist_model.dart';
