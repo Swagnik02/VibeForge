@@ -95,7 +95,7 @@ class _CustomNavBar extends StatelessWidget {
       currentIndex: controller.bottomNavBarIndex.value,
       onTap: (index) {
         controller.bottomNavBarIndex.value = index;
-        controller.title('VibeForge');
+        controller.title(UsedStrings.appName);
       },
       items: [
         const BottomNavigationBarItem(
@@ -160,9 +160,9 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     controller.text.value,
                     key: UniqueKey(),
                     style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.white,
-                    ),
+                        fontFamily: "ProtestRiot-Regular",
+                        fontSize: 30,
+                        color: Colors.white),
                   ),
                 )),
         leading: InkWell(

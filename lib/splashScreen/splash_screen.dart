@@ -22,11 +22,11 @@ class SplashScreen extends StatelessWidget {
                 children: <Widget>[
                   Lottie.asset(LocalAssets.loadingAnim),
                   Text(
-                    'Vibe Forge',
-                    style: Theme.of(context)
-                        .textTheme
-                        .displaySmall
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    UsedStrings.appName,
+                    style: TextStyle(
+                        fontFamily: "ProtestRiot-Regular",
+                        fontSize: 50,
+                        color: ColorConstants.themeColour),
                   ),
                 ],
               ),

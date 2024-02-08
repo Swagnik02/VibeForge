@@ -75,3 +75,7 @@ class MusicSource {
   static const String apiNCS = 'apiNCS';
   static const String downloadedNCS = 'downloadedNCS';
 }
+
+class UsedStrings {
+  static const String appName = 'Vibe Forge';
+}

@@ -72,7 +72,7 @@ class WelcomePage extends StatelessWidget {
 
   _welcomeText() {
     return Text(
-      'Welcome to Vibe Forge',
+      'Welcome to ${UsedStrings.appName}',
       textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.deepPurple.shade400,

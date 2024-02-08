@@ -8,7 +8,7 @@ import 'package:vibeforge/services/auth_service.dart';
 
 class HomeScreenController extends GetxController {
   var bottomNavBarIndex = 0.obs;
-  RxString text = 'VibeForge'.obs;
+  RxString text = UsedStrings.appName.obs;
 
   @override
   void onInit() {
