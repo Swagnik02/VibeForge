@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         // useMaterial3: true,
       ),
       initialRoute: '/splash',
-      home: HomeScreen(),
+      // home: const AuthHome(),
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/auth', page: () => const AuthHome()),
