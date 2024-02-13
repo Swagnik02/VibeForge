@@ -29,10 +29,10 @@ class AllSongsDatabaseService {
     return await openDatabase(
       path,
       version: 1,
-      onCreate: (db, version) {
-        return db.execute(
+      onCreate: (db, version) async {
+        await db.execute(
           '''
-            CREATE TABLE IF NOT EXISTS ${SongsDb.tableName} (
+            CREATE TABLE IF NOT EXISTS ${SongsDb.allSongsTable} (
                 ${SongsDb.columnId} INTEGER PRIMARY KEY AUTOINCREMENT,
                 ${SongsDb.columnName} TEXT,
                 ${SongsDb.columnGenre} TEXT,
@@ -48,10 +48,12 @@ class AllSongsDatabaseService {
     );
   }
 
+  // all songs Datbase methods
+
   Future<void> insertSong(VibeSong song) async {
     final db = await database;
     await db.insert(
-      SongsDb.tableName,
+      SongsDb.allSongsTable,
       song.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -59,7 +61,8 @@ class AllSongsDatabaseService {
 
   Future<List<VibeSong>> getSongs() async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query(SongsDb.tableName);
+    final List<Map<String, dynamic>> maps =
+        await db.query(SongsDb.allSongsTable);
     return List.generate(maps.length, (i) {
       return VibeSong.fromMap(maps[i]);
     });
@@ -68,7 +71,7 @@ class AllSongsDatabaseService {
   Future<void> deleteSong(int id) async {
     final db = await database;
     await db.delete(
-      SongsDb.tableName,
+      SongsDb.allSongsTable,
       where: '${SongsDb.columnId} = ?',
       whereArgs: [id],
     );
@@ -83,7 +86,8 @@ class AllSongsDatabaseService {
 
   Future<void> logAllSongs() async {
     final db = await database;
-    final List<Map<String, dynamic>> songs = await db.query(SongsDb.tableName);
+    final List<Map<String, dynamic>> songs =
+        await db.query(SongsDb.allSongsTable);
     for (var song in songs) {
       log('Song: $song');
     }
@@ -91,13 +95,14 @@ class AllSongsDatabaseService {
 
   Future<void> clearDatabase() async {
     final db = await database;
-    await db.delete(SongsDb.tableName);
+    await db.delete(SongsDb.allSongsTable);
     log('Database cleared');
   }
 
   Future<List<VibeSong>> populateList() async {
     final db = await database;
-    final List<Map<String, dynamic>> songs = await db.query(SongsDb.tableName);
+    final List<Map<String, dynamic>> songs =
+        await db.query(SongsDb.allSongsTable);
     List<VibeSong> vibeSongs = [];
     for (var song in songs) {
       List<VibeArtist> artistsList = []; // Initialize an empty list for artists

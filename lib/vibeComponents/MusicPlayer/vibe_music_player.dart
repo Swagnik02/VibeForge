@@ -97,16 +97,25 @@ class VibeMusicPlayer extends StatelessWidget {
                   ),
                   onPressed: () => Get.back(),
                 ),
-                musicSource == MusicSource.apiNCS
-                    ? IconButton(
-                        iconSize: 35,
-                        onPressed: () => controller.downloadSong(song),
-                        icon: const Icon(
-                          Icons.downloading_rounded,
-                          color: Colors.white,
-                        ),
-                      )
-                    : Container(),
+                IconButton(
+                  icon: const Icon(
+                    Icons.favorite_border_rounded,
+                    size: 35,
+                    color: Colors.white,
+                  ),
+                  onPressed: () => {
+                    // addTofav();
+                  },
+                ),
+                if (musicSource == MusicSource.apiNCS)
+                  IconButton(
+                    iconSize: 35,
+                    onPressed: () => controller.downloadSong(song),
+                    icon: const Icon(
+                      Icons.downloading_rounded,
+                      color: Colors.white,
+                    ),
+                  ),
               ],
             ),
           ],
