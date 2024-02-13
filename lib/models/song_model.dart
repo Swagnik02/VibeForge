@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:vibeforge/common/utils.dart';
 
 class VibeArtist {
@@ -7,6 +9,24 @@ class VibeArtist {
   final List<String>? genres;
 
   VibeArtist({this.img, this.genres, this.name, this.url});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'url': url,
+      'img': img,
+      'genres': genres,
+    };
+  }
+
+  factory VibeArtist.fromMap(Map<String, dynamic> map) {
+    return VibeArtist(
+      name: map['name'],
+      url: map['url'],
+      img: map['img'],
+      genres: List<String>.from(map['genres'] ?? []),
+    );
+  }
 }
 
 class VibeTag {
@@ -19,6 +39,22 @@ class VibeTag {
     this.mood,
     this.genre,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'mood': mood,
+      'genre': genre,
+    };
+  }
+
+  factory VibeTag.fromMap(Map<String, dynamic> map) {
+    return VibeTag(
+      name: map['name'],
+      mood: map['mood'],
+      genre: map['genre'],
+    );
+  }
 }
 
 class VibeSong {
@@ -39,6 +75,41 @@ class VibeSong {
     this.songUrl,
     this.tags,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'genre': genre,
+      'artists': jsonEncode(artists?.map((artist) => artist.toMap()).toList()),
+      'url': url,
+      'imageUrl': imageUrl,
+      'songUrl': songUrl,
+      'tags': jsonEncode(tags?.map((tag) => tag.toMap()).toList()),
+    };
+  }
+
+  factory VibeSong.fromMap(Map<String, dynamic> map) {
+    var artistsList = map['artists'] != null
+        ? List<VibeArtist>.from(
+            map['artists'].map((artistMap) => VibeArtist.fromMap(artistMap)))
+        : null;
+
+    var tagsList = map['tags'] != null
+        ? List<VibeTag>.from(
+            map['tags'].map((tagMap) => VibeTag.fromMap(tagMap)))
+        : null;
+
+    return VibeSong(
+      name: map['name'],
+      genre: map['genre'],
+      artists: artistsList,
+      url: map['url'],
+      imageUrl: map['imageUrl'],
+      songUrl: map['songUrl'],
+      tags: tagsList,
+    );
+  }
+
   static List<VibeSong> songs = [
     VibeSong(
       name: 'Forever and Always',

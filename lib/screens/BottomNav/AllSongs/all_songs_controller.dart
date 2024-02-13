@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
+import 'package:vibeforge/services/db.dart';
 import 'package:vibeforge/services/permission_service.dart';
 import 'package:vibeforge/vibeComponents/SongScreen/vibe_song_screen.dart';
 import 'package:vibeforge/vibeComponents/model_conversion.dart';
@@ -23,6 +24,7 @@ class AllSongsController extends GetxController {
   void onInit() {
     super.onInit();
     searchController = TextEditingController();
+    loadFiles();
     // Initialize filteredMusicList with the entire musicList initially
     filteredMusicList = List.from(musicList);
   }
@@ -58,7 +60,7 @@ class AllSongsController extends GetxController {
 
       selectedFolders.add(path);
       update();
-      await _loadFiles(path);
+      await _loadFilesintoDb(path);
     } else {
       // Handle the case when storage permission is not granted
       log('Storage permission not granted');
@@ -73,25 +75,11 @@ class AllSongsController extends GetxController {
     ));
   }
 
-  Future<void> _loadFiles(String path) async {
+  Future<void> loadFiles() async {
     try {
-      Directory dir = Directory(path);
-      List<FileSystemEntity> fileList = dir.listSync(recursive: true);
-
       List<VibeSong> tempMusicList = [];
 
-      for (FileSystemEntity file in fileList) {
-        if (file is File) {
-          // Assuming createVibeSongFromMetadata returns a VibeSong object
-          VibeSong song = await createVibeSongFromMetadata(file.path);
-
-          if (!_songExistsInMusicList(song.name, musicList)) {
-            tempMusicList.add(song);
-          } else {
-            log('${song.name} already exists ');
-          }
-        }
-      }
+      tempMusicList = await AllSongsDatabaseService.instance.populateList();
 
       // Set the musicList to the temporary list after loading all files
       musicList.addAll(tempMusicList);
@@ -100,7 +88,27 @@ class AllSongsController extends GetxController {
       // Update the UI
       update();
     } catch (e) {
-      print("Error loading files: $e");
+      log("Error loading files: $e");
+    }
+  }
+
+  Future<void> _loadFilesintoDb(String path) async {
+    try {
+      Directory dir = Directory(path);
+      List<FileSystemEntity> fileList = dir.listSync(recursive: true);
+
+      for (FileSystemEntity file in fileList) {
+        if (file is File) {
+          // Assuming createVibeSongFromMetadata returns a VibeSong object
+          VibeSong song = await createVibeSongFromMetadata(file.path);
+          AllSongsDatabaseService.instance.insertSong(song);
+          AllSongsDatabaseService.instance.logAllSongs();
+        }
+      }
+      // Update the UI
+      update();
+    } catch (e) {
+      log("Error loading files: $e");
     }
   }
 

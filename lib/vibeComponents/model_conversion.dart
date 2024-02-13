@@ -66,8 +66,6 @@ Future<VibeSong> createVibeSongFromMetadata(String filePath) async {
   List<VibeArtist> artists = artistNames
       .map((artistName) => VibeArtist(
             name: artistName,
-            // You may need to provide additional properties for the artist here,
-            // such as URL, image, and genres, based on the metadata structure.
           ))
       .toList();
 

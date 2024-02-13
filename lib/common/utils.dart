@@ -67,3 +67,15 @@ class MusicSource {
 class UsedStrings {
   static const String appName = 'Vibe Forge';
 }
+
+class SongsDb {
+  static const String tableName = 'songs';
+  static const String columnId = 'id';
+  static const String columnName = 'name';
+  static const String columnGenre = 'genre';
+  static const String columnArtists = 'artists';
+  static const String columnUrl = 'url';
+  static const String columnImageUrl = 'imageUrl';
+  static const String columnSongUrl = 'songUrl';
+  static const String columnTags = 'tags';
+}
