@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -9,6 +9,7 @@ import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_download.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_music_controller.dart';
 import 'package:vibeforge/vibeComponents/vibe_song_card.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class NCSMusic extends StatelessWidget {
   NCSMusic({super.key});
@@ -37,39 +38,72 @@ class NCSMusic extends StatelessWidget {
   }
 
   // all ncs songs
-  FutureBuilder<List<NCSDev.Song>?> _futureNCS() {
-    return FutureBuilder<List<NCSDev.Song>?>(
-      future: NCSDev.NCS.getMusic(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200),
-            shrinkWrap: true,
-            itemCount: snapshot.data?.length ?? 0,
-            itemBuilder: (context, index) {
-              // Usage:
-              NCSDev.Song? ncsSong = snapshot.data?[index];
-              VibeSong song = convertToVibeSong(ncsSong);
-
-              return VibeSongCard(
-                song: song,
-                musicSource: MusicSource.apiNCS,
-              );
-            },
-          );
-        } else if (snapshot.hasError) {
-          return const SnapshotScreen(
-            snapshotText: 'Error...',
-          );
-        } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return const SnapshotScreen(
-            snapshotText: 'Loading...',
-          );
-        }
-        return const Center(child: CupertinoActivityIndicator());
-      },
-    );
+  Widget _futureNCS() {
+    return Obx(() {
+      if (controller.connectivityResult.value == ConnectivityResult.mobile ||
+          controller.connectivityResult.value == ConnectivityResult.wifi ||
+          controller.connectivityResult.value == ConnectivityResult.other) {
+        return FutureBuilder<List<NCSDev.Song>?>(
+          future: NCSDev.NCS.getMusic(),
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting: // loading
+                return const SnapshotScreen(
+                  snapshotText: 'Loading...',
+                );
+              case ConnectionState.active: // active
+                return const SnapshotScreen(
+                  snapshotText: 'Active Network...',
+                );
+              case ConnectionState.done: // network working
+                if (snapshot.hasData) {
+                  return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 200,
+                    ),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      NCSDev.Song? ncsSong = snapshot.data![index];
+                      VibeSong song = convertToVibeSong(ncsSong!);
+                      return VibeSongCard(
+                        song: song,
+                        musicSource: MusicSource.apiNCS,
+                      );
+                    },
+                  );
+                } else if (snapshot.hasError) {
+                  // Check if the error is due to a SocketException
+                  if (snapshot.error is SocketException) {
+                    return const SnapshotScreen(
+                      snapshotText:
+                          'Network error. Please check your internet connection.',
+                    );
+                  } else {
+                    // Handle other types of errors
+                    return const SnapshotScreen(
+                      snapshotText: 'Error...',
+                    );
+                  }
+                } else {
+                  return const SnapshotScreen(
+                    snapshotText: 'No data available...',
+                  );
+                }
+              default: // default
+                return const SnapshotScreen(
+                  snapshotText: 'Unknown state...',
+                );
+            }
+          },
+        );
+      } else {
+        return const SnapshotScreen(
+          snapshotText: 'No internet...',
+        );
+      }
+    });
   }
 }
 

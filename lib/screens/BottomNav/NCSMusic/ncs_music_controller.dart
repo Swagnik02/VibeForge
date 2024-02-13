@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ncs_io/ncs_io.dart' as NCSDev;
@@ -7,13 +8,22 @@ class NCSMusicController extends GetxController {
   bool isDataFetched = false;
   bool isSearching = false;
   List<NCSDev.Song> songs = [NCSDev.Song(name: 'abc')];
-
   TextEditingController searchController = TextEditingController();
 
+  var connectivityResult = ConnectivityResult.none.obs;
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
+    checkConnectivity();
+    Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+      connectivityResult.value = result;
+    });
+  }
+
+  Future<void> checkConnectivity() async {
+    var connectivity = await Connectivity().checkConnectivity();
+    connectivityResult.value = connectivity;
+    update();
   }
 
   void updateIsSearchBody() {
