@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             const _DiscoverMusic(),
-            _TrendingMusic(songs: songs),
+            _CreatorsChoice(songs: songs),
             _Playlists(playlists: playlists),
             _craftedWithLove(),
             // Lottie.asset(LocalAssets.owl),
@@ -127,8 +127,8 @@ class _DiscoverMusic extends StatelessWidget {
   }
 }
 
-class _TrendingMusic extends StatelessWidget {
-  const _TrendingMusic({
+class _CreatorsChoice extends StatelessWidget {
+  const _CreatorsChoice({
     super.key,
     required this.songs,
   });
@@ -147,7 +147,7 @@ class _TrendingMusic extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.only(right: 20, bottom: 15),
-            child: SectionHeader(title: "Trending Music"),
+            child: SectionHeader(title: "Creators Choice"),
           ),
 
           // corousel
