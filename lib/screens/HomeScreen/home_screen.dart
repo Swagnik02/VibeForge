@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/screens/BottomNav/AllSongs/all_songs.dart';
+import 'package:vibeforge/screens/BottomNav/Favourites/favourites.dart';
 import 'package:vibeforge/screens/DirectorySelection/directory_screen.dart';
 import 'package:vibeforge/screens/HomeScreen/home_screen_controller.dart';
 import 'package:vibeforge/screens/BottomNav/NCSMusic/ncs_mucis.dart';
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
                 case 1:
                   return AllSongs();
                 case 2:
-                  return Container();
+                  return FavouritesScreen();
                 case 3:
                   return NCSMusic();
                 default:

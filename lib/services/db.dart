@@ -44,6 +44,23 @@ class AllSongsDatabaseService {
               )
           ''',
         );
+
+        // Create the new table for favorites with the same schema as the Songs table
+        await db.execute(
+          '''
+              CREATE TABLE IF NOT EXISTS ${SongsDb.favSongsTable} (
+                ${SongsDb.columnId} INTEGER PRIMARY KEY AUTOINCREMENT,
+                ${SongsDb.columnName} TEXT,
+                ${SongsDb.columnGenre} TEXT,
+                ${SongsDb.columnArtists} TEXT,
+                ${SongsDb.columnUrl} TEXT,
+                ${SongsDb.columnImageUrl} TEXT,
+                ${SongsDb.columnSongUrl} TEXT,
+                ${SongsDb.columnTags} TEXT,
+                ${SongsDb.columnMusicSource} TEXT
+              )
+          ''',
+        );
       },
     );
   }
@@ -96,6 +113,7 @@ class AllSongsDatabaseService {
   Future<void> clearDatabase() async {
     final db = await database;
     await db.delete(SongsDb.allSongsTable);
+    await db.delete(SongsDb.favSongsTable);
     log('Database cleared');
   }
 
@@ -131,10 +149,26 @@ class AllSongsDatabaseService {
     }
     return vibeSongs;
   }
+
+  // Favourites Database Methods
+  Future<void> addToFav(String musicSource, VibeSong song) async {
+    final db = await database;
+    await db.insert(
+      SongsDb.favSongsTable,
+      {
+        ...song.toMap(),
+        SongsDb.columnMusicSource: musicSource,
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> readFavouriteList() async {
+    final db = await database;
+    final List<Map<String, dynamic>> favoriteSongs =
+        await db.query(SongsDb.favSongsTable);
+    for (var song in favoriteSongs) {
+      log('Favorite Song: $song');
+    }
+  }
 }
-
-
-
-
-// [log] Song: {id: 17, name: ALL ABOUT YOU, genre: null, artists: [{"name":"Enrique Iglesias","url":null,"img":null,"genres":null}], 
-// url: null, imageUrl: data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFB, songUrl: /storage/emulated/0/Download/Ss/[SPOTIFY-DOWNLOADER.COM] ALL ABOUT YOU.mp3, tags: null}

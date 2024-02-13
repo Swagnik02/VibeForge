@@ -70,6 +70,8 @@ class UsedStrings {
 
 class SongsDb {
   static const String favSongsTable = 'favouriteSongs';
+  static const String columnMusicSource = 'musicSource';
+
   static const String allSongsTable = 'songs';
   static const String columnId = 'id';
   static const String columnName = 'name';

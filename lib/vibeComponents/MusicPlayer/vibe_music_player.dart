@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
+import 'package:vibeforge/services/db.dart';
 import 'package:vibeforge/vibeComponents/MusicPlayer/vibe_music_player_controller.dart';
 import 'package:vibeforge/vibeComponents/MusicPlayer/vibe_player_buttons.dart';
 import 'package:vibeforge/widgets/seek_bar_data.dart';
@@ -103,9 +104,17 @@ class VibeMusicPlayer extends StatelessWidget {
                     size: 35,
                     color: Colors.white,
                   ),
-                  onPressed: () => {
-                    // addTofav();
-                  },
+                  onPressed: () => AllSongsDatabaseService.instance
+                      .addToFav(musicSource, song),
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.edit_document,
+                    size: 35,
+                    color: Colors.white,
+                  ),
+                  onPressed: () =>
+                      AllSongsDatabaseService.instance.readFavouriteList(),
                 ),
                 if (musicSource == MusicSource.apiNCS)
                   IconButton(
