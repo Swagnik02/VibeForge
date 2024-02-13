@@ -34,9 +34,17 @@ class PlayListCard extends StatelessWidget {
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  // Placeholder image or locally stored image as fallback
+                  return const Icon(
+                    Icons.library_music_rounded,
+                    color: Colors.white,
+                  );
+                },
               ),
             ),
-            SizedBox(width: 20),
+
+            const SizedBox(width: 20),
             // playlist title & desc
             Expanded(
               child: Column(
