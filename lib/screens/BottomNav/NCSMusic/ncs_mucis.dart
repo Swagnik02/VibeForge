@@ -66,7 +66,7 @@ class NCSMusic extends StatelessWidget {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       NCSDev.Song? ncsSong = snapshot.data![index];
-                      VibeSong song = convertToVibeSong(ncsSong!);
+                      VibeSong song = convertToVibeSong(ncsSong);
                       return VibeSongCard(
                         song: song,
                         musicSource: MusicSource.apiNCS,
