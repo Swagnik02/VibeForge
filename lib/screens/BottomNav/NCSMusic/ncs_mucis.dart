@@ -59,22 +59,55 @@ class NCSMusic extends StatelessWidget {
             },
           );
         } else if (snapshot.hasError) {
-          return Center(
-            child: Image.asset(
-              LocalAssets.ncsLogo,
-              scale: 0.8,
-            ),
+          return const SnapshotScreen(
+            snapshotText: 'Error...',
           );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: Image.asset(
-              LocalAssets.ncsLogo,
-              scale: 0.8,
-            ),
+          return const SnapshotScreen(
+            snapshotText: 'Loading...',
           );
         }
         return const Center(child: CupertinoActivityIndicator());
       },
+    );
+  }
+}
+
+class SnapshotScreen extends StatelessWidget {
+  final String snapshotText;
+  const SnapshotScreen({
+    super.key,
+    required this.snapshotText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            LocalAssets.ncsLogo,
+            scale: 0.8,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                snapshotText,
+                style: const TextStyle(fontSize: 18),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
@@ -126,7 +159,7 @@ class _searchBox extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () => Get.to(NCSDownloads()),
+          onPressed: () => Get.to(const NCSDownloads()),
           icon: const Icon(
             Icons.download,
             size: 40,
@@ -184,9 +217,18 @@ class _searchBody extends StatelessWidget {
                     child: Row(
                       children: [
                         ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.network(song.imageUrl ?? '',
-                                width: 60, height: 60)),
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.network(song.imageUrl ?? '',
+                              width: 60, height: 60,
+                              errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              LocalAssets.ncsLogo,
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.cover,
+                            );
+                          }),
+                        ),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Column(
