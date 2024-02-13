@@ -24,7 +24,7 @@ class AllSongsController extends GetxController {
   void onInit() {
     super.onInit();
     searchController = TextEditingController();
-    loadFiles();
+    _loadFiles();
     // Initialize filteredMusicList with the entire musicList initially
     filteredMusicList = List.from(musicList);
   }
@@ -61,6 +61,7 @@ class AllSongsController extends GetxController {
       selectedFolders.add(path);
       update();
       await _loadFilesintoDb(path);
+      await _loadFiles();
     } else {
       // Handle the case when storage permission is not granted
       log('Storage permission not granted');
@@ -75,8 +76,9 @@ class AllSongsController extends GetxController {
     ));
   }
 
-  Future<void> loadFiles() async {
+  Future<void> _loadFiles() async {
     try {
+      musicList.clear();
       List<VibeSong> tempMusicList = [];
 
       tempMusicList = await AllSongsDatabaseService.instance.populateList();
