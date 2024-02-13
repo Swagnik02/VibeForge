@@ -171,4 +171,43 @@ class AllSongsDatabaseService {
       log('Favorite Song: $song');
     }
   }
+
+  Future<List<VibeSong>> populateFavLists(String musicSource) async {
+    final db = await database;
+    final List<Map<String, dynamic>> songs =
+        await db.query(SongsDb.favSongsTable);
+    List<VibeSong> vibeSongs = [];
+
+    List<VibeArtist> artistsList = [];
+    List<VibeTag> tagsList = [VibeTag(name: "Unknown")];
+    for (var song in songs) {
+      String mSource = song['musicSource'];
+
+      if (mSource == musicSource) {
+        if (mSource == MusicSource.localDirectory) {
+          if (song['artists'] != null) {
+            List<dynamic> artistsData = json.decode(song['artists']);
+            for (var artistData in artistsData) {
+              artistsList.add(
+                VibeArtist(name: artistData['name']),
+              );
+            }
+          }
+        }
+
+        // Create VibeSong object with all retrieved data
+        VibeSong vibeSong = VibeSong(
+          artists: artistsList,
+          genre: song['genre'],
+          imageUrl: song['imageUrl'],
+          name: song['name'],
+          songUrl: song['songUrl'],
+          tags: tagsList,
+          url: song['url'],
+        );
+        vibeSongs.add(vibeSong);
+      }
+    }
+    return vibeSongs;
+  }
 }

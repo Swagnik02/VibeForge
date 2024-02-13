@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vibeforge/common/utils.dart';
@@ -27,28 +29,37 @@ class VibeSongCard extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: [
             // cover image
-            musicSource == MusicSource.apiNCS
-                ? Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.network(
-                        song.imageUrl ?? '',
-                      ),
-                    ),
-                  )
-                : Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                        image: AssetImage(
-                          song.imageUrl ?? '',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.45,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: _CoverImage(
+                    musicSource: musicSource, image: song.imageUrl ?? ''),
+              ),
+            ),
+
+            // musicSource == MusicSource.apiNCS
+            //     ? Container(
+            //         width: MediaQuery.of(context).size.width * 0.45,
+            //         child: ClipRRect(
+            //           borderRadius: BorderRadius.circular(15),
+            //           child: Image.network(
+            //             song.imageUrl ?? '',
+            //           ),
+            //         ),
+            //       )
+            //     : Container(
+            //         width: MediaQuery.of(context).size.width * 0.45,
+            //         decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(15),
+            //           image: DecorationImage(
+            //             image: AssetImage(
+            //               song.imageUrl ?? '',
+            //             ),
+            //             fit: BoxFit.cover,
+            //           ),
+            //         ),
+            //       ),
 
             // title and artists
             Container(
@@ -107,5 +118,49 @@ class VibeSongCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _CoverImage extends StatelessWidget {
+  final String musicSource;
+  final String image;
+
+  const _CoverImage({
+    required this.musicSource,
+    required this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Widget coverImage;
+
+    switch (musicSource) {
+      case MusicSource.apiNCS:
+        coverImage = Image.network(
+          image,
+          fit: BoxFit.cover,
+        );
+        break;
+      case MusicSource.localDirectory || MusicSource.downloadedNCS:
+        coverImage = Image.memory(
+          base64Decode(image.split(',').last),
+          fit: BoxFit.cover,
+        );
+        break;
+      case MusicSource.localAssets:
+        coverImage = Image.asset(
+          image,
+          fit: BoxFit.cover,
+        );
+        break;
+      default:
+        coverImage = Image.asset(
+          LocalAssets.appLogo,
+          fit: BoxFit.cover,
+        );
+        break;
+    }
+
+    return coverImage;
   }
 }
