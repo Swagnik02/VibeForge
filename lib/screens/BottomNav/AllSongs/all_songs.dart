@@ -21,9 +21,18 @@ class AllSongs extends StatelessWidget {
         body: Column(
           children: [
             _searchBox(context),
-            Expanded(
-              child: _buildMusicList(),
-            ),
+            controller.filteredMusicList.isEmpty
+                ? const Center(
+                    child: Column(
+                      children: [
+                        Text('Add Directories to add Songs'),
+                        Text('Click on the + icon above to add directories'),
+                      ],
+                    ),
+                  )
+                : Expanded(
+                    child: _buildMusicList(),
+                  ),
           ],
         ),
       ),
