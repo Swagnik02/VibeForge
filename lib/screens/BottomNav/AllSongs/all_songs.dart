@@ -11,8 +11,10 @@ class AllSongs extends StatelessWidget {
   AllSongs({super.key});
 
   final AllSongsController controller = Get.put(AllSongsController());
+  final TextEditingController searchControl = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    controller.searchController = searchControl;
     return GetBuilder<AllSongsController>(
       builder: (_) => Scaffold(
         backgroundColor: Colors.transparent,
@@ -45,10 +47,9 @@ class AllSongs extends StatelessWidget {
               },
               isOriginalAnimation: false,
               buttonBorderColour: Colors.black45,
-              onFieldSubmitted: (String value) {
-                controller.filterMusicList(value);
-              },
-              textEditingController: controller.searchController,
+              onFieldSubmitted: (String value) =>
+                  controller.filterMusicList(value),
+              textEditingController: searchControl,
               trailingWidget: const Icon(Icons.music_note_outlined),
               secondaryButtonWidget:
                   const Icon(Icons.arrow_back_ios_new_rounded),
