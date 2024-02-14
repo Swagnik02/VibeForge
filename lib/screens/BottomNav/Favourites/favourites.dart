@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
+import 'package:vibeforge/screens/BottomNav/Favourites/favourite_section_page.dart';
 import 'package:vibeforge/screens/BottomNav/Favourites/favourites_controller.dart';
 import 'package:vibeforge/vibeComponents/vibe_song_card.dart';
-import 'package:vibeforge/widgets/section_header.dart';
 import 'package:get/get.dart';
 
 class FavouritesScreen extends StatelessWidget {
@@ -30,36 +30,24 @@ class FavouritesScreen extends StatelessWidget {
   Widget _mainBody() {
     return Column(
       children: [
-        _sectionLocalAssets(),
-        _sectionAllSongs(),
-        _sectionNCS(),
-      ],
-    );
-  }
-
-  Widget _sectionLocalAssets() {
-    return Column(
-      children: [
-        const SectionHeader(title: 'Local'),
-        _corousel(controller.localAssetsFavMusicList, MusicSource.localAssets),
-      ],
-    );
-  }
-
-  Widget _sectionAllSongs() {
-    return Column(
-      children: [
-        const SectionHeader(title: 'AllSongs'),
-        _corousel(controller.allSongsFavMusicList, MusicSource.localDirectory),
-      ],
-    );
-  }
-
-  Widget _sectionNCS() {
-    return Column(
-      children: [
-        const SectionHeader(title: 'NCS Songs'),
-        _corousel(controller.ncsFavMusicList, MusicSource.apiNCS),
+        _Section(
+          sectionName: 'Local Assets',
+          icon: Icons.audio_file_sharp,
+          musicSource: MusicSource.localAssets,
+          musicList: controller.localAssetsFavMusicList,
+        ),
+        _Section(
+          sectionName: 'All Songs',
+          icon: Icons.music_note_outlined,
+          musicSource: MusicSource.localDirectory,
+          musicList: controller.allSongsFavMusicList,
+        ),
+        _Section(
+          sectionName: 'No Copyright Songs',
+          icon: LocalAssets.ncsLogo,
+          musicSource: MusicSource.apiNCS,
+          musicList: controller.ncsFavMusicList,
+        ),
       ],
     );
   }
@@ -76,6 +64,89 @@ class FavouritesScreen extends StatelessWidget {
             musicSource: musicSource,
           );
         },
+      ),
+    );
+  }
+}
+
+class _Section extends StatelessWidget {
+  final String musicSource;
+  final String sectionName;
+  final List<VibeSong> musicList;
+
+  final dynamic icon;
+
+  const _Section({
+    this.icon,
+    required this.sectionName,
+    required this.musicSource,
+    required this.musicList,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: GestureDetector(
+        onTap: () => Get.to(() => FavouriteSectionPage(
+              musicSource: musicSource,
+              title: sectionName,
+              musicList: musicList,
+            )),
+        child: Container(
+          height: 70,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50),
+            // color: Colors.purpleAccent,
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                Colors.purpleAccent.shade400,
+                Colors.purpleAccent.shade100,
+                Colors.purpleAccent.shade400,
+              ],
+            ),
+          ),
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: ColorConstants.themeColour),
+                  child: Center(
+                    child: icon is IconData // Check if the icon is IconData
+                        ? Icon(
+                            icon,
+                            size: 30,
+                            color: Colors
+                                .purpleAccent, // Adjust the icon color if needed
+                          )
+                        : Image.asset(
+                            icon,
+                            width: 30,
+                            height: 30,
+                            color: Colors
+                                .purpleAccent, // Adjust the image color if needed
+                          ),
+                  ),
+                ),
+              ),
+              Text(
+                sectionName,
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: ColorConstants.themeColour,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

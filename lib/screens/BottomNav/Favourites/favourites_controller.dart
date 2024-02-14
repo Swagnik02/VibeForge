@@ -19,6 +19,7 @@ class FavourtiesScreenController extends GetxController {
         .populateFavLists(MusicSource.localDirectory);
     ncsFavMusicList = await AllSongsDatabaseService.instance
         .populateFavLists(MusicSource.apiNCS);
+    update();
   }
 
   void logMusicList(List<VibeSong> musicList) {
