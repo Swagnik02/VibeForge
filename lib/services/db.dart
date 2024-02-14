@@ -161,6 +161,7 @@ class AllSongsDatabaseService {
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    log('Added ${song.name.toString()} to Favourites');
   }
 
   Future<void> removeFromFav(String musicSource, String songName) async {
@@ -170,6 +171,7 @@ class AllSongsDatabaseService {
       where: '${SongsDb.columnName} = ? AND ${SongsDb.columnMusicSource} = ?',
       whereArgs: [songName, musicSource],
     );
+    log('Removed $songName from Favourites');
   }
 
   Future<void> readFavouriteList() async {

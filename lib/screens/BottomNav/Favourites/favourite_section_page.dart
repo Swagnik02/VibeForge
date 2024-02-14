@@ -17,8 +17,8 @@ class FavouriteSectionPage extends StatelessWidget {
     required this.musicSource,
     required this.title,
     required this.musicList,
-  }) : controller =
-            Get.put(FavouriteSectionPageController(musicSource: musicSource));
+  }) : controller = Get.put(FavouriteSectionPageController(
+            musicSource: musicSource, musicList: musicList));
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +80,9 @@ class FavouriteSectionPage extends StatelessWidget {
   Widget _buildMusicList() {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
-      itemCount: musicList.length,
+      itemCount: controller.musicList.length,
       itemBuilder: (context, index) {
-        VibeSong song = musicList[index];
+        VibeSong song = controller.musicList[index];
         ImageProvider? backgroundImage;
 
         switch (musicSource) {
@@ -102,6 +102,13 @@ class FavouriteSectionPage extends StatelessWidget {
         return ListTile(
           leading: CircleAvatar(
             backgroundImage: backgroundImage,
+          ),
+          trailing: IconButton(
+            icon: const Icon(
+              Icons.favorite_rounded,
+              color: Colors.purpleAccent,
+            ),
+            onPressed: () => controller.removeFromFav(song.name ?? ''),
           ),
           title: Text(
             song.name ?? '',
