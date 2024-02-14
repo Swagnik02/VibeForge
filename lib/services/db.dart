@@ -163,6 +163,15 @@ class AllSongsDatabaseService {
     );
   }
 
+  Future<void> removeFromFav(String musicSource, String songName) async {
+    final db = await database;
+    await db.delete(
+      SongsDb.favSongsTable,
+      where: '${SongsDb.columnName} = ? AND ${SongsDb.columnMusicSource} = ?',
+      whereArgs: [songName, musicSource],
+    );
+  }
+
   Future<void> readFavouriteList() async {
     final db = await database;
     final List<Map<String, dynamic>> favoriteSongs =
@@ -178,22 +187,22 @@ class AllSongsDatabaseService {
         await db.query(SongsDb.favSongsTable);
     List<VibeSong> vibeSongs = [];
 
-    List<VibeArtist> artistsList = [];
     List<VibeTag> tagsList = [VibeTag(name: "Unknown")];
     for (var song in songs) {
       String mSource = song['musicSource'];
 
       if (mSource == musicSource) {
-        if (mSource == MusicSource.localDirectory) {
-          if (song['artists'] != null) {
-            List<dynamic> artistsData = json.decode(song['artists']);
-            for (var artistData in artistsData) {
-              artistsList.add(
-                VibeArtist(name: artistData['name']),
-              );
-            }
+        List<VibeArtist> artistsList = [];
+        // if (mSource == MusicSource.localDirectory) {
+        if (song['artists'] != null) {
+          List<dynamic> artistsData = json.decode(song['artists']);
+          for (var artistData in artistsData) {
+            artistsList.add(
+              VibeArtist(name: artistData['name']),
+            );
           }
         }
+        // }
 
         // Create VibeSong object with all retrieved data
         VibeSong vibeSong = VibeSong(
@@ -209,5 +218,18 @@ class AllSongsDatabaseService {
       }
     }
     return vibeSongs;
+  }
+
+  Future<bool> checkIsAddedToFav(String songName) async {
+    final db = await database;
+    final List<Map<String, dynamic>> songs =
+        await db.query(SongsDb.favSongsTable);
+
+    for (var song in songs) {
+      if (songName == song['name']) {
+        return true;
+      }
+    }
+    return false;
   }
 }

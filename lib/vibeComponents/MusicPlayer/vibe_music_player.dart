@@ -9,8 +9,7 @@ import 'package:vibeforge/vibeComponents/MusicPlayer/vibe_player_buttons.dart';
 import 'package:vibeforge/widgets/seek_bar_data.dart';
 
 class VibeMusicPlayer extends StatelessWidget {
-  final VibeMusicPlayerController controller =
-      Get.put(VibeMusicPlayerController());
+  final VibeMusicPlayerController controller;
   final VibeSong song;
   final Stream<SeekBarData> seekBarDataStream;
   final AudioPlayer audioPlayer;
@@ -22,7 +21,8 @@ class VibeMusicPlayer extends StatelessWidget {
     required this.seekBarDataStream,
     required this.audioPlayer,
     required this.musicSource,
-  });
+  }) : controller = Get.put(
+            VibeMusicPlayerController(musicSource: musicSource, song: song));
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class VibeMusicPlayer extends StatelessWidget {
                             ))
                   ],
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
 
                 Text(song.genre ?? '',
                     style: TextStyle(color: Colors.grey.shade400)),
@@ -98,15 +98,23 @@ class VibeMusicPlayer extends StatelessWidget {
                   ),
                   onPressed: () => Get.back(),
                 ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.favorite_border_rounded,
-                    size: 35,
-                    color: Colors.white,
-                  ),
-                  onPressed: () => AllSongsDatabaseService.instance
-                      .addToFav(musicSource, song),
-                ),
+                controller.addedToFav
+                    ? IconButton(
+                        icon: const Icon(
+                          Icons.favorite_rounded,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                        onPressed: controller.removeFromFav,
+                      )
+                    : IconButton(
+                        icon: const Icon(
+                          Icons.favorite_border_rounded,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                        onPressed: controller.addToFav,
+                      ),
                 IconButton(
                   icon: const Icon(
                     Icons.edit_document,

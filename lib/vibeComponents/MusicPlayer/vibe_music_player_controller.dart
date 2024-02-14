@@ -5,10 +5,17 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
+import 'package:vibeforge/services/db.dart';
 import 'package:vibeforge/services/permission_service.dart';
 import 'package:vibeforge/widgets/file_save_helper.dart';
 
 class VibeMusicPlayerController extends GetxController {
+  final String musicSource;
+  final VibeSong song;
+  VibeMusicPlayerController({
+    required this.musicSource,
+    required this.song,
+  });
   final Rx<VibeSong> _currentSong = Rx<VibeSong>(VibeSong());
   final Rx<Duration> _position = Rx<Duration>(Duration.zero);
   final Rx<Duration> _duration = Rx<Duration>(Duration.zero);
@@ -16,6 +23,13 @@ class VibeMusicPlayerController extends GetxController {
   VibeSong get currentSong => _currentSong.value;
   Duration get position => _position.value;
   Duration get duration => _duration.value;
+  bool addedToFav = false;
+  @override
+  void onInit() {
+    super.onInit();
+    checkIsAddedToFav(song.name ?? '');
+    update();
+  }
 
   void setCurrentSong(VibeSong song) {
     _currentSong.value = song;
@@ -61,8 +75,22 @@ class VibeMusicPlayerController extends GetxController {
     }
   }
 
-  @override
-  void onClose() {
-    super.onClose();
+  void checkIsAddedToFav(String songName) async {
+    addedToFav =
+        await AllSongsDatabaseService.instance.checkIsAddedToFav(songName);
+    update();
+  }
+
+  void addToFav() async {
+    await AllSongsDatabaseService.instance.addToFav(musicSource, song);
+    checkIsAddedToFav(song.name ?? '');
+    update();
+  }
+
+  void removeFromFav() async {
+    await AllSongsDatabaseService.instance
+        .removeFromFav(musicSource, song.name ?? '');
+    checkIsAddedToFav(song.name ?? '');
+    update();
   }
 }

@@ -28,11 +28,13 @@ class FavouritesScreen extends StatelessWidget {
   }
 
   Widget _mainBody() {
-    return Column(children: [
-      _sectionLocalAssets(),
-      _sectionAllSongs(),
-      _sectionNCS(),
-    ]);
+    return Column(
+      children: [
+        _sectionLocalAssets(),
+        _sectionAllSongs(),
+        _sectionNCS(),
+      ],
+    );
   }
 
   Widget _sectionLocalAssets() {
