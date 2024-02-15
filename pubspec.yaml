@@ -27,7 +27,6 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2  
-  google_fonts: ^4.0.4
   sqflite: ^2.3.2
 
 
@@ -58,5 +57,13 @@ flutter:
         - asset: assets/fonts/ProtestRiot-Regular.ttf
     - family: ProtestRevolution-Regular
       fonts:
-        - asset: assets/fonts/ProtestRevolution-Regular.ttf
+        - asset: assets/fonts/ProtestRevolution-Regular.ttf  
+    - family: Monoton-Regular
+      fonts:
+        - asset: assets/fonts/Monoton-Regular.ttf
+    - family: Asul
+      fonts:
+        - asset: assets/fonts/Asul-Regular.ttf
+        - asset: assets/fonts/Asul-Bold.ttf
+          weight: 700
     

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/playlist_model.dart';
 import 'package:vibeforge/models/song_model.dart';
@@ -34,38 +33,34 @@ class Home extends StatelessWidget {
   }
 
   Widget _craftedWithLove() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 26.0),
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 26.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
             'Music',
-            style: GoogleFonts.monoton(fontSize: 50),
+            style: TextStyle(fontFamily: Fonts.monoton, fontSize: 50),
           ),
           Text(
             'heals!',
-            style: GoogleFonts.monoton(fontSize: 50),
+            style: TextStyle(fontFamily: Fonts.monoton, fontSize: 50),
           ),
           Row(
             children: [
-              Text(
-                'Crafted with',
-                style: GoogleFonts.asul(fontSize: 18),
-              ),
-              const Icon(
+              Text('Crafted with',
+                  style: TextStyle(fontFamily: Fonts.asul, fontSize: 18)),
+              Icon(
                 Icons.favorite_rounded,
                 color: Colors.red,
                 size: 50,
               ),
-              Text(
-                'for Anusha',
-                style: GoogleFonts.asul(fontSize: 18),
-              ),
+              Text('for Anusha',
+                  style: TextStyle(fontFamily: Fonts.asul, fontSize: 18)),
             ],
           ),
-          const SizedBox(height: 200),
+          SizedBox(height: 200),
         ],
       ),
     );

@@ -24,7 +24,7 @@ class SplashScreen extends StatelessWidget {
                   Text(
                     UsedStrings.appName,
                     style: TextStyle(
-                        fontFamily: "ProtestRiot-Regular",
+                        fontFamily: Fonts.protestRiot,
                         fontSize: 50,
                         color: ColorConstants.themeColour),
                   ),

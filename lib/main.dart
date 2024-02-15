@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'VibeForge',
       theme: ThemeData(
-        // fontFamily: "ProtestRiot-Regular",
+        // fontFamily: Fonts.protestRiot,
         textTheme: Theme.of(context).textTheme.apply(
               bodyColor: Colors.white,
               displayColor: Colors.white,

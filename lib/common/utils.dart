@@ -82,3 +82,10 @@ class SongsDb {
   static const String columnSongUrl = 'songUrl';
   static const String columnTags = 'tags';
 }
+
+class Fonts {
+  static const String asul = 'Asul';
+  static const String protestRiot = 'ProtestRiot-Regular';
+  static const String protestRevolution = 'ProtestRevolution-Regular';
+  static const String monoton = 'Monoton-Regular';
+}

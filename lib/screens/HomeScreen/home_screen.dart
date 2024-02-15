@@ -156,12 +156,12 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               )
             : Obx(() => AnimatedSwitcher(
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   child: Text(
                     controller.text.value,
                     key: UniqueKey(),
-                    style: TextStyle(
-                        fontFamily: "ProtestRiot-Regular",
+                    style: const TextStyle(
+                        fontFamily: Fonts.protestRiot,
                         fontSize: 30,
                         color: Colors.white),
                   ),
