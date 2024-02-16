@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_navigation/src/routes/default_transitions.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/vibeComponents/SongScreen/vibe_song_screen.dart';
@@ -21,10 +23,12 @@ class VibeSongCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(right: 10),
       child: InkWell(
-        onTap: () => Get.to(VibeSongScreen(
-          song: song,
-          musicSource: musicSource,
-        )),
+        onTap: () => Get.to(
+            () => VibeSongScreen(
+                  song: song,
+                  musicSource: musicSource,
+                ),
+            transition: Transition.downToUp),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
