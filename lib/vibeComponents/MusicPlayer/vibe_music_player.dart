@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:lottie/lottie.dart';
 import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
-import 'package:vibeforge/services/db.dart';
 import 'package:vibeforge/vibeComponents/MusicPlayer/vibe_music_player_controller.dart';
 import 'package:vibeforge/vibeComponents/MusicPlayer/vibe_player_buttons.dart';
 import 'package:vibeforge/widgets/seek_bar_data.dart';
@@ -98,14 +98,16 @@ class VibeMusicPlayer extends StatelessWidget {
                   ),
                   onPressed: () => Get.back(),
                 ),
-                controller.addedToFav
-                    ? IconButton(
-                        icon: const Icon(
-                          Icons.favorite_rounded,
-                          size: 35,
-                          color: Colors.white,
+                controller.isFavourite
+                    ? GestureDetector(
+                        onTap: controller.removeFromFav,
+                        child: SizedBox(
+                          height: 50,
+                          child: Lottie.asset(LocalAssets.addToFavAnim,
+                              fit: BoxFit.fitHeight,
+                              repeat: false,
+                              controller: controller.favoriteController),
                         ),
-                        onPressed: controller.removeFromFav,
                       )
                     : IconButton(
                         icon: const Icon(
@@ -115,15 +117,6 @@ class VibeMusicPlayer extends StatelessWidget {
                         ),
                         onPressed: controller.addToFav,
                       ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.edit_document,
-                    size: 35,
-                    color: Colors.white,
-                  ),
-                  onPressed: () =>
-                      AllSongsDatabaseService.instance.readFavouriteList(),
-                ),
                 if (musicSource == MusicSource.apiNCS)
                   IconButton(
                     iconSize: 35,

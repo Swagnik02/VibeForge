@@ -29,6 +29,8 @@ class LocalAssets {
       '${LocalAssetDirectories.localAssetsImagesDir}splash_astraunaut.json';
   static String waveAnim =
       '${LocalAssetDirectories.localAssetsImagesDir}wave_horizontal.json';
+  static String addToFavAnim =
+      '${LocalAssetDirectories.localAssetsImagesDir}fav_btn.json';
   static String ncsVisualizerYellow =
       '${LocalAssetDirectories.localAssetsImagesDir}ncsVisualizer.gif';
 }

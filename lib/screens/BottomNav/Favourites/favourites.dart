@@ -3,6 +3,7 @@ import 'package:vibeforge/common/utils.dart';
 import 'package:vibeforge/models/song_model.dart';
 import 'package:vibeforge/screens/BottomNav/Favourites/favourite_section_page.dart';
 import 'package:vibeforge/screens/BottomNav/Favourites/favourites_controller.dart';
+import 'package:vibeforge/screens/BottomNav/Favourites/test.dart';
 import 'package:vibeforge/vibeComponents/vibe_song_card.dart';
 import 'package:get/get.dart';
 
@@ -48,6 +49,7 @@ class FavouritesScreen extends StatelessWidget {
           musicSource: MusicSource.apiNCS,
           musicList: controller.ncsFavMusicList,
         ),
+        TextButton(onPressed: () => Get.to(LottieLearn()), child: Text('Test')),
       ],
     );
   }

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart' as DioDev;
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vibeforge/common/utils.dart';
@@ -9,7 +11,8 @@ import 'package:vibeforge/services/db.dart';
 import 'package:vibeforge/services/permission_service.dart';
 import 'package:vibeforge/widgets/file_save_helper.dart';
 
-class VibeMusicPlayerController extends GetxController {
+class VibeMusicPlayerController extends GetxController
+    implements TickerProvider {
   final String musicSource;
   final VibeSong song;
   VibeMusicPlayerController({
@@ -19,16 +22,34 @@ class VibeMusicPlayerController extends GetxController {
   final Rx<VibeSong> _currentSong = Rx<VibeSong>(VibeSong());
   final Rx<Duration> _position = Rx<Duration>(Duration.zero);
   final Rx<Duration> _duration = Rx<Duration>(Duration.zero);
-
+  late AnimationController favoriteController;
   VibeSong get currentSong => _currentSong.value;
   Duration get position => _position.value;
   Duration get duration => _duration.value;
-  bool addedToFav = false;
+  bool isFavourite = false;
+
+  @override
+  Ticker createTicker(TickerCallback onTick) {
+    return Ticker(onTick);
+  }
+
   @override
   void onInit() {
     super.onInit();
     checkIsAddedToFav(song.name ?? '');
+    favoriteController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+    log(isFavourite.toString());
+
     update();
+  }
+
+  @override
+  void onClose() {
+    favoriteController.dispose();
+    super.onClose();
   }
 
   void setCurrentSong(VibeSong song) {
@@ -76,20 +97,25 @@ class VibeMusicPlayerController extends GetxController {
   }
 
   void checkIsAddedToFav(String songName) async {
-    addedToFav =
+    isFavourite =
         await AllSongsDatabaseService.instance.checkIsAddedToFav(songName);
+    isFavourite ? favoriteController.forward() : null;
     update();
   }
 
   void addToFav() async {
     await AllSongsDatabaseService.instance.addToFav(musicSource, song);
+    favoriteController.forward();
     checkIsAddedToFav(song.name ?? '');
     update();
   }
 
   void removeFromFav() async {
+    await favoriteController.animateTo(isFavourite ? 1 : 0);
     await AllSongsDatabaseService.instance
         .removeFromFav(musicSource, song.name ?? '');
+    favoriteController.reverse();
+    await Future.delayed(Duration(seconds: 1));
     checkIsAddedToFav(song.name ?? '');
     update();
   }
